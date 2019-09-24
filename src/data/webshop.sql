@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 24. Sep 2019 um 09:35
+-- Erstellungszeit: 24. Sep 2019 um 11:21
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.3.4
 
@@ -34,6 +34,23 @@ CREATE TABLE `available_colors` (
   `ColorID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `available_colors`
+--
+
+INSERT INTO `available_colors` (`ID`, `ProductID`, `ColorID`) VALUES
+(1, 1, 3),
+(2, 1, 4),
+(3, 2, 4),
+(4, 6, 4),
+(5, 6, 1),
+(6, 4, 6),
+(7, 3, 2),
+(8, 1, 5),
+(9, 1, 2),
+(10, 1, 1),
+(11, 5, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +63,20 @@ CREATE TABLE `available_sizes` (
   `SizeID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `available_sizes`
+--
+
+INSERT INTO `available_sizes` (`ID`, `ProductID`, `SizeID`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 2, 2),
+(5, 5, 2),
+(6, 6, 2),
+(7, 3, 2),
+(8, 4, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +88,18 @@ CREATE TABLE `colors` (
   `Name` varchar(255) NOT NULL,
   `HexValue` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `colors`
+--
+
+INSERT INTO `colors` (`ID`, `Name`, `HexValue`) VALUES
+(1, 'Schwarz', '000000'),
+(2, 'Weiss', 'FFFFFF'),
+(3, 'Grün', '30FF00'),
+(4, 'Blau', '0031FF'),
+(5, 'Violett', 'A700FF'),
+(6, 'Rot', 'FF0000');
 
 -- --------------------------------------------------------
 
@@ -98,6 +141,18 @@ CREATE TABLE `products` (
   `Image` varchar(4096) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `products`
+--
+
+INSERT INTO `products` (`ID`, `Name`, `Description`, `Image`) VALUES
+(1, 'T-Shirt Uni', 'Ein einfarbiges T-Shirt welches in mehreren Farben und Grössen verfügbar ist.', 'tshirt.png'),
+(2, 'Jeans', 'Ein paar Blauer wunderschöner Jeans', 'tshirt.png'),
+(3, 'Socken', 'Ein Normales paar weisser Socken.', 'tshirt.png'),
+(4, 'Pullover', 'Ein warmer aus 100% Wolle bestehender Pullover.', 'tshirt.png'),
+(5, 'Jacke', 'Eine dicke Jacke perfekt für zum Skifahren oder während kalten Wintertagen', 'tshirt.png'),
+(6, 'Mütze', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'tshirt.png');
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +164,15 @@ CREATE TABLE `sizes` (
   `Name` varchar(255) NOT NULL,
   `Description` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `sizes`
+--
+
+INSERT INTO `sizes` (`ID`, `Name`, `Description`) VALUES
+(1, 'Klein', ''),
+(2, 'Mittel', ''),
+(3, 'Gross', '');
 
 -- --------------------------------------------------------
 
@@ -156,6 +220,14 @@ CREATE TABLE `user_types` (
   `Name` varchar(255) NOT NULL,
   `Description` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `user_types`
+--
+
+INSERT INTO `user_types` (`ID`, `Name`, `Description`) VALUES
+(1, 'Kunde', 'Ein kunde kann Produkte kaufen.'),
+(2, 'Admin', 'Ein Admin kann Bestellungen abbrechen');
 
 --
 -- Indizes der exportierten Tabellen
@@ -240,19 +312,19 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT für Tabelle `available_colors`
 --
 ALTER TABLE `available_colors`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT für Tabelle `available_sizes`
 --
 ALTER TABLE `available_sizes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT für Tabelle `colors`
 --
 ALTER TABLE `colors`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT für Tabelle `orders`
@@ -270,13 +342,13 @@ ALTER TABLE `orders_products`
 -- AUTO_INCREMENT für Tabelle `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT für Tabelle `sizes`
 --
 ALTER TABLE `sizes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `stages`
@@ -294,7 +366,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `user_types`
 --
 ALTER TABLE `user_types`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints der exportierten Tabellen
