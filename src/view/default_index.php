@@ -1,13 +1,11 @@
-<?php //foreach ($product as $products): ?>
 <div class="products">
+<?php foreach ($products as $product): ?>
+
     <div class="products__item">
         <div class="products__item__img"></div>
-        <h2>T-Shirt</h2>
-        <p>This is a nice T-Shirt Lorem ipsum dolor sit amet</p>
+        <h2><?= $product->Name; ?></h2>
+        <p><?= $product->Description; ?></p>
     </div>
-    <div class="products__item">
-        <div class="products__item__img"></div>
-        <h2>T-Shirt</h2>
-        <p>This is a nice T-Shirt Lorem ipsum dolor sit amet</p>
-    </div>
+
+<?php endforeach ?>
 </div>
