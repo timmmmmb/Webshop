@@ -8,10 +8,10 @@ class Dispatcher
         $uri = strtok($uri, '?'); // Erstes ? und alles danach abschneiden
         $uri = trim($uri, '/'); // Alle / am anfang und am Ende der URI abschneiden
         $uriFragments = explode('/', $uri); // In einzelteile zerlegen
-
+        
         $controllerName = 'DefaultController';
-        if (!empty($uriFragments[0])) {
-            $controllerName = $uriFragments[0];
+        if (!empty($uriFragments[1])) {
+            $controllerName = $uriFragments[1];
             $controllerName = ucfirst($controllerName); // Erstes Zeichen grossschreiben
             $controllerName .= 'Controller'; // "Controller" anhängen
         }
