@@ -1,11 +1,20 @@
-<div class="products">
+<section class="banner">
+    <div class="banner__overlay">
+        <div class="banner__overlay__title">popular</div>
+    <div>
+</section>
+<section class="products">
 <?php foreach ($products as $product): ?>
 
     <div class="products__item">
-        <div class="products__item__img"></div>
-        <h2><?= $product->Name; ?></h2>
-        <p><?= $product->Description; ?></p>
+        <div class="products__item__img">
+            <div></div>
+        </div>
+        <div class="products__item__desc">
+            <h2><?= $product->Name; ?></h2>
+            <h3><?= $product->Description; ?></h3>
+        </div>
     </div>
 
 <?php endforeach ?>
-</div>
+</section>
