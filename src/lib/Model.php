@@ -42,7 +42,7 @@ class Model
      */
     public function readAll()
     {
-        $query = "SELECT p.*, u.* FROM $this->tableName AS p JOIN users AS u ON u.id_user = p.user_id ORDER BY date DESC";
+        $query = "SELECT * FROM $this->tableName";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->execute();
