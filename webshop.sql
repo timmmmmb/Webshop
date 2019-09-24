@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 24. Sep 2019 um 09:25
+-- Erstellungszeit: 24. Sep 2019 um 09:35
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.3.4
 
@@ -81,7 +81,8 @@ CREATE TABLE `orders_products` (
   `OrderID` int(11) NOT NULL,
   `Amount` int(255) NOT NULL,
   `SizeID` int(11) NOT NULL,
-  `ColorID` int(11) NOT NULL
+  `ColorID` int(11) NOT NULL,
+  `StageID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -112,6 +113,27 @@ CREATE TABLE `sizes` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `stages`
+--
+
+CREATE TABLE `stages` (
+  `ID` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Description` varchar(10000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `stages`
+--
+
+INSERT INTO `stages` (`ID`, `Name`, `Description`) VALUES
+(1, 'Warenkorb', 'Das Produkt befindet sich noch im Warenkorb'),
+(2, 'Gekauft', 'Das Produkt wurde bezahlt und wird in kürze ausgeliefert.'),
+(3, 'Versendet', 'Das Produkt wurde versendet.');
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `users`
 --
 
@@ -119,7 +141,20 @@ CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
   `EMail` varchar(255) DEFAULT NULL,
-  `Password` varchar(255) DEFAULT NULL
+  `Password` varchar(255) DEFAULT NULL,
+  `User_TypeID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `user_types`
+--
+
+CREATE TABLE `user_types` (
+  `ID` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Description` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -163,7 +198,8 @@ ALTER TABLE `orders_products`
   ADD KEY `fk_products` (`ProductID`),
   ADD KEY `fk_orders` (`OrderID`),
   ADD KEY `fk_sizes` (`SizeID`),
-  ADD KEY `fk_colors` (`ColorID`);
+  ADD KEY `fk_colors` (`ColorID`),
+  ADD KEY `fk_stages_orders_products` (`StageID`);
 
 --
 -- Indizes für die Tabelle `products`
@@ -178,9 +214,22 @@ ALTER TABLE `sizes`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indizes für die Tabelle `stages`
+--
+ALTER TABLE `stages`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indizes für die Tabelle `users`
 --
 ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `fk_user_types_users` (`User_TypeID`);
+
+--
+-- Indizes für die Tabelle `user_types`
+--
+ALTER TABLE `user_types`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -230,9 +279,21 @@ ALTER TABLE `sizes`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT für Tabelle `stages`
+--
+ALTER TABLE `stages`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `user_types`
+--
+ALTER TABLE `user_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -266,7 +327,14 @@ ALTER TABLE `orders_products`
   ADD CONSTRAINT `fk_colors` FOREIGN KEY (`ColorID`) REFERENCES `colors` (`ID`),
   ADD CONSTRAINT `fk_orders` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`ID`),
   ADD CONSTRAINT `fk_products` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ID`),
-  ADD CONSTRAINT `fk_sizes` FOREIGN KEY (`SizeID`) REFERENCES `sizes` (`ID`);
+  ADD CONSTRAINT `fk_sizes` FOREIGN KEY (`SizeID`) REFERENCES `sizes` (`ID`),
+  ADD CONSTRAINT `fk_stages_orders_products` FOREIGN KEY (`StageID`) REFERENCES `stages` (`ID`);
+
+--
+-- Constraints der Tabelle `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_user_types_users` FOREIGN KEY (`User_TypeID`) REFERENCES `user_types` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
