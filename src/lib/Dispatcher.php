@@ -5,14 +5,15 @@ class Dispatcher
     public static function dispatch()
     {
         $uri = $_SERVER['REQUEST_URI'];
-        $uri = strtok($uri, '?');           //Erstes ? und alles danach abschneiden
-        $uri = trim($uri, '/');             //Alle / am anfang und am Ende der URI abschneiden
-        $uriFragments = explode('/', $uri); //In einzelteile zerlegen
+        $uri = strtok($uri, '?');           //Remove URL values after '?'
+        $uri = trim($uri, '/');             //Remove both '/' from left and right 
+        $uriFragments = explode('/', $uri); //Split URL into array
+        
         $controllerName = 'DefaultController';
         if (!empty($uriFragments[0])) {
             $controllerName = $uriFragments[0];
-            $controllerName = ucfirst($controllerName); //Erstes Zeichen grossschreiben
-            $controllerName .= 'Controller';            //"Controller" anhängen
+            $controllerName = ucfirst($controllerName); //Capitalize first letter
+            $controllerName .= 'Controller';            //Add "Controller"
         }
         
         $method = 'index';

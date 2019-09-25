@@ -1,9 +1,8 @@
 <?php
 
 /**
- * Die View is das V aus MVC. Dabei geht es um alles, was dem Client (Browser)
- * als Antwort auf einen Request zurückgegeben wird. Im Normalfall ist das der
- * HTML Code.
+ * Displays a site between footer and header 
+ * and extracts related values to be displayed by the viewfile.
  */
 class View
 {

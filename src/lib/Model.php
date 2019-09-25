@@ -7,11 +7,11 @@ class Model
     protected $tableName = null;
 
     /**
-     * Diese Funktion gibt den Datensatz mit der gegebenen id zurück.
+     * Returns database entry by specific id.
      *
-     * @param $id id des gesuchten Datensatzes
-     * @throws Exception falls das Ausführen des Statements fehlschlägt
-     * @return Der gesuchte Datensatz oder null, sollte dieser nicht existieren.
+     * @param $id id of entry to retrieve.
+     * @throws Exception if database connection fails.
+     * @return Object entry of null if not exists.
      */
     public function readById($id)
     {
@@ -33,12 +33,10 @@ class Model
     }
 
     /**
-     * Diese Funktion gibt ein array mit allen Datensätzen aus der Tabelle
-     * zurück.
+     * Returns all database entries from specific table.
      *
-     * @param $max Wie viele Datensätze höchstens zurückgegeben werden sollen
-     * @throws Exception falls das Ausführen des Statements fehlschlägt
-     * @return Ein array mit den gefundenen Datensätzen.
+     * @throws Exception if database connection fails.
+     * @return Array with database entries as objects.
      */
     public function readAll()
     {
@@ -52,7 +50,6 @@ class Model
             throw new Exception($statement->error);
         }
 
-        // Datensätze aus dem Resultat holen und in das Array $rows speichern
         $rows = array();
         while ($row = $result->fetch_object()) {
             $rows[] = $row;
@@ -62,24 +59,20 @@ class Model
     }
 
     /**
-     * Diese Funktion löscht den Datensatz mit der gegebenen id.
+     * Deletes entry with specific id.
      *
-     * @param $id id des zu löschenden Datensatzes
-     * @throws Exception falls das Ausführen des Statements fehlschlägt
+     * @param $id id of entry.
+     * @throws Exception if database connection fails.
      */
     public function deleteById($id)
     {
-        
         $query = "DELETE FROM $this->tableName WHERE id=?";
         
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $id);
-        
-        $statement->execute();
 
         if (!$statement->execute()) {
             throw new Exception($statement->error);
         }
-        
     }
 }

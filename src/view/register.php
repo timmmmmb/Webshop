@@ -1,4 +1,4 @@
-<form method="post" action="/user/register">
+<form method="post" action="/user/doRegister">
     <div class="container">
          <p>Please fill in this form to create an account.</p>
         <hr>
@@ -7,7 +7,7 @@
         <input type="text" placeholder="Enter Name" name="name" required>
 
         <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <input type="email" placeholder="Enter Email" name="email" required>
 
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
