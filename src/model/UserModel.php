@@ -40,4 +40,8 @@ class UserModel extends Model
 
     }
 
+    public function getUserByNameAndPassword($name,$password){
+
+    }
+
 }

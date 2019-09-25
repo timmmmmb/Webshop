@@ -29,4 +29,15 @@ class UserController
         $view->products = $registerModel->readAll();
         $view->display();
     }
+
+    public function login(){
+        $registerModel = new UserModel();
+
+        $view = new View('login');
+        $view->title = 'Login';
+        $view->heading = 'Login';
+        $view->products = $registerModel->readAll();
+        $view->display();
+    }
+
 }
