@@ -29,4 +29,8 @@ class UserModel extends Model
         echo "<script> window.location.href='/'; </script>";
     }
 
+    public function getUserByNameAndPassword($name,$password){
+
+    }
+
 }

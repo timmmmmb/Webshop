@@ -33,4 +33,14 @@ class UserController
             );
         }
     }
+    public function login(){
+        $registerModel = new UserModel();
+
+        $view = new View('login');
+        $view->title = 'Login';
+        $view->heading = 'Login';
+        $view->products = $registerModel->readAll();
+        $view->display();
+    }
+
 }
