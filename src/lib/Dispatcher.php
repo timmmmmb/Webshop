@@ -8,7 +8,6 @@ class Dispatcher
         $uri = strtok($uri, '?');           //Erstes ? und alles danach abschneiden
         $uri = trim($uri, '/');             //Alle / am anfang und am Ende der URI abschneiden
         $uriFragments = explode('/', $uri); //In einzelteile zerlegen
-        
         $controllerName = 'DefaultController';
         if (!empty($uriFragments[1])) {
             $controllerName = $uriFragments[1];
@@ -20,7 +19,6 @@ class Dispatcher
         if (!empty($uriFragments[2])) {
             $method = $uriFragments[2];
         }
-
         require_once "src/controller/$controllerName.php";
 
         $controller = new $controllerName();
