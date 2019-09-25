@@ -6,28 +6,27 @@ class ConnectionHandler
 
     private function __construct()
     {
-        //Privater Konstruktor um das erstellen von Instanzen zu verhindern
+        //Private constructor to prevent class instances.
     }
 
     /**
-     * Prüft ob bereits eine Verbindung auf die Datenbank existiert,
-     * initialisiert diese ansonsten und gibt sie dann zurück.
+     * Creates connection to database if it does not exist already.
      *
-     * @throws Exception wenn der Verbindungsaufbau schiefgegeangen ist.
-     * @return Die MySQLi Verbindung, welche für den Zugriff aud die Datenbank verwendet werden kann.
+     * @throws Exception if connection error occurs.
+     * @return MySQLi MySQLi connection that can execute queres.
      */
     public static function getConnection()
     {
         if (self::$connection === null) {
 
-            // Konfigurationsdatei auslesen
+            //Read login data from config.php
             $config = require 'config.php';
             $host = $config['database']['host'];
             $username = $config['database']['username'];
             $password = $config['database']['password'];
             $database = $config['database']['database'];
 
-            // Verbindung initialisieren
+            //Initialize connection
             self::$connection = new MySQLi($host, $username, $password, $database);
             if (self::$connection->connect_error) {
                 $error = self::$connection->connect_error;
@@ -37,7 +36,7 @@ class ConnectionHandler
             self::$connection->set_charset('utf8');
         }
 
-        // Verbindung zurückgeben
+        //Return connection
         return self::$connection;
     }
 }
