@@ -26,13 +26,11 @@ class UserModel extends Model
      */
     public function createUser($name,$email,$password)
     {
-        $query="INSERT INTO users (Name, EMail, Password, User_TypeID) VALUES ('$name', '$password', '$email', '1')";
+        $query="INSERT INTO users (Name, EMail, Password, User_TypeID) VALUES (?,?,?, '1')";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
 
-        $statement->bind_param('s', $name);
-        $statement->bind_param('s', $password);
-        $statement->bind_param('s', $email);
+        $statement->bind_param('sss', $name, $password, $email);
 
         if (!$statement->execute()) {
             throw new Exception($statement->error);
