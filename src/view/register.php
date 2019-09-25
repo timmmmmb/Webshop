@@ -1,7 +1,10 @@
-<form action="action_page.php">
+<form method="post" action="/user/register">
     <div class="container">
-        <p>Please fill in this form to create an account.</p>
+         <p>Please fill in this form to create an account.</p>
         <hr>
+
+        <label for="name"><b>Name</b></label>
+        <input type="text" placeholder="Enter Name" name="name" required>
 
         <label for="email"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" required>
