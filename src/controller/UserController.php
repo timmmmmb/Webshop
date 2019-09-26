@@ -13,6 +13,16 @@ class UserController
     }
 
     public function register(){
+        if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['psw'])) {
+
+            $userModel = new UserModel();
+            $userModel->createUser(
+                htmlspecialchars($_POST['name']),
+                htmlspecialchars($_POST['email']),
+                md5(htmlspecialchars($_POST['psw'])),
+                '1'
+            );
+        }
 
         $view = new View('register');
         $view->title = 'Register';
@@ -20,25 +30,32 @@ class UserController
         $view->display();
     }
 
-    public function doRegister() {
-
-        if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['psw'])) {
-            
-            $userModel = new UserModel();
-            $userModel->createUser(
-                htmlspecialchars($_POST['name']), 
-                htmlspecialchars($_POST['email']), 
-                md5(htmlspecialchars($_POST['psw'])),
-                '1'
-            );
-        }
-    }
     public function login(){
         $registerModel = new UserModel();
 
         $view = new View('login');
         $view->title = 'Login';
         $view->heading = 'Login';
+        $view->products = $registerModel->readAll();
+        $view->display();
+    }
+
+    public function loginForm(){
+        $registerModel = new UserModel();
+
+        $view = new View('loginForm');
+        $view->title = 'Login';
+        $view->heading = 'Login';
+        $view->products = $registerModel->readAll();
+        $view->display();
+    }
+
+    public function registerForm(){
+        $registerModel = new UserModel();
+
+        $view = new View('registerForm');
+        $view->title = 'Register';
+        $view->heading = 'Register';
         $view->products = $registerModel->readAll();
         $view->display();
     }

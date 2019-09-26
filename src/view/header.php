@@ -11,4 +11,9 @@
     <header>
       <h1><?= $heading ?></h1>
     </header>
+    <nav>
+        <a href="../user/loginForm">login</a>
+        <a href="../user/registerForm">register</a>
+        <a href="../">home</a>
+    </nav>
     <main>

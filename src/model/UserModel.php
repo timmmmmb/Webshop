@@ -43,4 +43,8 @@ class UserModel extends Model
 
     }
 
+    public function checkIfUserExists($email, $name){
+
+    }
+
 }
