@@ -12,8 +12,19 @@
       <h1><?= $heading ?></h1>
     </header>
     <nav>
-        <a href="../user/loginForm">login</a>
-        <a href="../user/registerForm">register</a>
-        <a href="../">home</a>
+        <?php
+            if(isset($_SESSION['user_id'])){
+                echo '<a href="../">home</a>
+                        <a href="../user/profile">'.$_SESSION['user_name'].'</a>
+                        <a href="../user/logout">logout</a>';
+            }else{
+                echo '<a href="../user/loginForm">login</a>
+                        <a href="../user/registerForm">register</a>
+                        <a href="../">home</a>';
+            }
+        ?>
+
+
+
     </nav>
     <main>

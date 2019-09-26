@@ -1,4 +1,4 @@
-<form method="post" action="/user/doRegister">
+<form method="post" action="/user/register">
     <div class="container">
         <p>Please fill in this form to create an account.</p>
         <hr>

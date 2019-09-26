@@ -1,1 +1,1 @@
-<p>successfully logd in new user</p>
+<p>successfully logged in new user</p>
