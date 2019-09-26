@@ -2,6 +2,10 @@
     <div class="form__container">
         <h3>Register</h3>
         <form method="post" action="/user/registerSubmit">
+<form method="post" action="/user/register">
+    <div class="container">
+        <p>Please fill in this form to create an account.</p>
+        <hr>
 
             <input type="text" class="form__container__input form__container__input--text" placeholder="Username" name="name" required>
             <input type="email" class="form__container__input form__container__input--text" placeholder="Email" name="email" required>
