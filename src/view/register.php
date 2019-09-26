@@ -14,7 +14,7 @@
                 <button type="submit" class="form__container__button form__container__button--submit">Register</button>
             </span>
 
-            <p class="form__container__hint">Already have an account? <a href="#">Sign in</a>.</p>
+            <p class="form__container__hint">Already have an account? <a href="/user/login">Sign in</a>.</p>
         
         </form>
     </div>

@@ -33,7 +33,7 @@ class UserModel extends Model
      * @param $name
      * @param $password
      */
-    public function getUserByNameAndPassword($name,$password) {
+    public function getUserByNameAndPassword($name, $password) {
 
         $query = "SELECT * FROM $this->tableName WHERE NAME like ? and PASSWORD like ?";
 
@@ -45,6 +45,7 @@ class UserModel extends Model
         if (!$result) {
             throw new Exception($statement->error);
         }
+
         $row = $result->fetch_object();
         $result->close();
         return $row;
@@ -68,6 +69,7 @@ class UserModel extends Model
         if (!$result) {
             throw new Exception($statement->error);
         }
+        
         $exists = mysqli_num_rows($result)==0;
         $result->close();
 

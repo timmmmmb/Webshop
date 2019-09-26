@@ -34,16 +34,13 @@ class UserController
                 htmlspecialchars($_POST['name']),
                 htmlspecialchars($_POST['email'])
             )) {
-                $newUser = $userModel->createUser(
+                $userModel->createUser(
                     htmlspecialchars($_POST['name']),
                     htmlspecialchars($_POST['email']),
                     md5(htmlspecialchars($_POST['psw'])),
                     '1'
                 );
-                $_SESSION['user_id'] = $newUser->ID;
-                $_SESSION['user_name'] = $newUser->Name;
-                header("Location: /user/login");
-                die();
+                $this->doLogin();
 
             } else {
                 echo 'User already exists';
