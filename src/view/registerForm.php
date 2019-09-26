@@ -1,22 +1,20 @@
 <section class="form form--register">
     <div class="form__container">
+
         <h3>Register</h3>
-        <form method="post" action="/user/registerSubmit">
-<form method="post" action="/user/register">
-    <div class="container">
-        <p>Please fill in this form to create an account.</p>
-        <hr>
+        <form method="post" action="/user/register">
 
-            <input type="text" class="form__container__input form__container__input--text" placeholder="Username" name="name" required>
-            <input type="email" class="form__container__input form__container__input--text" placeholder="Email" name="email" required>
-            <input type="password" class="form__container__input form__container__input--text" placeholder="Password" name="psw" required>
-            <input type="password" class="form__container__input form__container__input--text" placeholder="Repeat Password" name="psw-repeat" required>
+            <input type="text" class="form__container__input" placeholder="Username" name="name" required>
+            <input type="email" class="form__container__input" placeholder="Email" name="email" required>
+            <input type="password" class="form__container__input" placeholder="Password" name="psw" required>
+            <input type="password" class="form__container__input" placeholder="Repeat Password" name="psw-repeat" required>
 
-            <span class="form__buttons">
-                <button class="button--back">Back</button>
-                <button type="submit" class="button--submit">Register</button>
+            <span class="form__container__buttons">
+                <button type="reset" class="form__container__button form__container__button--reset">Reset</button>
+                <button type="submit" class="form__container__button form__container__button--submit">Register</button>
             </span>
-            <p>Already have an account? <a href="#">Sign in</a>.</p>
+
+            <p class="form__container__hint">Already have an account? <a href="#">Sign in</a>.</p>
         
         </form>
     </div>
