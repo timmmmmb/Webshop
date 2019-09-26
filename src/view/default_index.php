@@ -12,7 +12,7 @@
         </div>
         <div class="products__item__desc">
             <h2><?= $product->Name; ?></h2>
-            <h3><?= $product->Description; ?></h3>
+            <h4><?= $product->Description; ?></h4>
         </div>
     </div>
 

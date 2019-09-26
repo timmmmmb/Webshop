@@ -1,26 +1,19 @@
-<form method="post" action="/user/doRegister">
-    <div class="container">
-        <p>Please fill in this form to create an account.</p>
-        <hr>
+<section class="form form--register">
+    <div class="form__container">
+        <h3>Register</h3>
+        <form method="post" action="/user/registerSubmit">
 
-        <label for="name"><b>Name</b></label>
-        <input type="text" placeholder="Enter Name" name="name" required>
+            <input type="text" class="form__container__input form__container__input--text" placeholder="Username" name="name" required>
+            <input type="email" class="form__container__input form__container__input--text" placeholder="Email" name="email" required>
+            <input type="password" class="form__container__input form__container__input--text" placeholder="Password" name="psw" required>
+            <input type="password" class="form__container__input form__container__input--text" placeholder="Repeat Password" name="psw-repeat" required>
 
-        <label for="email"><b>Email</b></label>
-        <input type="email" placeholder="Enter Email" name="email" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-
-        <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-        <hr>
-
-        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-        <button type="submit" class="registerbtn">Register</button>
+            <span class="form__buttons">
+                <button class="button--back">Back</button>
+                <button type="submit" class="button--submit">Register</button>
+            </span>
+            <p>Already have an account? <a href="#">Sign in</a>.</p>
+        
+        </form>
     </div>
-
-    <div class="container signin">
-        <p>Already have an account? <a href="#">Sign in</a>.</p>
-    </div>
-</form>
+</section>
