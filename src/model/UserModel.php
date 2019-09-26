@@ -6,16 +6,6 @@ class UserModel extends Model
 {
     protected $tableName = 'users';
 
-    public function create()
-    {
-
-    }
-
-    public function delete()
-    {
-
-    }
-
     /**
      * Store new user in database
      *
@@ -25,8 +15,8 @@ class UserModel extends Model
      * @param $typeid User classification
      * @throws Exception falls das Ausführen des Statements fehlschlägt
      */
-    public function createUser($name, $email, $password, $typeid)
-    {
+    public function createUser($name, $email, $password, $typeid) {
+
         $query="INSERT INTO users (Name, EMail, Password, User_TypeID) VALUES (?, ?, ?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
@@ -35,8 +25,6 @@ class UserModel extends Model
         if (!$statement->execute()) {
             throw new Exception($statement->error);
         }
-
-        echo "<script> window.location.href='/'; </script>";
     }
 
     /**
@@ -45,7 +33,8 @@ class UserModel extends Model
      * @param $name
      * @param $password
      */
-    public function getUserByNameAndPassword($name,$password){
+    public function getUserByNameAndPassword($name,$password) {
+
         $query = "SELECT * FROM $this->tableName WHERE NAME like ? and PASSWORD like ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
@@ -67,7 +56,8 @@ class UserModel extends Model
      * @param $email
      * @param $name
      */
-    public function checkIfUserExists($email, $name){
+    public function checkIfUserExists($email, $name) {
+
         $query = "SELECT * FROM $this->tableName WHERE NAME like ? or EMAIL like ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);

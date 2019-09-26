@@ -4,13 +4,29 @@ require_once 'src/model/UserModel.php';
 
 class UserController
 {
-    public function index()
-    {
+    public function index() {
+
         $this->profile();
     }
 
-    public function register()
-    {
+    public function profile() {
+
+        $view = new View('profile');
+        $view->title = 'Profile';
+        $view->heading = 'Profile';
+        $view->display();
+    }
+
+    public function register() {
+
+        $view = new View('register');
+        $view->title = 'Register';
+        $view->heading = 'Register';
+        $view->display();
+    }
+
+    public function doRegister() {
+
         if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['psw'])) {
             //check if that user allready exists
             $userModel = new UserModel();
@@ -18,80 +34,55 @@ class UserController
                 htmlspecialchars($_POST['name']),
                 htmlspecialchars($_POST['email'])
             )) {
-                $userModel->createUser(
+                $newUser = $userModel->createUser(
                     htmlspecialchars($_POST['name']),
                     htmlspecialchars($_POST['email']),
                     md5(htmlspecialchars($_POST['psw'])),
                     '1'
                 );
-                $view = new View('register');
-                $this->doLogin();
-            }else{
-                $view = new View('registerForm');
-                echo 'unable to register user';
+                $_SESSION['user_id'] = $newUser->ID;
+                $_SESSION['user_name'] = $newUser->Name;
+                header("Location: /user/login");
+                die();
+
+            } else {
+                echo 'User already exists';
             }
         }
-
-
-        $view->title = 'Register';
-        $view->heading = 'Register';
-        $view->display();
     }
 
-    public function login()
-    {
-        if($this->doLogin()){
-            $view = new View('login');
-        }else{
-            $view = new View('loginForm');
-            echo "The login failed";
-        }
+    public function login() {
+
+        $view = new View('login');
         $view->title = 'Login';
         $view->heading = 'Login';
         $view->display();
     }
 
-    public function doLogin(){
+    public function doLogin() {
+
         $userModel = new UserModel();
-        $result = $userModel->getUserByNameAndPassword(htmlspecialchars($_POST['name']),md5(htmlspecialchars($_POST['psw'])));
+        $result = $userModel->getUserByNameAndPassword(htmlspecialchars($_POST['name']), md5(htmlspecialchars($_POST['psw'])));
         //check if it was empty
         $arr = (array)$result;
         if (empty($arr)) {
 
-            return false;
-        }else{
+            echo "login failed";
+
+        } else {
+
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
-            return true;
+            header("Location: /");
+            die();
         }
     }
 
-    public function loginForm()
-    {
-        $view = new View('loginForm');
-        $view->title = 'Login';
-        $view->heading = 'Login';
-        $view->display();
-    }
+    public function logout() {
 
-    public function registerForm()
-    {
-        $view = new View('registerForm');
-        $view->title = 'Register';
-        $view->heading = 'Register';
-        $view->display();
-    }
-
-    public function profile(){
-        $view = new View('profile');
-        $view->title = 'Profile';
-        $view->heading = 'Profile';
-        $view->display();
-    }
-
-    public function logout(){
         session_unset();
-        $this->profile();
+        header("Location: /");
+        die();
     }
 
 }
