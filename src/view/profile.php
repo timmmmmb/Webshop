@@ -1,5 +1,5 @@
-<?php
-if(isset($_SESSION['user_id'])){
-    echo 'welcome '.$_SESSION['user_name'];
-}
-?>
+<section class="profile">
+    <div class="profile__img"></div>
+    <div class="profile__name"><?= $user->Name ?></div>
+    <div class="profile__email"><?= $user->EMail ?></div>
+</section>

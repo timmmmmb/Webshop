@@ -7,6 +7,7 @@
         </p>
       </footer>
     <script src="/src/view/js/jquery-3.4.1.min.js"></script>
+    <script src="/src/view/js/parallax.min.js"></script>
     <script src="/src/view/js/script.js"></script>
   </body>
 </html>

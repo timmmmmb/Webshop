@@ -11,9 +11,17 @@ class UserController
 
     public function profile() {
 
+        if(!isset($_SESSION['user_id'])) {
+            header("Location: /user/login");
+            die();
+        }
+
+        $userModel = new UserModel();
+
         $view = new View('profile');
         $view->title = 'Profile';
         $view->heading = 'Profile';
+        $view->user = $userModel->readById($_SESSION['user_id']);
         $view->display();
     }
 

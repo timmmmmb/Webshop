@@ -1,5 +1,8 @@
 jQuery(document).ready(function($) {
 
-    console.log("js loaded");
+    $('.banner').parallax({
+        imageSrc: '/src/view/images/banner1.jpg',
+        speed: 0.5
+    });
 
 });
