@@ -23,7 +23,6 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
 }
@@ -47,7 +46,6 @@ blockquote, q {
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
 	content: none;
 }
 
@@ -190,7 +188,7 @@ header nav ul li a {
     margin: 1.5em;
     color: #444;
     background: white;
-    box-shadow: 0px 0px 10px 0px #eee;
+    box-shadow: 0 0 10px 0 #eee;
     overflow: hidden;
 }
 
@@ -206,7 +204,7 @@ header nav ul li a {
     margin: 1.5em;
     color: #444;
     background: white;
-    box-shadow: 0px 0px 10px 0px #eee;
+    box-shadow: 0 0 10px 0 #eee;
     overflow: hidden;
 }
 
@@ -343,12 +341,10 @@ footer a {
 .profile__img {
     width: 150px;
     height: 150px;
-    background: url("http://s3.amazonaws.com/37assets/svn/765-default-avatar.png");
     background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background: url("http://s3.amazonaws.com/37assets/svn/765-default-avatar.png") no-repeat center center;
     border-radius: 50%;
-    box-shadow: 0px 0px 10px 0px #ddd;
+    box-shadow: 0 0 10px 0 #ddd;
 }
 
 .profile__name {

@@ -5,19 +5,15 @@ require_once 'src/model/UserModel.php';
 class UserController
 {
     public function index() {
-
         $this->profile();
     }
 
     public function profile() {
-
         if(!isset($_SESSION['user_id'])) {
             header("Location: /user/login");
             die();
         }
-
         $userModel = new UserModel();
-
         $view = new View('profile');
         $view->title = 'Profile';
         $view->heading = 'Profile';
@@ -26,7 +22,6 @@ class UserController
     }
 
     public function register() {
-
         $view = new View('register');
         $view->title = 'Register';
         $view->heading = 'Register';
@@ -34,7 +29,6 @@ class UserController
     }
 
     public function doRegister() {
-
         if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['psw'])) {
             //check if that user allready exists
             $userModel = new UserModel();
@@ -49,7 +43,6 @@ class UserController
                     '1'
                 );
                 $this->doLogin();
-
             } else {
                 echo 'User already exists';
             }
@@ -57,7 +50,6 @@ class UserController
     }
 
     public function login() {
-
         $view = new View('login');
         $view->title = 'Login';
         $view->heading = 'Login';
@@ -65,17 +57,13 @@ class UserController
     }
 
     public function doLogin() {
-
         $userModel = new UserModel();
         $result = $userModel->getUserByNameAndPassword(htmlspecialchars($_POST['name']), md5(htmlspecialchars($_POST['psw'])));
         //check if it was empty
         $arr = (array)$result;
         if (empty($arr)) {
-
             echo "login failed";
-
         } else {
-
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
             header("Location: /");
@@ -84,7 +72,6 @@ class UserController
     }
 
     public function logout() {
-
         session_unset();
         header("Location: /");
         die();
