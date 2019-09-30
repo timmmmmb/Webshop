@@ -8,7 +8,7 @@
     <a href="../product?product_id=<?= $product->ID; ?>">
         <div class="products__item">
             <div class="products__item__img">
-                <div></div>
+                <div style="background-image: url(../src/view/images/<?=$product->Image;?>"></div>
             </div>
             <div class="products__item__desc">
                 <h2><?= $product->Name; ?></h2>
