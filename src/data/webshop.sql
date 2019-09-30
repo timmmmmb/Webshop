@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 24. Sep 2019 um 11:21
+-- Erstellungszeit: 30. Sep 2019 um 10:14
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.3.4
 
@@ -138,20 +138,21 @@ CREATE TABLE `products` (
   `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
   `Description` mediumtext,
-  `Image` varchar(4096) DEFAULT NULL
+  `Image` varchar(4096) DEFAULT NULL,
+  `Preis` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `products`
 --
 
-INSERT INTO `products` (`ID`, `Name`, `Description`, `Image`) VALUES
-(1, 'T-Shirt Uni', 'Ein einfarbiges T-Shirt welches in mehreren Farben und Grössen verfügbar ist.', 'tshirt.png'),
-(2, 'Jeans', 'Ein paar Blauer wunderschöner Jeans', 'tshirt.png'),
-(3, 'Socken', 'Ein Normales paar weisser Socken.', 'tshirt.png'),
-(4, 'Pullover', 'Ein warmer aus 100% Wolle bestehender Pullover.', 'tshirt.png'),
-(5, 'Jacke', 'Eine dicke Jacke perfekt für zum Skifahren oder während kalten Wintertagen', 'tshirt.png'),
-(6, 'Mütze', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'tshirt.png');
+INSERT INTO `products` (`ID`, `Name`, `Description`, `Image`, `Preis`) VALUES
+(1, 'T-Shirt Uni', 'Ein einfarbiges T-Shirt welches in mehreren Farben und Grössen verfügbar ist.', 'tshirt.png', 19.95),
+(2, 'Jeans', 'Ein paar Blauer wunderschöner Jeans', 'jeans.jpg', 49.95),
+(3, 'Socken', 'Ein Normales paar weisser Socken.', 'socken.jpg', 9.95),
+(4, 'Pullover', 'Ein warmer aus 100% Wolle bestehender Pullover.', 'pullover.jpg', 39.95),
+(5, 'Jacke', 'Eine dicke Jacke perfekt für zum Skifahren oder während kalten Wintertagen', 'jacke.jpg', 109.95),
+(6, 'Mütze', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'mütze.jpg', 14.95);
 
 -- --------------------------------------------------------
 
@@ -208,6 +209,16 @@ CREATE TABLE `users` (
   `Password` varchar(255) DEFAULT NULL,
   `User_TypeID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `users`
+--
+
+INSERT INTO `users` (`ID`, `Name`, `EMail`, `Password`, `User_TypeID`) VALUES
+(12, 'bob', 'bob@bob', '9f9d51bc70ef21ca5c14f307980a29d8', 1),
+(13, 'svenbob', 'bobby@bob', '9f9d51bc70ef21ca5c14f307980a29d8', 1),
+(14, 'tim', 'tim@tim', 'b15d47e99831ee63e3f47cf3d4478e9a', 1),
+(15, 'meche', 'mech@mech', 'f7ff8b3b2c106010635c9252ab4c4a66', 1);
 
 -- --------------------------------------------------------
 
@@ -318,7 +329,7 @@ ALTER TABLE `available_colors`
 -- AUTO_INCREMENT für Tabelle `available_sizes`
 --
 ALTER TABLE `available_sizes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT für Tabelle `colors`
@@ -360,7 +371,7 @@ ALTER TABLE `stages`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT für Tabelle `user_types`
