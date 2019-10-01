@@ -291,6 +291,20 @@ footer a {
     margin: 1em 0;
     padding: 1em;
     outline: none;
+    box-sizing: border-box;
+}
+
+.form__container__input--error {
+    border: 1px solid red;
+}
+
+.form__container__error {
+    background: red;
+    color: white;
+    width: 300px;
+    margin: 1em 0;
+    padding: 1em 0;
+    text-indent: 1em;
 }
 
 .form__container__buttons {

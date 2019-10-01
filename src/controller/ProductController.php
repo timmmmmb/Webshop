@@ -6,9 +6,9 @@ class ProductController
     public function index()
     {
         $productModel = new ProductModel();
-        $view = new View('productDetail');
-        $view->title = 'ProductView';
-        $view->heading = 'ProductView';
+        $view = new View('product_detail');
+        $view->title = 'Product';
+        $view->heading = 'Product';
         $view->product = $productModel->readById($_GET['product_id']);
         $view->colors = $productModel->readColorsByID($_GET['product_id']);
         $view->sizes = $productModel->readSizesByID($_GET['product_id']);
