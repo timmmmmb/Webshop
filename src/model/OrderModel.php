@@ -6,8 +6,9 @@ class OrderModel extends Model
 {
     /**
      * adds a new product to the baskett of the user
+     * @throws Exception
      */
-    public function addToBasket($product_id, $user_id, $quantity, $color_id, $size_id){
+    public function addToBasket($product_id, $user_id, $amount, $colorid, $sizeid){
         //get the id of the order that represents the basket
         $basket_id = $this->getBasketID($user_id);
         //create a new basket if there is none in the db
@@ -16,7 +17,14 @@ class OrderModel extends Model
             $basket_id = $this->getBasketID($user_id);
         }
         //add product to the basket
+        $query="INSERT INTO orders_products (productid, orderid, amount, sizeid, colorid) VALUES (?, ?, ?, ?, ?)";
 
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('iiiii', $product_id, $basket_id, $amount, $sizeid, $colorid);
+
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
     }
 
     private function getBasketID($user_id){

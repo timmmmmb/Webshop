@@ -1,5 +1,7 @@
 <?php
 
+require_once 'src/model/OrderModel.php';
+require_once 'src/model/DefaultModel.php';
 
 class OrderController
 {
@@ -8,9 +10,13 @@ class OrderController
     }
 
     public function addBasket() {
-        echo $_POST["product_id"];
-        echo $_POST["color"];
-        echo $_POST["size"];
-        echo date_default_timezone_get();
+        $productModel = new OrderModel();
+        $defaultModel = new DefaultModel();
+        $productModel->addToBasket($_POST["product_id"], $_SESSION["user_id"],$_POST["amount"], $_POST["color"], $_POST["size"] );
+        $view = new View('default_index');
+        $view->title = 'Startseite';
+        $view->heading = 'Startseite';
+        $view->products = $defaultModel->readAll();
+        $view->display();
     }
 }

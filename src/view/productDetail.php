@@ -22,7 +22,7 @@
             <?php endforeach ?>
         </select>
         <p>Menge</p>
-        <input type="number" name="quantity" min="1" max="5" value="1">
+        <input type="number" name="amount" min="1" max="5" value="1">
         <?php if(isset($_SESSION['user_id'])) : ?>
             <input type="submit">
         <?php endif; ?>
