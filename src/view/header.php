@@ -26,16 +26,14 @@
       </span>
       <nav>
         <ul>
-          <li><a href="/">home</a></li>
-          <?php
-          if(isset($_SESSION['user_id'])) {
-              echo '<li><a href="/user/profile">'.$_SESSION['user_name'].'</a></li>
-                    <li><a href="/user/logout">logout</a></li>';
-          } else {
-              echo '<li><a href="/user/login">login</a></li>
-                    <li><a href="/user/register">register</a></li>';
-          }
-          ?>
+            <li><a href="/">home</a></li>
+            <?php if(isset($_SESSION['user_id'])) : ?>
+                <li><a href="/user/profile"><?= $_SESSION['user_name'] ?></a></li>
+                <li><a href="/user/logout">logout</a></li>
+            <?php else : ?>
+                <li><a href="/user/login">login</a></li>
+                <li><a href="/user/register">register</a></li>
+            <?php endif; ?>
         </ul>
       </nav>
     </header>

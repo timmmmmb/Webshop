@@ -245,22 +245,6 @@ INSERT INTO `user_types` (`ID`, `Name`, `Description`) VALUES
 --
 
 --
--- Indizes für die Tabelle `available_colors`
---
-ALTER TABLE `available_colors`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_products_available_colors` (`ProductID`),
-  ADD KEY `fk_colors_available_colors` (`ColorID`);
-
---
--- Indizes für die Tabelle `available_sizes`
---
-ALTER TABLE `available_sizes`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_products_available_sizes` (`ProductID`),
-  ADD KEY `fk_sizes_available_sizes` (`SizeID`);
-
---
 -- Indizes für die Tabelle `colors`
 --
 ALTER TABLE `colors`
@@ -314,6 +298,22 @@ ALTER TABLE `users`
 --
 ALTER TABLE `user_types`
   ADD PRIMARY KEY (`ID`);
+  
+  --
+-- Indizes für die Tabelle `available_colors`
+--
+ALTER TABLE `available_colors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `fk_products_available_colors` (`ProductID`),
+  ADD KEY `fk_colors_available_colors` (`ColorID`);
+
+--
+-- Indizes für die Tabelle `available_sizes`
+--
+ALTER TABLE `available_sizes`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `fk_products_available_sizes` (`ProductID`),
+  ADD KEY `fk_sizes_available_sizes` (`SizeID`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
