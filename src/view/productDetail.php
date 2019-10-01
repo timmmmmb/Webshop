@@ -6,22 +6,25 @@
         <h2><?= $product->Name; ?></h2>
         <h4><?= $product->Description; ?></h4>
     </div>
-    <form action="/order/addBasket?product_id=<?= $product->id; ?>">
+    <form action="/order/addBasket" method="post">
         <p>Wählen sie ihre Farbe aus: </p>
+        <input type="hidden" name="product_id" value="<?= $product->ID ?>" />
         <fieldset>
             <?php foreach ($colors as $color): ?>
-                <input type="radio" id="<?= $color->Name; ?>" name="color" value="<?= $color->Name;?>"checked>
-                <label for="<?= $color->Name; ?>"> <?= $color->Name; ?></label>
+                <input type="radio" id="<?= $color->Name; ?>" name="color" value="<?= $color->ID;?>"checked>
+                <label for="<?= $color->ID; ?>"> <?= $color->Name; ?></label>
             <?php endforeach ?>
         </fieldset>
         <p>Wählen sie ihre Grösse aus: </p>
         <select name="size">
             <?php foreach ($sizes as $size): ?>
-                <option value="<?= $size->Name; ?>"><?= $size->Name; ?></option>
+                <option id="<?= $size->ID; ?>" value="<?= $size->ID; ?>"><?= $size->Name; ?></option>
             <?php endforeach ?>
         </select>
         <p>Menge</p>
         <input type="number" name="quantity" min="1" max="5" value="1">
-        <input type="submit">
+        <?php if(isset($_SESSION['user_id'])) : ?>
+            <input type="submit">
+        <?php endif; ?>
     </form>
 </div>

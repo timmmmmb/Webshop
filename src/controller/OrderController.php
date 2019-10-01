@@ -8,6 +8,8 @@ class OrderController
     }
 
     public function addBasket() {
-
+        echo $_POST["product_id"];
+        echo $_POST["color"];
+        echo $_POST["size"];
     }
 }
