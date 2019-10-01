@@ -1,7 +1,10 @@
-<div class="products__item_detail">
-    <div class="products__item__img">
-        <div style="background-image: url(/src/view/images/<?=$product->Image;?>);width: 100%;height: 100%;"></div>
-    </div>
+<section class="product">
+    <section class="product__img">
+
+    </section>
+    <section class="product__info">
+        
+    </section>
     <div class="products__item__desc">
         <h2><?= $product->Name; ?></h2>
         <h4><?= $product->Description; ?></h4>
@@ -27,4 +30,4 @@
             <input type="submit">
         <?php endif; ?>
     </form>
-</div>
+</section>

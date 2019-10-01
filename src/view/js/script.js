@@ -1,5 +1,22 @@
 jQuery(document).ready(function($) {
 
+    //Sticky Header
+    function stickyHeader() {
+        let scrollTop = $(window).scrollTop();
+        let header = $("h1");
+        let headerSquare = $(".header__line__square");
+
+        if(scrollTop >= 50) {
+            header.slideUp();
+            headerSquare.addClass("header__line__square--shrink");
+        } else {
+            header.slideDown();
+            headerSquare.removeClass("header__line__square--shrink");
+        }
+    };
+    $(window).scroll(stickyHeader);
+    stickyHeader();
+
     //Banner scroll effect
     $('.banner').parallax({
         imageSrc: '/src/view/images/banner1.jpg',
