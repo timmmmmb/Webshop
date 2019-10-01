@@ -43,17 +43,51 @@ class OrderModel extends Model
         }
         $row = $result->fetch_object();
         $result->close();
-        return $row->id;
+        return $row->ID;
     }
 
-    private function createBasket($user_id){
+    private function createBasket($userid){
         $query="INSERT INTO orders (userID, stageID) VALUES (?, 1)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('i', $user_id);
+        $statement->bind_param('i', $userid);
 
         if (!$statement->execute()) {
             throw new Exception($statement->error);
         }
+    }
+
+    public function getProductsInBasket($userid){
+        $basketid = $this->getBasketID($userid);
+        $query =
+            "SELECT
+                p.name as name,
+                p.preis as prize,
+                CONVERT(p.preis*amount,DECIMAL(65,2)) as total_prize,
+                sum(amount) as amount,
+                c.Name as color,
+                s.name as size
+            FROM orders_products as op
+                JOIN products p ON op.ProductID = p.ID
+                JOIN colors c ON op.ColorID = c.ID
+                JOIN sizes s ON op.SizeID = s.ID
+            WHERE OrderID = ?
+            group by NAME";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $basketid);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        if (!$result) {
+            throw new Exception($statement->error);
+        }
+
+        $rows = array();
+        while ($row = $result->fetch_object()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 }

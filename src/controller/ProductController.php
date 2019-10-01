@@ -14,6 +14,13 @@ class ProductController
         $view->sizes = $productModel->readSizesByID($_GET['product_id']);
         $view->display();
     }
+
+    public function payForm(){
+        $view = new View('pay');
+        $view->title = 'Payment';
+        $view->heading = 'Payment';
+        $view->display();
+    }
 }
 
 ?>
