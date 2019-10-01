@@ -44,7 +44,7 @@ class UserController
                 );
                 $this->doLogin();
             } else {
-                echo 'User already exists';
+                echo 'registration__failed';
             }
         }
     }
@@ -62,12 +62,11 @@ class UserController
         //check if it was empty
         $arr = (array)$result;
         if (empty($arr)) {
-            echo "login failed";
+            echo "login__failed";
         } else {
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
-            header("Location: /");
-            die();
+            echo "login__success";
         }
     }
 
