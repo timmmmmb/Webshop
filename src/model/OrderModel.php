@@ -63,7 +63,7 @@ class OrderModel extends Model
             "SELECT
                 p.name as name,
                 p.preis as prize,
-                CONVERT(p.preis*amount,DECIMAL(65,2)) as total_prize,
+                CONVERT(p.preis*sum(amount),DECIMAL(65,2)) as total_prize,
                 sum(amount) as amount,
                 c.Name as color,
                 s.name as size
