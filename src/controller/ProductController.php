@@ -1,5 +1,6 @@
 <?php
 require_once 'src/model/ProductModel.php';
+require_once 'src/model/OrderModel.php';
 
 class ProductController
 {
@@ -19,7 +20,15 @@ class ProductController
         $view = new View('pay');
         $view->title = 'Payment';
         $view->heading = 'Payment';
+        $ordermodel = new OrderModel();
+        $view->products =$ordermodel->getProductsInBasket($_SESSION["user_id"]);
         $view->display();
+    }
+
+    public function pay(){
+        //just change the state of the order
+
+
     }
 }
 
