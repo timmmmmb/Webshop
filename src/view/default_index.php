@@ -16,6 +16,5 @@
                 </div>
             </div>
         </a>
-
     <?php endforeach ?>
 </section>

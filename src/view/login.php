@@ -9,8 +9,8 @@
             <div class="form__container__error" hidden>Login incorrect</div>
 
             <span class="form__container__buttons">
-                <button type="reset" class="form__container__button form__container__button--reset">Reset</button>
-                <button type="submit" class="form__container__button form__container__button--submit">Login</button>
+                <button type="reset" class="form__container__buttons__reset">Reset</button>
+                <button type="submit" class="form__container__buttons__submit">Login</button>
             </span>
         </form>
     </div>

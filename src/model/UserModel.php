@@ -57,7 +57,7 @@ class UserModel extends Model
      * @param $email
      * @param $name
      */
-    public function checkIfUserExists($email, $name) {
+    public function userExists($email, $name) {
 
         $query = "SELECT * FROM $this->tableName WHERE NAME like ? or EMAIL like ?";
 

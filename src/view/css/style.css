@@ -100,6 +100,15 @@ h4 {
     line-height: 1.15em;
 }
 
+button[type="submit"], button[type="reset"] {
+    width: 48%;
+    padding: 1em;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
 header {
     position: fixed;
     width: 100%;
@@ -313,22 +322,13 @@ footer a {
     justify-content: space-between;
 }
 
-.form__container__button {
-    width: 48%;
-    padding: 1em;
-    outline: none;
-    border: 1px solid white;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.form__container__button--reset {
+.form__container__buttons__reset {
     background: transparent;
     color: white;
     align-self: flex-start;
 }
 
-.form__container__button--submit {
+.form__container__buttons__submit {
     background: white;
     color: #333;
     align-self: flex-end;
@@ -374,4 +374,37 @@ footer a {
 .product {
     width: 100%;
     background: white;
+    display: flex;
+}
+
+.product__img {
+    width: 50%;
+    height: 50vw;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product__img > div {
+    width: 70%;
+    height: 70%;
+    box-shadow: 0px 0px 5px 0px #ccc;
+}
+
+.product__info {
+    width: 50%;
+    height: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.product__info > * {
+    width: 70%;
+}
+
+.product__info__submit {
+    width: 150px;
 }

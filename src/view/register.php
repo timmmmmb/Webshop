@@ -11,8 +11,8 @@
             <div class="form__container__error" hidden>User already exists</div>
 
             <span class="form__container__buttons">
-                <button type="reset" class="form__container__button form__container__button--reset">Reset</button>
-                <button type="submit" class="form__container__button form__container__button--submit">Register</button>
+                <button type="reset" class="form__container__buttons__reset">Reset</button>
+                <button type="submit" class="form__container__buttons__submit">Register</button>
             </span>
 
             <p class="form__container__hint">Already have an account? <a href="/user/login">Sign in</a>.</p>

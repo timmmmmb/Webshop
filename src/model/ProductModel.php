@@ -6,17 +6,8 @@ class ProductModel extends Model
 {
     protected $tableName = 'products';
 
-    public function create()
+    public function readColorsByID($id) 
     {
-
-    }
-
-    public function delete()
-    {
-
-    }
-
-    public function readColorsByID($id){
         $query = "SELECT * FROM available_colors as ac JOIN colors as c ON c.id = ac.colorid WHERE productid=?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
@@ -36,7 +27,8 @@ class ProductModel extends Model
         return $rows;
     }
 
-    public function readSizesByID($id){
+    public function readSizesByID($id) 
+    {
         $query = "SELECT * FROM available_sizes as avs JOIN sizes as s ON s.id = avs.sizeid WHERE productid=?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
