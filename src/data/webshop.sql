@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 30. Sep 2019 um 10:14
+-- Erstellungszeit: 01. Okt 2019 um 10:29
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.3.4
 
@@ -109,7 +109,8 @@ INSERT INTO `colors` (`ID`, `Name`, `HexValue`) VALUES
 
 CREATE TABLE `orders` (
   `ID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL
+  `UserID` int(11) NOT NULL,
+  `StageID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -124,8 +125,7 @@ CREATE TABLE `orders_products` (
   `OrderID` int(11) NOT NULL,
   `Amount` int(255) NOT NULL,
   `SizeID` int(11) NOT NULL,
-  `ColorID` int(11) NOT NULL,
-  `StageID` int(11) NOT NULL
+  `ColorID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -245,6 +245,22 @@ INSERT INTO `user_types` (`ID`, `Name`, `Description`) VALUES
 --
 
 --
+-- Indizes für die Tabelle `available_colors`
+--
+ALTER TABLE `available_colors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `fk_products_available_colors` (`ProductID`),
+  ADD KEY `fk_colors_available_colors` (`ColorID`);
+
+--
+-- Indizes für die Tabelle `available_sizes`
+--
+ALTER TABLE `available_sizes`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `fk_products_available_sizes` (`ProductID`),
+  ADD KEY `fk_sizes_available_sizes` (`SizeID`);
+
+--
 -- Indizes für die Tabelle `colors`
 --
 ALTER TABLE `colors`
@@ -255,7 +271,8 @@ ALTER TABLE `colors`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_users` (`UserID`);
+  ADD KEY `fk_users` (`UserID`),
+  ADD KEY `fk_order_stages` (`StageID`);
 
 --
 -- Indizes für die Tabelle `orders_products`
@@ -265,8 +282,7 @@ ALTER TABLE `orders_products`
   ADD KEY `fk_products` (`ProductID`),
   ADD KEY `fk_orders` (`OrderID`),
   ADD KEY `fk_sizes` (`SizeID`),
-  ADD KEY `fk_colors` (`ColorID`),
-  ADD KEY `fk_stages_orders_products` (`StageID`);
+  ADD KEY `fk_colors` (`ColorID`);
 
 --
 -- Indizes für die Tabelle `products`
@@ -298,22 +314,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `user_types`
   ADD PRIMARY KEY (`ID`);
-  
-  --
--- Indizes für die Tabelle `available_colors`
---
-ALTER TABLE `available_colors`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_products_available_colors` (`ProductID`),
-  ADD KEY `fk_colors_available_colors` (`ColorID`);
-
---
--- Indizes für die Tabelle `available_sizes`
---
-ALTER TABLE `available_sizes`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_products_available_sizes` (`ProductID`),
-  ADD KEY `fk_sizes_available_sizes` (`SizeID`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -401,6 +401,7 @@ ALTER TABLE `available_sizes`
 -- Constraints der Tabelle `orders`
 --
 ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_order_stages` FOREIGN KEY (`StageID`) REFERENCES `stages` (`ID`),
   ADD CONSTRAINT `fk_users` FOREIGN KEY (`UserID`) REFERENCES `users` (`ID`);
 
 --
@@ -410,8 +411,7 @@ ALTER TABLE `orders_products`
   ADD CONSTRAINT `fk_colors` FOREIGN KEY (`ColorID`) REFERENCES `colors` (`ID`),
   ADD CONSTRAINT `fk_orders` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`ID`),
   ADD CONSTRAINT `fk_products` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ID`),
-  ADD CONSTRAINT `fk_sizes` FOREIGN KEY (`SizeID`) REFERENCES `sizes` (`ID`),
-  ADD CONSTRAINT `fk_stages_orders_products` FOREIGN KEY (`StageID`) REFERENCES `stages` (`ID`);
+  ADD CONSTRAINT `fk_sizes` FOREIGN KEY (`SizeID`) REFERENCES `sizes` (`ID`);
 
 --
 -- Constraints der Tabelle `users`
