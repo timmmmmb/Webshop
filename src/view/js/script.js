@@ -61,7 +61,6 @@ jQuery(document).ready(function($) {
 
     //Show error div in form
     let showErrorMessage = function(message) {
-
         let loginInput = $(".form__container__input");
         let loginInputErrorClass = "form__container__input--error";
         let loginErrorMsg = $(".form__container__error");
@@ -73,5 +72,14 @@ jQuery(document).ready(function($) {
             loginErrorMsg.slideUp();
         }, 2000);
     };
+
+    //product_detail, choose color
+    $(".product__view__colors__radio").click(function() {
+        let selected = "product__view__colors__radio--selected";
+        $(".product__view__colors__radio").removeClass(selected);
+        $(this).addClass(selected);
+        $("#productColor").val($(this).attr("value"));
+    });
+    $(".product__view__colors__radio:first-child").click();
 
 });
