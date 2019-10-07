@@ -17,12 +17,6 @@ jQuery(document).ready(function($) {
     $(window).scroll(stickyHeader);
     stickyHeader();
 
-    //Banner scroll effect
-    $('.banner').parallax({
-        imageSrc: '/src/view/images/banner1.jpg',
-        speed: 0.5
-    });
-
     //Login submit
     $("#formLogin").submit(function(e) {
         e.preventDefault();

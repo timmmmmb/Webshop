@@ -12,6 +12,9 @@
                 <button type="reset" class="form__container__buttons__reset">Reset</button>
                 <button type="submit" class="form__container__buttons__submit">Login</button>
             </span>
+
+            <p class="form__container__hint">Don't have an account? <a href="/user/register">Register here</a>.</p>
+
         </form>
     </div>
 </section>

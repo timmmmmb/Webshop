@@ -41,7 +41,7 @@ class UserController
      */
     public function register() 
     {
-        $this->checkForExistingLogin();
+        $this->checkForExistingLogin("/");
         $view = new View('register');
         $view->title = 'Register';
         $view->heading = 'Register';
@@ -80,7 +80,7 @@ class UserController
      */
     public function login() 
     {
-        $this->checkForExistingLogin();
+        $this->checkForExistingLogin("/user/profile");
         $view = new View('login');
         $view->title = 'Login';
         $view->heading = 'Login';
@@ -124,11 +124,11 @@ class UserController
     /**
      * Deny access to certain pages if user is not logged in.
      */
-    private function checkForExistingLogin() 
+    private function checkForExistingLogin($redirect) 
     {
         if(isset($_SESSION['user_id'])) 
         {
-            header("Location: /");
+            header("Location: " . $redirect);
             die();
         }
     }

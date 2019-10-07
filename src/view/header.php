@@ -21,24 +21,50 @@
 
 <body>
     <header>
-        <h1>Webshop</h1>
-        <div class="header__line">
-            <div class="header__line__hr"></div>
-            <div class="header__line__square"></div>
-            <div class="header__line__hr"></div>
+        <div class="header__languages">
+            <nav>
+                <ul>
+                    <li>de</li>
+                    <li>fr</li>
+                    <li>it</li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="/">home</a></li>
-                <?php if (isset($_SESSION['user_id'])) : ?>
-                    <li><a href="/user/profile"><?= $_SESSION['user_name'] ?></a></li>
-                    <li><a href="/basket">basket</a></li>
-                    <li><a href="/user/logout">logout</a></li>
-                <?php else : ?>
-                    <li><a href="/user/login">login</a></li>
-                    <li><a href="/user/register">register</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
+        <div class="header__menu">
+            <h1>Webshop</h1>
+            <div class="header__menu__line">
+                <div class="header__menu__line__hr"></div>
+                <div class="header__menu__line__square"></div>
+                <div class="header__menu__line__hr"></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">home</a></li>
+                    <li><a href="/">herren</a></li>
+                    <li><a href="/">damen</a></li>
+                    <?php if (isset($_SESSION['user_id'])) : ?>
+                        <li><a href="/user/logout">logout</a></li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+        <div class="header__icons">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/user/login">
+                            <img src="/src/view/images/user.svg">
+                        </a>
+                    </li>
+                    <?php if (isset($_SESSION['user_id'])) : ?>
+                        <li>
+                            <a href="/basket">
+                                <img src="/src/view/images/shopping-bag.svg">
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
