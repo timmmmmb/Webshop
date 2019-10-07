@@ -2,13 +2,25 @@
 
 require_once 'src/model/UserModel.php';
 
+/**
+ * URL name: /user
+ * This controller is invoked at https://servername/user/ by the Dispatcher.
+ * The class methods are invoked at https://servername/user/method by the Dispatcher.
+ * 
+ */
 class UserController
 {
+    /**
+     * https://servername/user
+     */
     public function index() 
     {
         $this->profile();
     }
 
+    /**
+     * https://servername/user/profile
+     */
     public function profile() 
     {
         if(!isset($_SESSION['user_id'])) 
@@ -24,6 +36,9 @@ class UserController
         $view->display();
     }
 
+    /**
+     * https://servername/user/register
+     */
     public function register() 
     {
         $this->checkForExistingLogin();
@@ -33,15 +48,18 @@ class UserController
         $view->display();
     }
 
+    /**
+     * https://servername/user/doRegister
+     */
     public function doRegister() 
     {
         if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['psw'])) 
         {
             $userModel = new UserModel();
-            if ($userModel->checkIfUserExists(
+            if ($userModel->userExists(
                 htmlspecialchars($_POST['name']),
-                htmlspecialchars($_POST['email']))
-            ) {
+                htmlspecialchars($_POST['email']))) 
+            {
                 $userModel->createUser(
                     htmlspecialchars($_POST['name']),
                     htmlspecialchars($_POST['email']),
@@ -57,6 +75,9 @@ class UserController
         }
     }
 
+    /**
+     * https://servername/user/login
+     */
     public function login() 
     {
         $this->checkForExistingLogin();
@@ -66,10 +87,16 @@ class UserController
         $view->display();
     }
 
+    /**
+     * https://servername/user/doLogin
+     */
     public function doLogin() 
     {
         $userModel = new UserModel();
-        $result = $userModel->getUserByNameAndPassword(htmlspecialchars($_POST['name']), md5(htmlspecialchars($_POST['psw'])));
+        $result = $userModel->getUserByNameAndPassword(
+            htmlspecialchars($_POST['name']), 
+            md5(htmlspecialchars($_POST['psw']))
+        );
         $arr = (array)$result;
         
         if(empty($arr)) 
@@ -84,6 +111,9 @@ class UserController
         }
     }
 
+    /**
+     * https://servername/user/logout
+     */
     public function logout() 
     {
         session_unset();
@@ -91,6 +121,9 @@ class UserController
         die();
     }
 
+    /**
+     * Deny access to certain pages if user is not logged in.
+     */
     private function checkForExistingLogin() 
     {
         if(isset($_SESSION['user_id'])) 
