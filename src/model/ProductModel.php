@@ -47,5 +47,16 @@ class ProductModel extends Model
 
         return $rows;
     }
+
+    public function removeItemByUserID($userid, $productid){
+        $query = "DELETE FROM orders_products where ProductID = ? and OrderID = (SELECT ID FROM orders where UserID = ? and StageID = 1 limit 1)";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('ii', $productid, $userid);
+
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
 }
 ?>

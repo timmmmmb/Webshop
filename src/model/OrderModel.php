@@ -61,6 +61,7 @@ class OrderModel extends Model
         $basketid = $this->getBasketID($userid);
         $query =
             "SELECT
+                p.id as ID,
                 p.name as name,
                 p.preis as prize,
                 CONVERT(p.preis*sum(amount),DECIMAL(65,2)) as total_prize,

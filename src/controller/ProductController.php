@@ -30,6 +30,15 @@ class ProductController
 
 
     }
+
+    /*
+     * removes all of the items of one type from the basket and returns to the basket.
+     */
+    public function removeItem(){
+        $productModel = new ProductModel();
+        $productModel->removeItemByUserID($_SESSION["user_id"], $_POST["product_id"]);
+        header("Location: /basket");
+    }
 }
 
 ?>
