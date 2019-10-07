@@ -62,3 +62,4 @@ typings/
 
 # VS Code Workspace
 *.code-workspace
+/.idea/*
