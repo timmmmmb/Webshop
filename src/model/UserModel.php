@@ -31,6 +31,25 @@ class UserModel extends Model
         }
     }
 
+    public function getAllUsers(){
+        $query = "SELECT u.id as ID, u.name as Name, email, ut.Name as Type FROM users as u join user_types as ut on ut.ID = u.User_TypeID";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        if (!$result)
+        {
+            throw new Exception($statement->error);
+        }
+
+        $rows = array();
+        while ($row = $result->fetch_object()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     /**
      * Checks if a user with this name and pw exists.
      * Returns the row if the user exists.
