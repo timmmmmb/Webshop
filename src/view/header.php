@@ -53,13 +53,13 @@
                 <ul>
                     <li>
                         <a href="/user/login">
-                            <img src="/src/view/images/user.svg">
+                            <img src="/src/view/images/user.svg" alt="Profile">
                         </a>
                     </li>
                     <?php if (isset($_SESSION['user_id'])) : ?>
                         <li>
                             <a href="/basket">
-                                <img src="/src/view/images/shopping-bag.svg">
+                                <img src="/src/view/images/shopping-bag.svg" alt="Basket">
                             </a>
                         </li>
                     <?php endif; ?>

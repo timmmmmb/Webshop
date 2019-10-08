@@ -1,24 +1,34 @@
 <section class="basket">
-    <h2>Warenkorb</h2>
-    <ul>
-        <?php foreach ($products as $product): ?>
-            <li><?= $product->amount." ".$product->color." ".$product->name." ".$product->size." Preis: ".$product->prize." CHF total: ".$product->total_prize." CHF"?>
-                <form action="/order/removeItem" method="post">
-                    <input type="hidden" name="id" value="<?= $product->order_id ?>" />
-                    <button type="submit">remove</button>
-                </form>
-                <form action="/order/updateAmount" method="post">
-                    <input type="hidden" name="id" value="<?= $product->order_id ?>" />
-                    <input type="number" name="amount" min="1" value="<?= $product->amount ?>">
-                    <button type="submit">Update Amount</button>
-                </form>
-            </li>
-        <?php endforeach ?>
-        <?php if (isset($basketisempty)&&!$basketisempty) : ?>
+
+    <h3>Shopping cart</h3>
+    <hr class="basket__hr">
+
+    <?php if (empty($products)) : ?>
+        <div class="basket__empty">
+            <div class="basket__empty__icon">
+                <img src="/src/view/images/shopping-cart-empty.svg" alt="Empty">
+            </div>
+            <p>Shopping cart is empty</p>
+        </div>
+    <?php else : ?>
+        <ul>
+            <?php foreach ($products as $product) : ?>
+                <li><?= $product->amount . " " . $product->color . " " . $product->name . " " . $product->size . " Preis: " . $product->prize . " CHF total: " . $product->total_prize . " CHF" ?>
+                    <form action="/order/removeItem" method="post">
+                        <input type="hidden" name="id" value="<?= $product->order_id ?>" />
+                        <button type="submit">remove</button>
+                    </form>
+                    <form action="/order/updateAmount" method="post">
+                        <input type="hidden" name="id" value="<?= $product->order_id ?>" />
+                        <input type="number" name="amount" min="1" value="<?= $product->amount ?>">
+                        <button type="submit">Update Amount</button>
+                    </form>
+                </li>
+            <?php endforeach; ?>
             <form action="/product/payForm" method="post">
                 <button type="submit">Pay</button>
             </form>
-        <?php endif; ?>
+        </ul>
+    <?php endif; ?>
 
-    </ul>
 </section>
