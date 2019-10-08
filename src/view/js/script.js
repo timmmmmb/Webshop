@@ -72,8 +72,24 @@ jQuery(document).ready(function($) {
         let selected = "product__view__colors__radio--selected";
         $(".product__view__colors__radio").removeClass(selected);
         $(this).addClass(selected);
-        $("#productColor").val($(this).attr("value"));
+        $("#productColor").val($(this).attr("data-color-id"));
     });
     $(".product__view__colors__radio:first-child").click();
+
+    //Add to basket submit
+    $("#formAddBasket").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: '/order/addBasket',
+            data: $(this).serialize(),
+            success: function(data)
+            {
+                $("#orderCount").text(data);
+                $(".header__icons__item--cart")
+                    .css("animation-name", "header__icons__item--beat");
+            }
+        });
+    });
 
 });

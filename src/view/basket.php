@@ -16,6 +16,7 @@
                 <li><?= $product->amount . " " . $product->color . " " . $product->name . " " . $product->size . " Preis: " . $product->prize . " CHF total: " . $product->total_prize . " CHF" ?>
                     <form action="/order/removeItem" method="post">
                         <input type="hidden" name="id" value="<?= $product->order_id ?>" />
+                        <input type="hidden" name="amount" value="<?= $product->amount ?>" />
                         <button type="submit">remove</button>
                     </form>
                     <form action="/order/updateAmount" method="post">

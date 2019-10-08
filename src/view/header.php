@@ -56,13 +56,18 @@
                 <ul>
                     <li>
                         <a href="/user/login">
-                            <img src="/src/view/images/user.svg" alt="Profile">
+                            <div class="header__icons__item">
+                                <img src="/src/view/images/user.svg" alt="Profile">
+                            </div>
                         </a>
                     </li>
                     <?php if (isset($_SESSION['user_id'])) : ?>
                         <li>
                             <a href="/basket">
-                                <img src="/src/view/images/shopping-bag.svg" alt="Basket">
+                                <div class="header__icons__item header__icons__item--cart">
+                                    <span id="orderCount"><?= $_SESSION['user_order_count']; ?></span>
+                                    <img src="/src/view/images/shopping-bag.svg" alt="Basket">
+                                </div>
                             </a>
                         </li>
                     <?php endif; ?>

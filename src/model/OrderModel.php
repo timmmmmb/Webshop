@@ -13,27 +13,31 @@ class OrderModel extends Model
         //get the id of the order that represents the basket
         $basket_id = $this->getBasketID($user_id);
         //create a new basket if there is none in the db
-        if ($basket_id == 0) {
+        if ($basket_id == 0) 
+        {
             $this->createBasket($user_id);
             $basket_id = $this->getBasketID($user_id);
         }
 
         //check if product is allready in basket
         $orderid = $this->checkIfProductAllreadyInBasket($product_id, $user_id, $colorid, $sizeid, $basket_id);
-        if ($orderid == 0) {
+        if ($orderid == 0) 
+        {
             //add product to the basket
             $query = "INSERT INTO orders_products (productid, orderid, amount, sizeid, colorid) VALUES (?, ?, ?, ?, ?)";
 
             $statement = ConnectionHandler::getConnection()->prepare($query);
             $statement->bind_param('iiiii', $product_id, $basket_id, $amount, $sizeid, $colorid);
 
-            if (!$statement->execute()) {
+            if (!$statement->execute()) 
+            {
                 throw new Exception($statement->error);
             }
-        } else {
+        } 
+        else 
+        {
             $this->addProductAmount($amount, $orderid);
         }
-
     }
 
     /**
@@ -51,10 +55,12 @@ class OrderModel extends Model
         $statement->execute();
 
         $result = $statement->get_result();
-        if (!$result) {
+        if (!$result) 
+        {
             throw new Exception($statement->error);
         }
-        if (mysqli_num_rows($result) == 0) {
+        if (mysqli_num_rows($result) == 0) 
+        {
             return 0;
         }
         $row = $result->fetch_object();
@@ -74,7 +80,8 @@ class OrderModel extends Model
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $userid);
 
-        if (!$statement->execute()) {
+        if (!$statement->execute())
+        {
             throw new Exception($statement->error);
         }
     }
@@ -104,16 +111,27 @@ class OrderModel extends Model
         $statement->execute();
 
         $result = $statement->get_result();
-        if (!$result) {
+        if (!$result) 
+        {
             throw new Exception($statement->error);
         }
-
         $rows = array();
-        while ($row = $result->fetch_object()) {
+        while ($row = $result->fetch_object()) 
+        {
             $rows[] = $row;
         }
-
         return $rows;
+    }
+
+    public function getNumberOfProductsInBasket($userid) 
+    {
+        $products = $this->getProductsInBasket($userid);
+        $numberOfProducts = 0;
+        foreach($products as $product)
+        {
+            $numberOfProducts += $product->amount;
+        }
+        return $numberOfProducts;
     }
 
     public function removeItemByID($id)
@@ -123,7 +141,8 @@ class OrderModel extends Model
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $id);
 
-        if (!$statement->execute()) {
+        if (!$statement->execute()) 
+        {
             throw new Exception($statement->error);
         }
     }
@@ -135,7 +154,8 @@ class OrderModel extends Model
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('ii', $amount, $id);
 
-        if (!$statement->execute()) {
+        if (!$statement->execute()) 
+        {
             throw new Exception($statement->error);
         }
     }
@@ -147,7 +167,8 @@ class OrderModel extends Model
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('ii', $amount, $id);
 
-        if (!$statement->execute()) {
+        if (!$statement->execute()) 
+        {
             throw new Exception($statement->error);
         }
     }
@@ -162,12 +183,15 @@ class OrderModel extends Model
 
 
         $result = $statement->get_result();
-        if (!$result) {
+        if (!$result) 
+        {
             throw new Exception($statement->error);
         }
-        if (mysqli_num_rows($result) == 0) {
+        if (mysqli_num_rows($result) == 0) 
+        {
             return 0;
         }
+
         $row = $result->fetch_object();
         $result->close();
         return $row->ID;
@@ -178,10 +202,12 @@ class OrderModel extends Model
         //get the id of the order that represents the basket
         $basket_id = $this->getBasketID($userid);
         //return if there is no basket
-        if ($basket_id == 0) {
+        if ($basket_id == 0) 
+        {
             return;
         }
-        if($this->checkIfBasketEmptyByBasket($basket_id)){
+        if($this->checkIfBasketEmptyByBasket($basket_id))
+        {
             return;
         }
         $query = "UPDATE orders SET StageID = (SELECT ID FROM stages where NAME like 'Gekauft' limit 1) where ID = ?";
@@ -189,30 +215,34 @@ class OrderModel extends Model
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $basket_id);
 
-        if (!$statement->execute()) {
+        if (!$statement->execute()) 
+        {
             throw new Exception($statement->error);
         }
     }
 
-    public function checkIfBasketEmptyByBasket($basketid){
+    public function checkIfBasketEmptyByBasket($basketid)
+    {
         $query = "SELECT * FROM orders_products where OrderID = ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $basketid);
         $statement->execute();
 
-
         $result = $statement->get_result();
-        if (!$result) {
+        if (!$result) 
+        {
             throw new Exception($statement->error);
         }
         return mysqli_num_rows($result) == 0;
     }
 
-    public function checkIfBasketEmptyByUser($userid){
+    public function checkIfBasketEmptyByUser($userid)
+    {
         $basket_id = $this->getBasketID($userid);
         //return if there is no basket
-        if ($basket_id == 0) {
+        if ($basket_id == 0) 
+        {
             return true;
         }
         return $this->checkIfBasketEmptyByBasket($basket_id);

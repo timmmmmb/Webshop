@@ -3,30 +3,51 @@
 require_once 'src/model/OrderModel.php';
 require_once 'src/model/DefaultModel.php';
 
+/**
+ * URL name: /order
+ * This controller is invoked at https://servername/order/ by the Dispatcher.
+ * The class methods are invoked at https://servername/order/method by the Dispatcher.
+ * 
+ */
 class OrderController
 {
-    public function index() {
-
-    }
-
-    public function addBasket() {
+    /**
+     * https://servername/order/addBasket
+     */
+    public function addBasket() 
+    {
         $orderModel = new OrderModel();
-        $orderModel->addToBasket($_POST["product_id"], $_SESSION["user_id"],$_POST["amount"], $_POST["color"], $_POST["size"] );
-        header("Location: /");
+        $orderModel->addToBasket(
+            $_POST["product_id"], 
+            $_SESSION["user_id"],
+            $_POST["amount"], 
+            $_POST["color"], 
+            $_POST["size"]
+        );
+        $_SESSION['user_order_count'] += $_POST["amount"];
+        echo $_SESSION['user_order_count'];
     }
 
-    public function updateAmount(){
+    /**
+     * https://servername/order/updateAmount
+     */
+    public function updateAmount()
+    {
         $orderModel = new OrderModel();
         $orderModel ->changeProductAmount($_POST["amount"],$_POST["id"]);
         header("Location: /basket");
     }
 
-    /*
+    /**
+     * https://servername/order/removeItem
      * removes all of the items of one type from the basket and returns to the basket.
      */
-    public function removeItem(){
+    public function removeItem()
+    {
         $orderModel = new OrderModel();
         $orderModel->removeItemByID($_POST["id"]);
+        $_SESSION['user_order_count'] -= $_POST["amount"];
         header("Location: /basket");
+        die();
     }
 }

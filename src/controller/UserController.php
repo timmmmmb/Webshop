@@ -1,6 +1,7 @@
 <?php
 
 require_once 'src/model/UserModel.php';
+require_once 'src/model/OrderModel.php';
 
 /**
  * URL name: /user
@@ -105,6 +106,8 @@ class UserController
         } 
         else 
         {
+            $orderModel = new OrderModel();
+            $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($result->ID);
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
             $_SESSION['user_type'] = $result->Type;
@@ -133,5 +136,4 @@ class UserController
             die();
         }
     }
-
 }
