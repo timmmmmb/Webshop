@@ -489,7 +489,7 @@ footer a {
     margin: 0 0.5em;
     cursor: pointer;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 2px solid gray;
     display: inline-block;
 }
 
