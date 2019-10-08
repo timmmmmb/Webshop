@@ -41,7 +41,7 @@ class UserModel extends Model
      */
     public function getUserByNameAndPassword($name, $password) 
     {
-        $query = "SELECT * FROM $this->tableName WHERE NAME like ? and PASSWORD like ?";
+        $query = "SELECT u.id as ID, u.name as Name, email, ut.Name as Type FROM users as u join user_types as ut on ut.ID = u.User_TypeID WHERE u.NAME like ? and u.PASSWORD like ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('ss', $name, $password);

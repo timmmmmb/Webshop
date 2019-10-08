@@ -42,6 +42,9 @@
                     <li><a href="/">home</a></li>
                     <li><a href="/">herren</a></li>
                     <li><a href="/">damen</a></li>
+                    <?php if (isset($_SESSION['user_type'])&&$_SESSION["user_type"]=="Admin") : ?>
+                        <li><a href="/admin">admin</a></li>
+                    <?php endif; ?>
                     <?php if (isset($_SESSION['user_id'])) : ?>
                         <li><a href="/user/logout">logout</a></li>
                     <?php endif; ?>

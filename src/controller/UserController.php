@@ -107,6 +107,7 @@ class UserController
         {
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
+            $_SESSION['user_type'] = $result->Type;
             echo "login__success";
         }
     }
