@@ -114,15 +114,6 @@ button[type="submit"], button[type="reset"] {
     cursor: pointer;
 }
 
-button.checkoutButton{
-    width: auto;
-    padding: 1em;
-    outline: none;
-    border: 1px solid white;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
 header {
     position: fixed;
     width: 100%;
@@ -610,13 +601,19 @@ footer a {
 }
 
 .basket {
-    width: 100%;
-    text-align: center;
+    width: 70%;
+    background: white;
+    margin: 2em auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     padding: 5em 0;
 }
 
 .basket h3 {
     color: #555;
+    margin: 0;
 }
 
 .basket__hr {
@@ -656,4 +653,14 @@ footer a {
 .basket__empty__icon img {
     width: 30px;
     height: 30px;
+}
+
+.basket__item {
+    background: white;
+    padding: 2em;
+    border-bottom: 1px solid #dee3e0;
+}
+
+ul li .basket__item:last-child {
+    border-bottom: none;
 }
