@@ -34,8 +34,10 @@ class OrderController
     public function updateAmount()
     {
         $orderModel = new OrderModel();
-        $orderModel ->changeProductAmount($_POST["amount"],$_POST["id"]);
+        $orderModel ->changeProductAmount($_POST["amount"], $_POST["id"]);
+        $_SESSION['user_order_count'] = $_POST["amount"];
         header("Location: /basket");
+        die();
     }
 
     /**

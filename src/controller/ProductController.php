@@ -16,7 +16,8 @@ class ProductController
         $view->display();
     }
 
-    public function payForm(){
+    public function payForm()
+    {
         $view = new View('pay');
         $view->title = 'Payment';
         $view->heading = 'Payment';
@@ -25,10 +26,12 @@ class ProductController
         $view->display();
     }
 
-    public function pay(){
-        //just change the state of the order
+    public function pay() 
+    {
+        //Just change the state of the order
         $ordermodel = new OrderModel();
         $ordermodel->payBasket($_SESSION["user_id"]);
+        $_SESSION['user_order_count'] = 0;
         header("Location: /");
     }
 }
