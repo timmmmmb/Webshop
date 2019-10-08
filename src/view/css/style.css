@@ -114,6 +114,15 @@ button[type="submit"], button[type="reset"] {
     cursor: pointer;
 }
 
+button.checkoutButton{
+    width: auto;
+    padding: 1em;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
 header {
     position: fixed;
     width: 100%;
