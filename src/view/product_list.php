@@ -1,5 +1,7 @@
-<section class="admin__products">
-    <ul>
+<section class="admin">
+    <h3>Product list</h3>
+    <hr class="admin__hr">
+    <ul class="admin_list">
         <?php foreach ($products as $product) : ?>
             <li><?= $product->Name?></li>
         <?php endforeach; ?>

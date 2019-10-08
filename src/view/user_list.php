@@ -1,5 +1,7 @@
-<section class="admin__users">
-    <ul>
+<section class="admin">
+    <h3>User list</h3>
+    <hr class="admin__hr">
+    <ul class="admin_list">
         <?php foreach ($users as $user) : ?>
             <li><?= $user->Name . " " . $user->email . " " . $user->Type ?></li>
         <?php endforeach; ?>

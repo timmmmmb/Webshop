@@ -1,5 +1,7 @@
-<section class="admin__orders">
-    <ul>
+<section class="admin">
+    <h3>Order list</h3>
+    <hr class="admin__hr">
+    <ul class="admin_list">
         <?php foreach ($orders as $order) : ?>
             <li><?= $order->ID?></li>
         <?php endforeach; ?>

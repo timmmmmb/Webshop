@@ -246,11 +246,37 @@ header {
     height: 25px;
 }
 
+.admin_list{
+    margin-top: 5px;
+}
+
+.admin_list li{
+    padding: 5px;
+}
+
 .admin__nav{
     display: inline-block;
     margin: 0 0.5em;
     min-width: 100px;
     text-align: center;
+}
+
+.admin{
+    width: 100%;
+    text-align: center;
+    padding: 5em 0;
+}
+
+.admin__hr{
+    border: none;
+    width: 300px;
+    height: 1px;
+    background: #ddd;
+    margin: 3em auto 0;
+}
+
+.admin h3 {
+    color: #555;
 }
 
 .admin__nav__ul{
