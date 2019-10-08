@@ -4,6 +4,8 @@ require_once 'src/lib/Model.php';
 
 class OrderModel extends Model
 {
+
+    protected $tableName = "orders";
     /**
      * adds a new product to the basket of the user
      * @throws Exception
