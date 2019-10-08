@@ -14,8 +14,11 @@
                 </form>
             </li>
         <?php endforeach ?>
-        <form action="/product/payForm" method="post">
-            <button type="submit">Pay</button>
-        </form>
+        <?php if (isset($basketisempty)&&!$basketisempty) : ?>
+            <form action="/product/payForm" method="post">
+                <button type="submit">Pay</button>
+            </form>
+        <?php endif; ?>
+
     </ul>
 </section>

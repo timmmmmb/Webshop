@@ -8,20 +8,21 @@ class OrderModel extends Model
      * adds a new product to the basket of the user
      * @throws Exception
      */
-    public function addToBasket($product_id, $user_id, $amount, $colorid, $sizeid){
+    public function addToBasket($product_id, $user_id, $amount, $colorid, $sizeid)
+    {
         //get the id of the order that represents the basket
         $basket_id = $this->getBasketID($user_id);
         //create a new basket if there is none in the db
-        if($basket_id == 0){
+        if ($basket_id == 0) {
             $this->createBasket($user_id);
             $basket_id = $this->getBasketID($user_id);
         }
 
         //check if product is allready in basket
         $orderid = $this->checkIfProductAllreadyInBasket($product_id, $user_id, $colorid, $sizeid, $basket_id);
-        if($orderid == 0){
+        if ($orderid == 0) {
             //add product to the basket
-            $query="INSERT INTO orders_products (productid, orderid, amount, sizeid, colorid) VALUES (?, ?, ?, ?, ?)";
+            $query = "INSERT INTO orders_products (productid, orderid, amount, sizeid, colorid) VALUES (?, ?, ?, ?, ?)";
 
             $statement = ConnectionHandler::getConnection()->prepare($query);
             $statement->bind_param('iiiii', $product_id, $basket_id, $amount, $sizeid, $colorid);
@@ -29,7 +30,7 @@ class OrderModel extends Model
             if (!$statement->execute()) {
                 throw new Exception($statement->error);
             }
-        }else{
+        } else {
             $this->addProductAmount($amount, $orderid);
         }
 
@@ -41,8 +42,9 @@ class OrderModel extends Model
      * @return int
      * @throws Exception
      */
-    private function getBasketID($user_id){
-        $query = "SELECT * FROM orders WHERE userid = ? and stageid = 1";
+    private function getBasketID($user_id)
+    {
+        $query = "SELECT * FROM orders WHERE userid = ? and stageid = (SELECT ID FROM stages where NAME like 'Warenkorb' limit 1)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $user_id);
@@ -52,7 +54,7 @@ class OrderModel extends Model
         if (!$result) {
             throw new Exception($statement->error);
         }
-        if (mysqli_num_rows($result)==0){
+        if (mysqli_num_rows($result) == 0) {
             return 0;
         }
         $row = $result->fetch_object();
@@ -65,8 +67,9 @@ class OrderModel extends Model
      * @param $userid
      * @throws Exception
      */
-    private function createBasket($userid){
-        $query="INSERT INTO orders (userID, stageID) VALUES (?, 1)";
+    private function createBasket($userid)
+    {
+        $query = "INSERT INTO orders (userID, stageID) VALUES (?, 1)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $userid);
@@ -76,7 +79,8 @@ class OrderModel extends Model
         }
     }
 
-    public function getProductsInBasket($userid){
+    public function getProductsInBasket($userid)
+    {
         $basketid = $this->getBasketID($userid);
         $query =
             "SELECT
@@ -112,7 +116,8 @@ class OrderModel extends Model
         return $rows;
     }
 
-    public function removeItemByID($id){
+    public function removeItemByID($id)
+    {
         $query = "DELETE FROM orders_products where id = ? ";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
@@ -123,33 +128,36 @@ class OrderModel extends Model
         }
     }
 
-    public function changeProductAmount($amount, $id){
+    public function changeProductAmount($amount, $id)
+    {
         $query = "UPDATE orders_products SET amount=? where ID = ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('ii', $amount,$id);
+        $statement->bind_param('ii', $amount, $id);
 
         if (!$statement->execute()) {
             throw new Exception($statement->error);
         }
     }
 
-    public function addProductAmount($amount, $id){
+    public function addProductAmount($amount, $id)
+    {
         $query = "UPDATE orders_products SET amount=amount+? where ID = ? ";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('ii', $amount,$id);
+        $statement->bind_param('ii', $amount, $id);
 
         if (!$statement->execute()) {
             throw new Exception($statement->error);
         }
     }
 
-    public function checkIfProductAllreadyInBasket($productid, $userid, $colorid, $sizeid, $orderid){
-        $query = "SELECT * FROM orders_products where ProductID = ? and ColorID = ? and SizeID = ? and OrderID = (SELECT ID FROM orders where UserID = ? and StageID = 1 limit 1) and OrderID = ?";
+    public function checkIfProductAllreadyInBasket($productid, $userid, $colorid, $sizeid, $orderid)
+    {
+        $query = "SELECT * FROM orders_products where ProductID = ? and ColorID = ? and SizeID = ? and OrderID = (SELECT ID FROM orders where UserID = ? and StageID = (SELECT ID FROM stages where NAME like 'Warenkorb' limit 1) limit 1) and OrderID = ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('iiiii', $productid,$colorid, $sizeid, $userid, $orderid);
+        $statement->bind_param('iiiii', $productid, $colorid, $sizeid, $userid, $orderid);
         $statement->execute();
 
 
@@ -157,11 +165,56 @@ class OrderModel extends Model
         if (!$result) {
             throw new Exception($statement->error);
         }
-        if (mysqli_num_rows($result)==0){
+        if (mysqli_num_rows($result) == 0) {
             return 0;
         }
         $row = $result->fetch_object();
         $result->close();
         return $row->ID;
+    }
+
+    public function payBasket($userid)
+    {
+        //get the id of the order that represents the basket
+        $basket_id = $this->getBasketID($userid);
+        //return if there is no basket
+        if ($basket_id == 0) {
+            return;
+        }
+        if($this->checkIfBasketEmptyByBasket($basket_id)){
+            return;
+        }
+        $query = "UPDATE orders SET StageID = (SELECT ID FROM stages where NAME like 'Gekauft' limit 1) where ID = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $basket_id);
+
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
+
+    public function checkIfBasketEmptyByBasket($basketid){
+        $query = "SELECT * FROM orders_products where OrderID = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $basketid);
+        $statement->execute();
+
+
+        $result = $statement->get_result();
+        if (!$result) {
+            throw new Exception($statement->error);
+        }
+        return mysqli_num_rows($result) == 0;
+    }
+
+    public function checkIfBasketEmptyByUser($userid){
+        $basket_id = $this->getBasketID($userid);
+        //return if there is no basket
+        if ($basket_id == 0) {
+            return true;
+        }
+        return $this->checkIfBasketEmptyByBasket($basket_id);
     }
 }

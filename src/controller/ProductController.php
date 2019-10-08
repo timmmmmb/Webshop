@@ -27,8 +27,9 @@ class ProductController
 
     public function pay(){
         //just change the state of the order
-
-
+        $ordermodel = new OrderModel();
+        $ordermodel->payBasket($_SESSION["user_id"]);
+        header("Location: /");
     }
 }
 

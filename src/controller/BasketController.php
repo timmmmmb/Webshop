@@ -10,6 +10,7 @@ class BasketController
         $view->title = 'Warenkorb';
         $view->heading = 'Warenkorb';
         $view->products =$ordermodel->getProductsInBasket($_SESSION["user_id"]);
+        $view->basketisempty = $ordermodel->checkIfBasketEmptyByUser($_SESSION["user_id"]);
         $view->display();
     }
 }
