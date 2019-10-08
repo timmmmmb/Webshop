@@ -208,15 +208,9 @@ header {
 }
 
 @keyframes header__icons__item--beat {
-    0% {
-        transform: scale(1.0);
-    }
-    50% {
-        transform: scale(1.5);
-    }
-    100% {
-        transform: scale(1.0);
-    }
+    0% { transform: scale(1.0); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1.0); }
 }
 
 .header__icons__item span {
@@ -608,7 +602,7 @@ footer a {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 5em 0;
+    padding: 7em 0;
 }
 
 .basket h3 {
@@ -655,12 +649,42 @@ footer a {
     height: 30px;
 }
 
+.basket ul {
+    width: 70%;
+}
+
+.basket ul li:last-child .basket__item {
+    border-bottom: none;
+}
+
 .basket__item {
+    height: 150px;
+    width: 100%;
     background: white;
     padding: 2em;
     border-bottom: 1px solid #dee3e0;
+    display: flex;
 }
 
-ul li .basket__item:last-child {
-    border-bottom: none;
+.basket__item__img {
+    width: 20%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.basket__item__info {
+    width: 60%;
+    height: 100%;
+}
+
+.basket__item__info p {
+    color: #777;
+    margin: 0.5em 1em;
+}
+
+.basket__item__right {
+    width: 20%;
+    height: 100%;
 }

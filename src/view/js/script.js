@@ -86,8 +86,11 @@ jQuery(document).ready(function($) {
             success: function(data)
             {
                 $("#orderCount").text(data);
-                $(".header__icons__item--cart")
-                    .css("animation-name", "header__icons__item--beat");
+                let cartIcon = ".header__icons__item--cart";
+                $(cartIcon).css("animation-name", "header__icons__item--beat");
+                setTimeout(function() {
+                    $(cartIcon).css("animation-name", "none");
+                }, 500)
             }
         });
     });
