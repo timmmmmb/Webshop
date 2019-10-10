@@ -9,21 +9,21 @@
                     <li class="admin__nav_item">
                         <a href="/admin/user">
                         <div class="basket__empty__icon">
-                            <img src="/src/view/images/user.svg" alt="Empty">
+                            <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
                         </div>
                         User list</a>
                     </li>
                     <li class="admin__nav_item">
                         <a href="/admin/product">
                         <div class="basket__empty__icon">
-                            <img src="/src/view/images/shopping-cart-empty.svg" alt="Empty">
+                            <i class="fa fa-list fa-2x" aria-hidden="true"></i>
                         </div>
                         Product list</a>
                     </li>
                     <li class="admin__nav_item">
                         <a href="/admin/order">
                         <div class="basket__empty__icon">
-                            <img src="/src/view/images/orders.svg" alt="Empty">
+                            <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
                         </div>
                         Order list</a>
                     </li>

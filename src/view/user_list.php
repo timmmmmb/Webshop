@@ -10,7 +10,7 @@
         <li class="admin__nav_item">
             <a href="/admin">
                 <div class="admin__nav__back__icon">
-                    <img src="/src/view/images/back.svg" alt="Empty">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </div>
             </a>
         </li>

@@ -29,7 +29,7 @@
                 <?php endforeach ?>
             </select>
 
-            <input type="number" class="product__info__amount" name="amount" min="1" max="5" value="1">
+            <input type="number" name="amount" min="1" max="5" value="1">
             
             <hr class="product__info__hr">
             

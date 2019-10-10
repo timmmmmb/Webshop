@@ -35,7 +35,7 @@ class OrderController
     {
         $orderModel = new OrderModel();
         $orderModel ->changeProductAmount($_POST["amount"], $_POST["id"]);
-        $_SESSION['user_order_count'] = $_POST["amount"];
+        $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($_SESSION["user_id"]);
         header("Location: /basket");
         die();
     }

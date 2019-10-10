@@ -57,7 +57,7 @@
                     <li>
                         <a href="/user/login">
                             <div class="header__icons__item">
-                                <img src="/src/view/images/user.svg" alt="Profile">
+                                <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
                             </div>
                         </a>
                     </li>
@@ -66,7 +66,7 @@
                             <a href="/basket">
                                 <div class="header__icons__item header__icons__item--cart">
                                     <span id="orderCount"><?= $_SESSION['user_order_count']; ?></span>
-                                    <img src="/src/view/images/shopping-bag.svg" alt="Basket">
+                                    <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
                                 </div>
                             </a>
                         </li>

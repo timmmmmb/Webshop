@@ -95,4 +95,9 @@ jQuery(document).ready(function($) {
         });
     });
 
+    //Basket change amount of product
+    $(".basket__item__right__number").bind('keyup mouseup', function () {
+        $(this).closest("form").submit();        
+    });
+
 });
