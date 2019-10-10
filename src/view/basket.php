@@ -11,7 +11,7 @@
 
         <div class="basket__empty">
             <div class="basket__empty__icon">
-                <img src="/src/view/images/shopping-cart-empty.svg" alt="Empty">
+                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
             </div>
             <p>Shopping cart is empty</p>
         </div>
