@@ -22,7 +22,7 @@ class ProductController
         $view->title = 'Payment';
         $view->heading = 'Payment';
         $ordermodel = new OrderModel();
-        $view->products =$ordermodel->getProductsInBasket($_SESSION["user_id"]);
+        $view->products = $ordermodel->getProductsInBasket($_SESSION["user_id"]);
         $view->display();
     }
 

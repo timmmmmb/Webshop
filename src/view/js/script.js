@@ -26,11 +26,12 @@ jQuery(document).ready(function($) {
             data: $(this).serialize(),
             success: function(data)
             {
-               if(data === 'login__success') {
-                   window.location = "/";
-               } else {
+                console.log(data);
+                if(data === 'login__success') {
+                    window.location = "/";
+                } else {
                     showErrorMessage("Login incorrect");
-               }
+                }
             }
         });
     });
@@ -44,11 +45,12 @@ jQuery(document).ready(function($) {
             data: $(this).serialize(),
             success: function(data)
             {
-               if(data === 'login__success') {
+                console.log(data);
+                if(data === 'login__success') {
                    window.location = "/";
-               } else {
+                } else {
                    showErrorMessage("User already exists");
-               }
+                }
             }
         });
     });
@@ -90,7 +92,7 @@ jQuery(document).ready(function($) {
                 $(cartIcon).css("animation-name", "header__icons__item--beat");
                 setTimeout(function() {
                     $(cartIcon).css("animation-name", "none");
-                }, 500)
+                }, 1000)
             }
         });
     });
