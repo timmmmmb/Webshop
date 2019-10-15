@@ -7,7 +7,6 @@ require_once 'src/model/OrderModel.php';
  * URL name: /user
  * This controller is invoked at https://servername/user/ by the Dispatcher.
  * The class methods are invoked at https://servername/user/method by the Dispatcher.
- * 
  */
 class UserController
 {

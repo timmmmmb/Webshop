@@ -19,6 +19,7 @@
     <?php else : ?>
     
         <ul>
+            <?php $checkout_total = 0; ?>
             <?php foreach ($products as $product) : ?>
                 <li>
                     <div class="basket__item">
@@ -46,6 +47,7 @@
                         </div>
                     </div>
                 </li>
+                <?php $checkout_total += $product->total_prize; ?>
             <?php endforeach; ?>
         </ul>
         <div class="basket__hr">
@@ -53,8 +55,10 @@
             <div class="basket__hr__circle"></div>
             <div class="basket__hr__line"></div>
         </div>
-        <form action="/product/payForm" class="basket__form" method="post">
-            <button class="basket__form__submit" type="submit">checkout</button>
+        <form action="/product/checkout" class="basket__form" method="post">
+            <button class="basket__form__submit" type="submit">
+                checkout &nbsp; <?= number_format((float)$checkout_total, 2, '.', ''); ?>
+            </button>
         </form>
     
     <?php endif; ?>

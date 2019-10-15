@@ -54,6 +54,8 @@ table {
 	border-spacing: 0;
 }
 
+/*--------------------------------------------*/
+
 html, body {
     width: 100%;
     height: 100%;
@@ -121,6 +123,8 @@ input[type="number"] {
     font-size: 1em;
     text-indent: 1em;
 }
+
+/*--------------------------------------------*/
 
 header {
     position: fixed;
@@ -237,6 +241,8 @@ header {
     color: white;
 }
 
+/*--------------------------------------------*/
+
 .admin_list{
     margin-top: 5px;
 }
@@ -291,9 +297,13 @@ header {
     height: 15px;
 }
 
+/*--------------------------------------------*/
+
 main {
     padding-top: 9em;
 }
+
+/*--------------------------------------------*/
 
 .banner {
     width: 100%;
@@ -322,6 +332,8 @@ main {
     letter-spacing: 0.3em;
     border: 2px solid white;
 }
+
+/*--------------------------------------------*/
 
 .products {
     display: flex;
@@ -380,6 +392,8 @@ main {
     width: 100%;
 }
 
+/*--------------------------------------------*/
+
 footer {
     background: #444;
     text-align: center;
@@ -395,6 +409,8 @@ footer a {
     color: inherit;
     border-bottom: 1px dotted rgba(255, 255, 255, .4);
 }
+
+/*--------------------------------------------*/
 
 .form {
     width: 100%;
@@ -474,6 +490,8 @@ footer a {
     border-bottom: 1px dotted #aaa;
 }
 
+/*--------------------------------------------*/
+
 .profile {
     width: 100%;
     display: flex;
@@ -500,6 +518,8 @@ footer a {
     text-transform: capitalize;
     margin: 1em;
 }
+
+/*--------------------------------------------*/
 
 .product {
     width: 100%;
@@ -591,6 +611,8 @@ footer a {
     font-size: 1em;
     letter-spacing: 0.225em;
 }
+
+/*--------------------------------------------*/
 
 .basket {
     width: 70%;
@@ -748,4 +770,30 @@ button.basket__form__submit {
     background: #407088;
     margin-top: 4em;
     padding: 1.5em 0;
+}
+
+/*--------------------------------------------*/
+
+.checkout {
+    width: 70%;
+    background: white;
+    margin: 2em auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 7em 0;
+}
+
+.checkout h3 {
+    color: #555;
+    margin: 0;
+}
+
+.checkout h4 {
+    margin: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
 }
