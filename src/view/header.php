@@ -7,27 +7,8 @@
    Createn on 17. Sept. 2019
    by Tim Frey & Yannick Ruefenacht
 -->
-<?php
-//used to integrate the multilanguage
-
-// Set Language variable
-if(isset($_GET['lang']) && !empty($_GET['lang'])){
-    $_SESSION['lang'] = $_GET['lang'];
-
-    if(isset($_SESSION['lang']) && $_SESSION['lang'] != $_GET['lang']){
-        echo "<script type='text/javascript'> location.reload(); </script>";
-    }
-}
-
-// Include Language file
-if(isset($_SESSION['lang'])){
-    include "languages/lang_".$_SESSION['lang'].".php";
-}else{
-    include "languages/lang_en.php";
-}
-?>
 <!DOCTYPE html>
-<html lang="<?=$_SESSION['lang']?>">
+<html>
 
 <head>
     <meta charset="utf-8" />
@@ -43,24 +24,18 @@ if(isset($_SESSION['lang'])){
         <div class="header__languages">
             <nav>
                 <ul>
-                    <script>
-                        function changeLanguage(lang){
-                            let url = window.location.href;
-                            let index = url.indexOf("lang=");
-                            //check if allready has lang parameter
-                            if(index > -1){
-                                url = url.substr(0, index+5)+lang+url.substr(index+7, url.length);
-                            }else if (url.indexOf('?') > -1){
-                                url += '&lang='+lang;
-                            }else{
-                                url += '?lang='+lang;
-                            }
-                            window.location.href = url;
-                        }
-                    </script>
-                    <li><a onclick="changeLanguage('de')">de</a></li>
-                    <!--<li><a onclick="changeLanguage('fr')">fr</a></li>-->
-                    <li><a onclick="changeLanguage('en')">en</a></li>
+                    <li>
+                        <form action="/" method="POST">
+                            <input type="hidden" value="de" name="lang">
+                            <button type="submit">de</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form action="/" method="POST">
+                            <input type="hidden" value="en" name="lang">
+                            <button type="submit">en</button>
+                        </form>
+                    </li>
                 </ul>
             </nav>
         </div>

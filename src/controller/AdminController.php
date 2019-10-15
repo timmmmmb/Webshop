@@ -18,7 +18,7 @@ class AdminController
     {
         $this->checkForAdminRights("/");
         $userModel = new UserModel();
-        $view = new View('user_list');
+        $view = new View('admin_user_list');
         $view->title = 'Admin';
         $view->heading = 'Admin';
         $view->users = $userModel->getAllUsers();
@@ -29,7 +29,7 @@ class AdminController
     {
         $this->checkForAdminRights("/");
         $productmodel = new ProductModel();
-        $view = new View('product_list');
+        $view = new View('admin_product_list');
         $view->title = 'Admin';
         $view->heading = 'Admin';
         $view->products = $productmodel->readAll();
@@ -40,7 +40,7 @@ class AdminController
     {
         $this->checkForAdminRights("/");
         $ordermodel = new OrderModel();
-        $view = new View('order_list');
+        $view = new View('admin_order_list');
         $view->title = 'Admin';
         $view->heading = 'Admin';
         $view->orders = $ordermodel->readAll();

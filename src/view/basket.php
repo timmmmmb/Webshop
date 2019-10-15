@@ -43,7 +43,7 @@
                                 <input type="hidden" name="id" value="<?= $product->order_id ?>" />
                                 <input type="number" name="amount" class="basket__item__right__number" min="1" value="<?= $product->amount ?>">
                             </form>
-                            <span><?= $product->total_prize ?>.- CHF</span>
+                            <span>CHF <?= $product->total_prize ?></span>
                         </div>
                     </div>
                 </li>
@@ -57,7 +57,7 @@
         </div>
         <form action="/product/checkout" class="basket__form" method="post">
             <button class="basket__form__submit" type="submit">
-                <?= _BASKET_CHECKOUT ?> &nbsp; <?= number_format((float)$checkout_total, 2, '.', ''); ?>
+                <?= _BASKET_CHECKOUT ?> &nbsp; CHF <?= number_format((float)$checkout_total, 2, '.', ''); ?>
             </button>
         </form>
     

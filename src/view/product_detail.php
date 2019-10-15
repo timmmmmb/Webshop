@@ -16,6 +16,7 @@
 
     <div class="product__info">
 
+        <h5>CHF <?= $product->Price; ?></h5>
         <h2><?= $product->Name; ?></h2>
         <h4><?= $product->Description; ?></h4>
 

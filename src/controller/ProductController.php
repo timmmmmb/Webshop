@@ -48,5 +48,6 @@ class ProductController
         $ordermodel->payBasket($_SESSION["user_id"]);
         $_SESSION['user_order_count'] = 0;
         header("Location: /");
+        die();
     }
 }

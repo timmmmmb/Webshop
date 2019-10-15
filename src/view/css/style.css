@@ -139,15 +139,21 @@ header {
 }
 
 .header__languages {
-    text-transform: uppercase;
     margin: 0 2em;
-    font-size: 0.9em;
 }
 
 .header__languages nav ul li {
     display: inline-block;
-    margin: 0 0.5em;
     cursor: pointer;
+}
+
+.header__languages nav ul li button {
+    text-transform: uppercase;
+    background: transparent;
+    font-size: 1em;
+    font-family: Source Sans Pro, sans-serif;
+    padding: 0;
+    width: 40px;
 }
 
 .header__menu {
@@ -243,62 +249,58 @@ header {
 
 /*--------------------------------------------*/
 
-.admin_list{
-    margin-top: 5px;
-}
-
-.admin_list li{
-    padding: 5px;
-}
-
-.admin__nav{
-    display: inline-block;
-    margin: 0 0.5em;
-    min-width: 100px;
+.admin {
+    position: relative;
+    width: 70%;
+    background: white;
+    margin: 4em auto;
+    padding: 3em 0;
     text-align: center;
-}
-
-.admin__nav a{
-    color: #333333;
-}
-
-.admin{
-    width: 100%;
-    text-align: center;
-    padding: 5em 0;
-}
-
-.admin__hr{
-    border: none;
-    width: 300px;
-    height: 1px;
-    background: #ddd;
-    margin: 3em auto 0;
 }
 
 .admin h3 {
     color: #555;
 }
 
-.admin__nav__ul{
-    display: flex;
-    flex-direction: row;
+.admin nav {
+    padding: 2em 0;
 }
 
-.admin__nav__back__icon{
+.admin nav ul li {
+    display: inline-block;
+    margin: 0 1em;
+}
+
+.admin nav ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.admin nav ul li a span {
+    text-transform: uppercase;
+    letter-spacing: 0.225em;
+}
+
+.admin__list {
+    padding: 2em 0;
+}
+
+.admin__list li {
+    padding: 1em 0;
+}
+
+.admin__return {
+    position: absolute;
+    top: calc(50% - 25px);
+    left: 0;
     width: 50px;
     height: 50px;
     margin: 1em;
     border-radius: 50%;
-    border: 1px solid #bbb;
+    border: 1px solid #ddd;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.admin__nav__back__icon img {
-    width: 15px;
-    height: 15px;
 }
 
 /*--------------------------------------------*/
@@ -547,7 +549,6 @@ footer a {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    box-shadow: 0px 0px 5px 0px #ccc;
 }
 
 .product__view__hr {
@@ -586,6 +587,12 @@ footer a {
 
 .product__info > * {
     width: 70%;
+}
+
+.product__info h5 {
+    font-weight: 400;
+    font-size: 1.45em;
+    color: #003f5c;
 }
 
 .product__info__size {
@@ -709,11 +716,20 @@ footer a {
 .basket__item__img {
     width: 20%;
     height: 100%;
+    background-color: #f7f7f7;
+}
+
+.basket__item__img a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .basket__item__img div {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
