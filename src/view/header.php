@@ -7,8 +7,27 @@
    Createn on 17. Sept. 2019
    by Tim Frey & Yannick Ruefenacht
 -->
+<?php
+//used to integrate the multilanguage
+
+// Set Language variable
+if(isset($_GET['lang']) && !empty($_GET['lang'])){
+    $_SESSION['lang'] = $_GET['lang'];
+
+    if(isset($_SESSION['lang']) && $_SESSION['lang'] != $_GET['lang']){
+        echo "<script type='text/javascript'> location.reload(); </script>";
+    }
+}
+
+// Include Language file
+if(isset($_SESSION['lang'])){
+    include "languages/lang_".$_SESSION['lang'].".php";
+}else{
+    include "languages/lang_en.php";
+}
+?>
 <!DOCTYPE html>
-<html lang="de">
+<html lang="<?=$_SESSION['lang']?>">
 
 <head>
     <meta charset="utf-8" />
@@ -16,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="/src/view/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Webshop | <?= $title ?></title>
+    <title><?=_TITLE?> | <?= $title ?></title>
 </head>
 
 <body>
@@ -24,14 +43,29 @@
         <div class="header__languages">
             <nav>
                 <ul>
-                    <li>de</li>
-                    <li>fr</li>
-                    <li>it</li>
+                    <script>
+                        function changeLanguage(lang){
+                            let url = window.location.href;
+                            let index = url.indexOf("lang=");
+                            //check if allready has lang parameter
+                            if(index > -1){
+                                url = url.substr(0, index+5)+lang+url.substr(index+7, url.length);
+                            }else if (url.indexOf('?') > -1){
+                                url += '&lang='+lang;
+                            }else{
+                                url += '?lang='+lang;
+                            }
+                            window.location.href = url;
+                        }
+                    </script>
+                    <li><a onclick="changeLanguage('de')">de</a></li>
+                    <li><a onclick="changeLanguage('fr')">fr</a></li>
+                    <li><a onclick="changeLanguage('en')">en</a></li>
                 </ul>
             </nav>
         </div>
         <div class="header__menu">
-            <h1>Webshop</h1>
+            <h1><?=_TITLE?></h1>
             <div class="header__menu__line">
                 <div class="header__menu__line__hr"></div>
                 <div class="header__menu__line__square"></div>
