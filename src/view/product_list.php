@@ -1,5 +1,5 @@
 <section class="admin">
-    <h3>Product list</h3>
+    <h3><?=_ADMIN_PRODUCTLIST?></h3>
     <hr class="admin__hr">
     <ul class="admin_list">
         <?php foreach ($products as $product) : ?>

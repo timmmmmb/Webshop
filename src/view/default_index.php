@@ -1,6 +1,6 @@
 <div class="banner">
     <div class="banner__overlay">
-        <div class="banner__overlay__title">popular</div>
+        <div class="banner__overlay__title"><?=_POPULAR?></div>
     </div>
 </div>
 <section class="products">

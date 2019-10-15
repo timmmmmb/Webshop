@@ -1,6 +1,6 @@
 <section class="basket">
 
-    <h3>Shopping cart</h3>
+    <h3><?=_BASKET_TITLE?></h3>
     <div class="basket__hr">
         <div class="basket__hr__line"></div>
         <div class="basket__hr__circle"></div>
@@ -13,7 +13,7 @@
             <div class="basket__empty__icon">
                 <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
             </div>
-            <p>Shopping cart is empty</p>
+            <p><?=_BASKET_EMPTY?></p>
         </div>
 
     <?php else : ?>
@@ -35,7 +35,7 @@
                             <form action="/order/removeItem" method="post">
                                 <input type="hidden" name="id" value="<?= $product->order_id ?>" />
                                 <input type="hidden" name="amount" value="<?= $product->amount ?>" />
-                                <button class="basket__item__info__submit" type="submit"><i class="fa fa-trash"></i> Remove</button>
+                                <button class="basket__item__info__submit" type="submit"><i class="fa fa-trash"></i> <?=_BASKET_REMOVE?></button>
                             </form>
                         </div>
                         <div class="basket__item__right">
@@ -57,7 +57,7 @@
         </div>
         <form action="/product/checkout" class="basket__form" method="post">
             <button class="basket__form__submit" type="submit">
-                checkout &nbsp; <?= number_format((float)$checkout_total, 2, '.', ''); ?>
+                <?= _BASKET_CHECKOUT ?> &nbsp; <?= number_format((float)$checkout_total, 2, '.', ''); ?>
             </button>
         </form>
     
