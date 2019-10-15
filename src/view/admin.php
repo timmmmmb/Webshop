@@ -11,7 +11,7 @@
                         <div class="basket__empty__icon">
                             <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
                         </div>
-                        <?=_ADMIN_USERLIST?>></a>
+                        <?=_ADMIN_USERLIST?></a>
                     </li>
                     <li class="admin__nav_item">
                         <a href="/admin/product">

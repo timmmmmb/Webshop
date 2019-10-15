@@ -29,12 +29,12 @@
                 <?php endforeach ?>
             </select>
 
-            <input type="number" name="amount" min="1" max="5" value="1">
+            <input type="number" name="amount" min="1" value="1">
             
             <hr class="product__info__hr">
             
             <?php if (isset($_SESSION['user_id'])) : ?>
-                <button type="submit" class="product__info__submit">Buy</button>
+                <button type="submit" class="product__info__submit"><?=_PRODUCT_DETAIL_ORDER?></button>
             <?php endif; ?>
         </form>
 

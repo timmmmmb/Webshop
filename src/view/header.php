@@ -80,7 +80,7 @@ if(isset($_SESSION['lang'])){
                         <li><a href="/admin"><?=_ADMIN?></a></li>
                     <?php endif; ?>
                     <?php if (isset($_SESSION['user_id'])) : ?>
-                        <li><a href="/user/logout"><?=_ADMIN?></a></li>
+                        <li><a href="/user/logout"><?=_LOGOUT?></a></li>
                     <?php endif; ?>
                 </ul>
             </nav>

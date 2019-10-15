@@ -252,6 +252,10 @@ header {
     text-align: center;
 }
 
+.admin__nav a{
+    color: #333333;
+}
+
 .admin{
     width: 100%;
     text-align: center;

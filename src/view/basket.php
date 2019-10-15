@@ -1,6 +1,6 @@
 <section class="basket">
 
-    <h3><?=_BASKET_TITLE?>></h3>
+    <h3><?=_BASKET_TITLE?></h3>
     <div class="basket__hr">
         <div class="basket__hr__line"></div>
         <div class="basket__hr__circle"></div>
