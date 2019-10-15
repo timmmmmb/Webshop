@@ -47,13 +47,7 @@ class View
     {
         extract($this->properties);
 
-        $languageFile = "lang_en.php";
-        if(isset($_SESSION['lang']))
-        {
-            $languageFile = "lang_".$_SESSION['lang'].".php";
-        }
-
-        require "src/view/languages/".$languageFile;
+        require "src/view/languages/".$_SESSION['lang']['file'];
         require 'src/view/header.php';
         require $this->viewfile;
         require 'src/view/footer.php';

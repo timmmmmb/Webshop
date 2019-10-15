@@ -145,15 +145,14 @@ header {
 .header__languages nav ul li {
     display: inline-block;
     cursor: pointer;
+    margin: 0 0.5em;
 }
 
-.header__languages nav ul li button {
+.header__languages nav ul li a {
     text-transform: uppercase;
-    background: transparent;
-    font-size: 1em;
-    font-family: Source Sans Pro, sans-serif;
-    padding: 0;
-    width: 40px;
+    text-decoration: none;
+    font-size: 0.9em;
+    color: inherit;
 }
 
 .header__menu {

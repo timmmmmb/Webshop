@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 01. Okt 2019 um 10:29
--- Server-Version: 10.1.38-MariaDB
--- PHP-Version: 7.3.4
+-- Erstellungszeit: 15. Okt 2019 um 22:48
+-- Server-Version: 10.4.6-MariaDB
+-- PHP-Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -96,10 +96,10 @@ CREATE TABLE `colors` (
 INSERT INTO `colors` (`ID`, `Name`, `HexValue`) VALUES
 (1, 'Schwarz', '000000'),
 (2, 'Weiss', 'FFFFFF'),
-(3, 'Grün', '30FF00'),
-(4, 'Blau', '0031FF'),
-(5, 'Violett', 'A700FF'),
-(6, 'Rot', 'FF0000');
+(3, 'Grün', '445C3C'),
+(4, 'Blau', '315B96'),
+(5, 'Violett', '58508D'),
+(6, 'Rot', 'B22222');
 
 -- --------------------------------------------------------
 
@@ -112,6 +112,14 @@ CREATE TABLE `orders` (
   `UserID` int(11) NOT NULL,
   `StageID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `orders`
+--
+
+INSERT INTO `orders` (`ID`, `UserID`, `StageID`) VALUES
+(1, 16, 2),
+(2, 16, 1);
 
 -- --------------------------------------------------------
 
@@ -128,6 +136,15 @@ CREATE TABLE `orders_products` (
   `ColorID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `orders_products`
+--
+
+INSERT INTO `orders_products` (`ID`, `ProductID`, `OrderID`, `Amount`, `SizeID`, `ColorID`) VALUES
+(22, 1, 1, 5, 1, 3),
+(26, 2, 2, 1, 2, 4),
+(27, 1, 2, 1, 1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -137,22 +154,22 @@ CREATE TABLE `orders_products` (
 CREATE TABLE `products` (
   `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
-  `Description` mediumtext,
+  `Description` mediumtext DEFAULT NULL,
   `Image` varchar(4096) DEFAULT NULL,
-  `Preis` double NOT NULL
+  `Price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `products`
 --
 
-INSERT INTO `products` (`ID`, `Name`, `Description`, `Image`, `Preis`) VALUES
+INSERT INTO `products` (`ID`, `Name`, `Description`, `Image`, `Price`) VALUES
 (1, 'T-Shirt Uni', 'Ein einfarbiges T-Shirt welches in mehreren Farben und Grössen verfügbar ist.', 'tshirt.png', 19.95),
-(2, 'Jeans', 'Ein paar Blauer wunderschöner Jeans', 'jeans.jpg', 49.95),
-(3, 'Socken', 'Ein Normales paar weisser Socken.', 'socken.jpg', 9.95),
-(4, 'Pullover', 'Ein warmer aus 100% Wolle bestehender Pullover.', 'pullover.jpg', 39.95),
-(5, 'Jacke', 'Eine dicke Jacke perfekt für zum Skifahren oder während kalten Wintertagen', 'jacke.jpg', 109.95),
-(6, 'Mütze', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'mütze.jpg', 14.95);
+(2, 'Jeans', 'Ein paar Blauer wunderschöner Jeans', 'jeans.png', 49.95),
+(3, 'Socken', 'Ein Normales paar weisser Socken.', 'socken.png', 9.95),
+(4, 'Pullover', 'Ein warmer aus 100% Wolle bestehender Pullover.', 'pullover.png', 39.95),
+(5, 'Jacke', 'Eine dicke Jacke perfekt für zum Skifahren oder während kalten Wintertagen', 'jacke.png', 109.95),
+(6, 'Mütze', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'mütze.png', 14.95);
 
 -- --------------------------------------------------------
 
@@ -218,7 +235,9 @@ INSERT INTO `users` (`ID`, `Name`, `EMail`, `Password`, `User_TypeID`) VALUES
 (12, 'bob', 'bob@bob', '9f9d51bc70ef21ca5c14f307980a29d8', 1),
 (13, 'svenbob', 'bobby@bob', '9f9d51bc70ef21ca5c14f307980a29d8', 1),
 (14, 'tim', 'tim@tim', 'b15d47e99831ee63e3f47cf3d4478e9a', 1),
-(15, 'meche', 'mech@mech', 'f7ff8b3b2c106010635c9252ab4c4a66', 1);
+(15, 'meche', 'mech@mech', 'f7ff8b3b2c106010635c9252ab4c4a66', 1),
+(16, 'yrue', 'yrue@test.ch', '202cb962ac59075b964b07152d234b70', 2),
+(17, 'moali', 'moali@test.ch', '202cb962ac59075b964b07152d234b70', 1);
 
 -- --------------------------------------------------------
 
@@ -341,13 +360,13 @@ ALTER TABLE `colors`
 -- AUTO_INCREMENT für Tabelle `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT für Tabelle `products`
@@ -371,7 +390,7 @@ ALTER TABLE `stages`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT für Tabelle `user_types`

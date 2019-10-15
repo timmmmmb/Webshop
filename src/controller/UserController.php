@@ -25,7 +25,7 @@ class UserController
     {
         if(!isset($_SESSION['user_id'])) 
         {
-            header("Location: /user/login");
+            header("Location: /".$_SESSION['lang']['name']."/user/login");
             die();
         }
         $userModel = new UserModel();
@@ -41,7 +41,7 @@ class UserController
      */
     public function register() 
     {
-        $this->checkForExistingLogin("/");
+        $this->checkForExistingLogin("/".$_SESSION['lang']['name']);
         $view = new View('register');
         $view->title = 'Register';
         $view->heading = 'Register';
@@ -80,7 +80,7 @@ class UserController
      */
     public function login() 
     {
-        $this->checkForExistingLogin("/user/profile");
+        $this->checkForExistingLogin("/".$_SESSION['lang']['name']."/user/profile");
         $view = new View('login');
         $view->title = 'Login';
         $view->heading = 'Login';
