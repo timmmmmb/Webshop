@@ -59,7 +59,7 @@ if(isset($_SESSION['lang'])){
                         }
                     </script>
                     <li><a onclick="changeLanguage('de')">de</a></li>
-                    <li><a onclick="changeLanguage('fr')">fr</a></li>
+                    <!--<li><a onclick="changeLanguage('fr')">fr</a></li>-->
                     <li><a onclick="changeLanguage('en')">en</a></li>
                 </ul>
             </nav>
@@ -73,14 +73,14 @@ if(isset($_SESSION['lang'])){
             </div>
             <nav>
                 <ul>
-                    <li><a href="/">home</a></li>
-                    <li><a href="/">herren</a></li>
-                    <li><a href="/">damen</a></li>
+                    <li><a href="/"><?=_HOME?></a></li>
+                    <li><a href="/"><?=_WOMEN?></a></li>
+                    <li><a href="/"><?=_MEN?></a></li>
                     <?php if (isset($_SESSION['user_type'])&&$_SESSION["user_type"]=="Admin") : ?>
-                        <li><a href="/admin">admin</a></li>
+                        <li><a href="/admin"><?=_ADMIN?></a></li>
                     <?php endif; ?>
                     <?php if (isset($_SESSION['user_id'])) : ?>
-                        <li><a href="/user/logout">logout</a></li>
+                        <li><a href="/user/logout"><?=_ADMIN?></a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
