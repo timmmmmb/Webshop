@@ -22,13 +22,13 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: '/user/doLogin',
+            url: $(this).attr("data-url"),
             data: $(this).serialize(),
             success: function(data)
             {
-                console.log(data);
-                if(data === 'login__success') {
-                    window.location = "/";
+                data = JSON.parse(data);
+                if(data.status === "success") {
+                    window.location = data.href;
                 } else {
                     showErrorMessage("Login incorrect");
                 }
@@ -41,13 +41,13 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: '/user/doRegister',
+            url: $(this).attr("data-url"),
             data: $(this).serialize(),
             success: function(data)
             {
-                console.log(data);
-                if(data === 'login__success') {
-                   window.location = "/";
+                data = JSON.parse(data);
+                if(data.status === "success") {
+                   window.location = data.href;
                 } else {
                    showErrorMessage("User already exists");
                 }
@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: '/order/addBasket',
+            url: $(this).attr('data-url'),
             data: $(this).serialize(),
             success: function(data)
             {

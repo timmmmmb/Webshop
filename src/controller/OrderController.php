@@ -36,7 +36,7 @@ class OrderController
         $orderModel = new OrderModel();
         $orderModel ->changeProductAmount($_POST["amount"], $_POST["id"]);
         $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($_SESSION["user_id"]);
-        header("Location: /basket");
+        header("Location: /".$_SESSION['lang']['name']."/basket");
         die();
     }
 
@@ -49,7 +49,7 @@ class OrderController
         $orderModel = new OrderModel();
         $orderModel->removeItemByID($_POST["id"]);
         $_SESSION['user_order_count'] -= $_POST["amount"];
-        header("Location: /basket");
+        header("Location: /".$_SESSION['lang']['name']."/basket");
         die();
     }
 }

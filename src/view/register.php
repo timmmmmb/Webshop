@@ -2,7 +2,7 @@
     <div class="form__container">
 
         <h3><?=_REGISTER_TITLE?></h3>
-        <form id="formRegister" method="post">
+        <form id="formRegister" method="post" data-url="/<?=$_SESSION['lang']['name']?>/user/doRegister">
 
             <input type="text" class="form__container__input" placeholder="<?=_REGISTER_USERNAME?>" name="name" required>
             <input type="email" class="form__container__input" placeholder="<?=_REGISTER_EMAIL?>" name="email" required>

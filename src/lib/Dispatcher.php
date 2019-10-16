@@ -44,4 +44,27 @@ class Dispatcher
         $controller = new $controllerName();
         $controller->$method();
     }
+
+    /**
+     * Returns url with language fragment.
+     */
+    public static function getURL($lang) 
+    {
+        $uri = $_SERVER['REQUEST_URI'];
+        $uri = trim($uri, '/'); 
+        $uriFragments = explode('/', $uri);
+
+        $languages = require 'src/view/languages/lang_config.php';
+        if(array_key_exists($uriFragments[0], $languages)) 
+        {
+            $uriFragments = array_slice($uriFragments, 1);
+        }
+        
+        foreach($uriFragments as $uriFragment)
+        {
+            $lang .= '/'.$uriFragment;
+        }
+        
+        return '/'.$lang;
+    }
 }

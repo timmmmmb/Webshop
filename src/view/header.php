@@ -8,7 +8,7 @@
    by Tim Frey & Yannick Ruefenacht
 -->
 <!DOCTYPE html>
-<html lang="<?= $_SESSION['lang'] ?>">
+<html lang="<?=$_SESSION['lang']['name']?>">
 
 <head>
     <meta charset="utf-8" />
@@ -24,8 +24,8 @@
         <div class="header__languages">
             <nav>
                 <ul>
-                    <li><a href="/de">de</a></li>
-                    <li><a href="/en">en</a></li>
+                    <li><a href="<?= Dispatcher::getURL('de'); ?>">de</a></li>
+                    <li><a href="<?= Dispatcher::getURL('en'); ?>">en</a></li>
                 </ul>
             </nav>
         </div>
@@ -38,14 +38,14 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="/<?= $_SESSION['lang']['name'] ?>"><?=_HOME?></a></li>
-                    <li><a href="/<?= $_SESSION['lang']['name'] ?>"><?=_WOMEN?></a></li>
-                    <li><a href="/<?= $_SESSION['lang']['name'] ?>"><?=_MEN?></a></li>
-                    <?php if (isset($_SESSION['user_type'])&&$_SESSION["user_type"]=="Admin") : ?>
-                        <li><a href="/<?= $_SESSION['lang']['name'] ?>/admin"><?=_ADMIN?></a></li>
+                    <li><a href="/<?=$_SESSION['lang']['name']?>"><?=_HOME?></a></li>
+                    <li><a href="/<?=$_SESSION['lang']['name']?>"><?=_WOMEN?></a></li>
+                    <li><a href="/<?=$_SESSION['lang']['name']?>"><?=_MEN?></a></li>
+                    <?php if (isset($_SESSION['user_type']) && $_SESSION["user_type"]=="Admin") : ?>
+                        <li><a href="/<?=$_SESSION['lang']['name']?>/admin"><?=_ADMIN?></a></li>
                     <?php endif; ?>
                     <?php if (isset($_SESSION['user_id'])) : ?>
-                        <li><a href="/user/logout"><?=_LOGOUT?></a></li>
+                        <li><a href="/<?=$_SESSION['lang']['name']?>/user/logout"><?=_LOGOUT?></a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
@@ -64,7 +64,7 @@
                         <li>
                             <a href="/<?= $_SESSION['lang']['name'] ?>/basket">
                                 <div class="header__icons__item header__icons__item--cart">
-                                    <span id="orderCount"><?= $_SESSION['user_order_count']; ?></span>
+                                    <span id="orderCount"><?=$_SESSION['user_order_count']?></span>
                                     <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
                                 </div>
                             </a>

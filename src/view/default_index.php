@@ -5,7 +5,7 @@
 </div>
 <section class="products">
     <?php foreach ($products as $product) : ?>
-        <a href="/product?product_id=<?= $product->ID; ?>">
+        <a href="/<?=$_SESSION['lang']['name']?>/product?product_id=<?= $product->ID; ?>">
             <div class="products__item">
                 <div class="products__item__img">
                     <div style="background-image: url('/src/view/images/<?= $product->Image; ?>');"></div>

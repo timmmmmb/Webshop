@@ -101,7 +101,7 @@ class UserController
         
         if(empty($arr)) 
         {
-            echo "login__failed";
+            echo "Login failed";
         } 
         else 
         {
@@ -110,7 +110,11 @@ class UserController
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
             $_SESSION['user_type'] = $result->Type;
-            echo "login__success";
+                
+            $data = new stdClass();
+            $data->status = "success";
+            $data->href = "/".$_SESSION['lang']['name'];
+            echo json_encode($data);
         }
     }
 
@@ -119,8 +123,9 @@ class UserController
      */
     public function logout() 
     {
+        $lang = $_SESSION['lang']['name'];
         session_unset();
-        header("Location: /");
+        header("Location: /".$lang);
         die();
     }
 

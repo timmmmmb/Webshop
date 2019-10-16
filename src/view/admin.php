@@ -11,7 +11,7 @@
     <nav>
         <ul>
             <li>
-                <a href="/admin/user">
+                <a href="/<?=$_SESSION['lang']['name']?>/admin/user">
                     <div class="basket__empty__icon">
                         <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
                     </div>
@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/product">
+                <a href="/<?=$_SESSION['lang']['name']?>/admin/product">
                     <div class="basket__empty__icon">
                         <i class="fa fa-list fa-2x" aria-hidden="true"></i>
                     </div>
@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/order">
+                <a href="/<?=$_SESSION['lang']['name']?>/admin/order">
                     <div class="basket__empty__icon">
                         <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
                     </div>

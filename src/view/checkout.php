@@ -16,7 +16,7 @@
     <li>TOTAL: <?= $total_prize?></li>
 
 
-    <form action="/product/pay" method="post">
+    <form action="/<?=$_SESSION['lang']['name']?>/product/pay" method="post">
               
         <h4>Shipping Address</h4>
         <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>

@@ -20,7 +20,7 @@
         <h2><?= $product->Name; ?></h2>
         <h4><?= $product->Description; ?></h4>
 
-        <form id="formAddBasket" method="post">
+        <form id="formAddBasket" method="post" data-url="/<?= $_SESSION['lang']['name'] ?>/order/addBasket">
             <input type="hidden" name="product_id" value="<?= $product->ID ?>" />
             <input type="hidden" name="color" value="<?= $colors[0]->ID ?>" id="productColor"/>
         
