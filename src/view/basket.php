@@ -55,11 +55,11 @@
             <div class="basket__hr__circle"></div>
             <div class="basket__hr__line"></div>
         </div>
-        <form action="/<?=$_SESSION['lang']['name']?>/product/checkout" class="basket__form" method="post">
-            <button class="basket__form__submit" type="submit">
+        <a href="/<?=$_SESSION['lang']['name']?>/product/checkout" class="basket__form">
+            <button class="basket__checkout">
                 <?= _BASKET_CHECKOUT ?> &nbsp; CHF <?= number_format((float)$checkout_total, 2, '.', ''); ?>
             </button>
-        </form>
+        </a>
     
     <?php endif; ?>
 

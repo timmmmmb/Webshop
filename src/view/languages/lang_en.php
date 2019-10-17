@@ -23,7 +23,7 @@ define("_LOGIN_USERNAME", "Username");
 define("_LOGIN_PASSWORD", "Password");
 define("_LOGIN_RESET", "Reset");
 define("_LOGIN_LOGIN", "Login");
-define("_LOGIN_NO_ACCOUNT", "Don't have an account? ");
+define("_LOGIN_NO_ACCOUNT", "Don't have an account?");
 define("_LOGIN_REGISTER", "Register here");
 define("_LOGIN_ERROR", "Login incorrect");
 define("_REGISTER_TITLE", "Register");
@@ -34,7 +34,7 @@ define("_REGISTER_REPEAT_PASSWORD", "Repeat Password");
 define("_REGISTER_ERROR", "User already exists");
 define("_REGISTER_RESET", "Reset");
 define("_REGISTER_REGISTER", "Register");
-define("_REGISTER_ALLREADY_ACCOUNT", "Already have an account? ");
+define("_REGISTER_ALLREADY_ACCOUNT", "Already have an account?");
 define("_REGISTER_LOGIN", "Sign in");
 
 

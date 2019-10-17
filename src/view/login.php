@@ -13,7 +13,9 @@
                 <button type="submit" class="form__container__buttons__submit"><?=_LOGIN_LOGIN?></button>
             </span>
 
-            <p class="form__container__hint"><?=_LOGIN_NO_ACCOUNT?><a href="/user/register"><?=_LOGIN_REGISTER?></a>.</p>
+            <p class="form__container__hint">
+                <?=_LOGIN_NO_ACCOUNT?><a href="/<?=$_SESSION['lang']['name']?>/user/register"> <?=_LOGIN_REGISTER?></a>.
+            </p>
 
         </form>
     </div>

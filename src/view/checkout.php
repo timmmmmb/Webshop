@@ -7,16 +7,35 @@
         <div class="basket__hr__line"></div>
     </div>
 
-    
     <?php $total_prize = 0?>
-    <?php foreach ($products as $product): ?>
-        <li><?= $product->amount." ".$product->{'color_'.$_SESSION['lang']['name']}." ".$product->{'name_'.$_SESSION['lang']['name']}." ".$product->{'size_'.$_SESSION['lang']['name']}." Preis: ".$product->prize." CHF total: ".$product->total_prize." CHF"?></li>
-        <?php $total_prize += $product->total_prize?>
-    <?php endforeach ?>
-    <li>TOTAL: <?= $total_prize?></li>
-
-
-    <form action="/<?=$_SESSION['lang']['name']?>/product/pay" method="post">
+    <ul class="checkout__products">
+        <?php foreach ($products as $product): ?>
+        <li>
+            <div class="checkout__products__img">
+                <a href="/<?=$_SESSION['lang']['name']?>/product?product_id=<?= $product->ID ?>">
+                    <div style="background-image: url('/src/view/images/<?= $product->image; ?>');"></div> 
+                </a>
+            </div>
+            <div class="checkout__products__desc">
+                <span>
+                    <?=$product->amount." x ".$product->{'name_'.$_SESSION['lang']['name']}?>
+                    <span class="checkout__products__desc__separator"></span>
+                    <?=$product->{'color_'.$_SESSION['lang']['name']}?>
+                    <span class="checkout__products__desc__separator"></span>
+                    <?=$product->{'size_'.$_SESSION['lang']['name']}?>
+                </span>
+                <span>CHF <?=$product->total_prize ?></span>
+            </div>
+        </li>
+        <?php $total_prize += $product->total_prize ?>
+        <?php endforeach ?>
+        <li class="checkout__products__total">
+            <i>Total</i>
+            <span>CHF <?=number_format((float)$total_prize, 2, '.', '');?></span>
+        </li>
+    </ul>
+    
+    <form action="/<?=$_SESSION['lang']['name']?>/product/pay" class="checkout__form" method="post">
               
         <h4>Shipping Address</h4>
         <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>

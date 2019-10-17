@@ -15,7 +15,9 @@
                 <button type="submit" class="form__container__buttons__submit"><?=_REGISTER_REGISTER?></button>
             </span>
 
-            <p class="form__container__hint"><?=_REGISTER_ALLREADY_ACCOUNT?><a href="/user/login"><?=_REGISTER_LOGIN?></a>.</p>
+            <p class="form__container__hint">
+                <?=_REGISTER_ALLREADY_ACCOUNT?><a href="/<?=$_SESSION['lang']['name']?>/user/login"> <?=_REGISTER_LOGIN?></a>.
+            </p>
         
         </form>
     </div>
