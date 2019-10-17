@@ -29,9 +29,9 @@
                             </a>
                         </div>
                         <div class="basket__item__info">
-                            <p><?= $product->name ?></p>
-                            <p>Color: <?= $product->color ?></p>
-                            <p>Size: <?= $product->size ?></p>
+                            <p><?= $product->{'name_'.$_SESSION['lang']['name']} ?></p>
+                            <p><?=_BASKET_COLOR?> <?= $product->{'color_'.$_SESSION['lang']['name']} ?></p>
+                            <p><?=_BASKET_SIZE?> <?= $product->{'size_'.$_SESSION['lang']['name']} ?></p>
                             <form action="/<?=$_SESSION['lang']['name']?>/order/removeItem" method="post">
                                 <input type="hidden" name="id" value="<?= $product->order_id ?>" />
                                 <input type="hidden" name="amount" value="<?= $product->amount ?>" />

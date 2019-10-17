@@ -11,6 +11,8 @@ define("_ADMIN_USERLIST", "Benutzer");
 define("_ADMIN_PRODUCTLIST", "Produkte");
 define("_ADMIN_ORDERLIST", "Bestellungen");
 define("_BASKET_TITLE", "Warenkorb");
+define("_BASKET_COLOR", "Farbe:");
+define("_BASKET_SIZE", "Grösse:");
 define("_BASKET_EMPTY", "Ihr Warenkorb ist leer");
 define("_BASKET_REMOVE", "Entfernen");
 define("_BASKET_CHECKOUT", "Bezahlen");

@@ -11,8 +11,8 @@
                     <div style="background-image: url('/src/view/images/<?= $product->Image; ?>');"></div>
                 </div>
                 <div class="products__item__desc">
-                    <h2><?= $product->Name; ?></h2>
-                    <h4><?= $product->Description; ?></h4>
+                    <h2><?= $product->{'Name_'.strtoupper($_SESSION['lang']['name'])}; ?></h2>
+                    <h4><?= $product->{'Description_'.strtoupper($_SESSION['lang']['name'])}; ?></h4>
                 </div>
             </div>
         </a>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Okt 2019 um 22:48
--- Server-Version: 10.4.6-MariaDB
--- PHP-Version: 7.3.9
+-- Erstellungszeit: 17. Okt 2019 um 09:41
+-- Server-Version: 10.1.38-MariaDB
+-- PHP-Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -80,12 +80,45 @@ INSERT INTO `available_sizes` (`ID`, `ProductID`, `SizeID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `category`
+--
+
+CREATE TABLE `category` (
+  `ID` int(11) NOT NULL,
+  `Name_DE` varchar(255) NOT NULL,
+  `Name_EN` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `category`
+--
+
+INSERT INTO `category` (`ID`, `Name_DE`, `Name_EN`) VALUES
+(1, 'Frauen', 'Women'),
+(2, 'Herren', 'Men');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `category_product`
+--
+
+CREATE TABLE `category_product` (
+  `ID` int(11) NOT NULL,
+  `categoryID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `colors`
 --
 
 CREATE TABLE `colors` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
+  `Name_DE` varchar(255) NOT NULL,
+  `Name_EN` varchar(255) NOT NULL,
   `HexValue` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -93,13 +126,13 @@ CREATE TABLE `colors` (
 -- Daten für Tabelle `colors`
 --
 
-INSERT INTO `colors` (`ID`, `Name`, `HexValue`) VALUES
-(1, 'Schwarz', '000000'),
-(2, 'Weiss', 'FFFFFF'),
-(3, 'Grün', '445C3C'),
-(4, 'Blau', '315B96'),
-(5, 'Violett', '58508D'),
-(6, 'Rot', 'B22222');
+INSERT INTO `colors` (`ID`, `Name_DE`, `Name_EN`, `HexValue`) VALUES
+(1, 'Schwarz', 'Black', '000000'),
+(2, 'Weiss', 'White', 'FFFFFF'),
+(3, 'Grün', 'Green', '445C3C'),
+(4, 'Blau', 'Blue', '315B96'),
+(5, 'Violett', 'Purple', '58508D'),
+(6, 'Rot', 'Red', 'B22222');
 
 -- --------------------------------------------------------
 
@@ -119,7 +152,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`ID`, `UserID`, `StageID`) VALUES
 (1, 16, 2),
-(2, 16, 1);
+(2, 16, 1),
+(3, 18, 1);
 
 -- --------------------------------------------------------
 
@@ -143,7 +177,8 @@ CREATE TABLE `orders_products` (
 INSERT INTO `orders_products` (`ID`, `ProductID`, `OrderID`, `Amount`, `SizeID`, `ColorID`) VALUES
 (22, 1, 1, 5, 1, 3),
 (26, 2, 2, 1, 2, 4),
-(27, 1, 2, 1, 1, 3);
+(27, 1, 2, 1, 1, 3),
+(28, 1, 3, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -153,8 +188,10 @@ INSERT INTO `orders_products` (`ID`, `ProductID`, `OrderID`, `Amount`, `SizeID`,
 
 CREATE TABLE `products` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(255) DEFAULT NULL,
-  `Description` mediumtext DEFAULT NULL,
+  `Name_DE` varchar(255) DEFAULT NULL,
+  `Name_EN` varchar(255) DEFAULT NULL,
+  `Description_DE` text,
+  `Description_EN` text,
   `Image` varchar(4096) DEFAULT NULL,
   `Price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -163,13 +200,13 @@ CREATE TABLE `products` (
 -- Daten für Tabelle `products`
 --
 
-INSERT INTO `products` (`ID`, `Name`, `Description`, `Image`, `Price`) VALUES
-(1, 'T-Shirt Uni', 'Ein einfarbiges T-Shirt welches in mehreren Farben und Grössen verfügbar ist.', 'tshirt.png', 19.95),
-(2, 'Jeans', 'Ein paar Blauer wunderschöner Jeans', 'jeans.png', 49.95),
-(3, 'Socken', 'Ein Normales paar weisser Socken.', 'socken.png', 9.95),
-(4, 'Pullover', 'Ein warmer aus 100% Wolle bestehender Pullover.', 'pullover.png', 39.95),
-(5, 'Jacke', 'Eine dicke Jacke perfekt für zum Skifahren oder während kalten Wintertagen', 'jacke.png', 109.95),
-(6, 'Mütze', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'mütze.png', 14.95);
+INSERT INTO `products` (`ID`, `Name_DE`, `Name_EN`, `Description_DE`, `Description_EN`, `Image`, `Price`) VALUES
+(1, 'T-Shirt Uni', 'T-Shirt', 'Ein einfarbiges T-Shirt welches in mehreren Farben und Grössen verfügbar ist.', 'A T-Shirt available in multiple colors.', 'tshirt.png', 19.95),
+(2, 'Jeans', 'Jeans', 'Ein paar Blauer wunderschöner Jeans', 'A Blue pair of beautiful pants.', 'jeans.png', 49.95),
+(3, 'Socken', 'Socks', 'Ein Normales paar weisser Socken.', 'A pair of white socks.', 'socken.png', 9.95),
+(4, 'Pullover', 'Pullover', 'Ein warmer aus 100% Wolle bestehender Pullover.', 'A warm and soft pullover with 100% cotten.', 'pullover.png', 39.95),
+(5, 'Jacke', 'Jacket', 'Eine dicke Jacke perfekt für zum Skifahren oder während kalten Wintertagen', 'A thic Veste that will keep you warm in the biggest snowstorm.', 'jacke.png', 109.95),
+(6, 'Mütze', 'Cap', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'A comftable cap available in black or blue.', 'mütze.png', 14.95);
 
 -- --------------------------------------------------------
 
@@ -179,18 +216,18 @@ INSERT INTO `products` (`ID`, `Name`, `Description`, `Image`, `Price`) VALUES
 
 CREATE TABLE `sizes` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Description` varchar(10000) NOT NULL
+  `Name_DE` varchar(255) NOT NULL,
+  `Name_EN` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `sizes`
 --
 
-INSERT INTO `sizes` (`ID`, `Name`, `Description`) VALUES
-(1, 'Klein', ''),
-(2, 'Mittel', ''),
-(3, 'Gross', '');
+INSERT INTO `sizes` (`ID`, `Name_DE`, `Name_EN`) VALUES
+(1, 'Klein', 'Small'),
+(2, 'Mittel', 'Medium'),
+(3, 'Gross', 'Large');
 
 -- --------------------------------------------------------
 
@@ -200,18 +237,18 @@ INSERT INTO `sizes` (`ID`, `Name`, `Description`) VALUES
 
 CREATE TABLE `stages` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Description` varchar(10000) NOT NULL
+  `Name_DE` varchar(255) NOT NULL,
+  `Name_EN` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `stages`
 --
 
-INSERT INTO `stages` (`ID`, `Name`, `Description`) VALUES
-(1, 'Warenkorb', 'Das Produkt befindet sich noch im Warenkorb'),
-(2, 'Gekauft', 'Das Produkt wurde bezahlt und wird in kürze ausgeliefert.'),
-(3, 'Versendet', 'Das Produkt wurde versendet.');
+INSERT INTO `stages` (`ID`, `Name_DE`, `Name_EN`) VALUES
+(1, 'Warenkorb', 'Basket'),
+(2, 'Gekauft', 'Bought'),
+(3, 'Versendet', 'Sent');
 
 -- --------------------------------------------------------
 
@@ -237,7 +274,8 @@ INSERT INTO `users` (`ID`, `Name`, `EMail`, `Password`, `User_TypeID`) VALUES
 (14, 'tim', 'tim@tim', 'b15d47e99831ee63e3f47cf3d4478e9a', 1),
 (15, 'meche', 'mech@mech', 'f7ff8b3b2c106010635c9252ab4c4a66', 1),
 (16, 'yrue', 'yrue@test.ch', '202cb962ac59075b964b07152d234b70', 2),
-(17, 'moali', 'moali@test.ch', '202cb962ac59075b964b07152d234b70', 1);
+(17, 'moali', 'moali@test.ch', '202cb962ac59075b964b07152d234b70', 1),
+(18, 'admin', 'admin@bfh.ch', '63a9f0ea7bb98050796b649e85481845', 2);
 
 -- --------------------------------------------------------
 
@@ -247,17 +285,17 @@ INSERT INTO `users` (`ID`, `Name`, `EMail`, `Password`, `User_TypeID`) VALUES
 
 CREATE TABLE `user_types` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Description` varchar(10000) NOT NULL
+  `Name_DE` varchar(255) NOT NULL,
+  `Name_EN` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `user_types`
 --
 
-INSERT INTO `user_types` (`ID`, `Name`, `Description`) VALUES
-(1, 'Kunde', 'Ein kunde kann Produkte kaufen.'),
-(2, 'Admin', 'Ein Admin kann Bestellungen abbrechen');
+INSERT INTO `user_types` (`ID`, `Name_DE`, `Name_EN`) VALUES
+(1, 'Kunde', 'Customer'),
+(2, 'Admin', 'Administrator');
 
 --
 -- Indizes der exportierten Tabellen
@@ -278,6 +316,20 @@ ALTER TABLE `available_sizes`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `fk_products_available_sizes` (`ProductID`),
   ADD KEY `fk_sizes_available_sizes` (`SizeID`);
+
+--
+-- Indizes für die Tabelle `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indizes für die Tabelle `category_product`
+--
+ALTER TABLE `category_product`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `fk_category_product_categoryid` (`categoryID`),
+  ADD KEY `fk_category_product_productid` (`productID`);
 
 --
 -- Indizes für die Tabelle `colors`
@@ -351,6 +403,18 @@ ALTER TABLE `available_sizes`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT für Tabelle `category`
+--
+ALTER TABLE `category`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT für Tabelle `category_product`
+--
+ALTER TABLE `category_product`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT für Tabelle `colors`
 --
 ALTER TABLE `colors`
@@ -360,13 +424,13 @@ ALTER TABLE `colors`
 -- AUTO_INCREMENT für Tabelle `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT für Tabelle `products`
@@ -390,7 +454,7 @@ ALTER TABLE `stages`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT für Tabelle `user_types`
@@ -415,6 +479,13 @@ ALTER TABLE `available_colors`
 ALTER TABLE `available_sizes`
   ADD CONSTRAINT `fk_products_available_sizes` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ID`),
   ADD CONSTRAINT `fk_sizes_available_sizes` FOREIGN KEY (`SizeID`) REFERENCES `sizes` (`ID`);
+
+--
+-- Constraints der Tabelle `category_product`
+--
+ALTER TABLE `category_product`
+  ADD CONSTRAINT `fk_category_product_categoryid` FOREIGN KEY (`categoryID`) REFERENCES `category` (`ID`),
+  ADD CONSTRAINT `fk_category_product_productid` FOREIGN KEY (`productID`) REFERENCES `products` (`ID`);
 
 --
 -- Constraints der Tabelle `orders`

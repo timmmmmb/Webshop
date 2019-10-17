@@ -11,6 +11,8 @@ define("_ADMIN_USERLIST", "Users");
 define("_ADMIN_PRODUCTLIST", "Products");
 define("_ADMIN_ORDERLIST", "Orders");
 define("_BASKET_TITLE", "Shopping Cart");
+define("_BASKET_COLOR", "Color:");
+define("_BASKET_SIZE", "Size:");
 define("_BASKET_EMPTY", "Shopping cart is empty");
 define("_BASKET_REMOVE", "Remove");
 define("_BASKET_CHECKOUT", "Checkout");

@@ -109,7 +109,8 @@ class UserController
             $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($result->ID);
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
-            $_SESSION['user_type'] = $result->Type;
+            $_SESSION['user_type_de'] = $result->Type_de;
+            $_SESSION['user_type_en'] = $result->Type_en;
                 
             $data = new stdClass();
             $data->status = "success";

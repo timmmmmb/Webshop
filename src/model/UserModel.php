@@ -42,7 +42,8 @@ class UserModel extends Model
                 u.id as ID, 
                 u.name as Name, 
                 email, 
-                ut.Name as Type 
+                ut.Name_de as Type_de,
+                ut.Name_en as Type_en 
             FROM users as u 
             JOIN user_types as ut ON ut.ID = u.User_TypeID";
 
@@ -78,7 +79,8 @@ class UserModel extends Model
                 u.id as ID, 
                 u.name as Name, 
                 email, 
-                ut.Name as Type 
+                ut.Name_de as Type_de,
+                ut.Name_EN  as Type_en
             FROM users as u 
             JOIN user_types as ut ON ut.ID = u.User_TypeID 
             WHERE u.NAME LIKE ? AND u.PASSWORD LIKE ?";
@@ -108,7 +110,7 @@ class UserModel extends Model
      */
     public function userExists($email, $name) 
     {
-        $query = "SELECT * FROM $this->tableName WHERE NAME LIKE ? OR EMAIL LIKE ?";
+        $query = "SELECT * FROM users WHERE NAME LIKE ? OR EMAIL LIKE ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('ss', $email, $name);

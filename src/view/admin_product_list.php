@@ -10,7 +10,7 @@
 
     <ul class="admin__list">
         <?php foreach ($products as $product) : ?>
-            <li><?= $product->Name?></li>
+            <li><?= $product->{'Name_'.strtoupper($_SESSION['lang']['name'])}?></li>
         <?php endforeach; ?>
     </ul>
         

@@ -10,7 +10,7 @@
     
     <?php $total_prize = 0?>
     <?php foreach ($products as $product): ?>
-        <li><?= $product->amount." ".$product->color." ".$product->name." ".$product->size." Preis: ".$product->prize." CHF total: ".$product->total_prize." CHF"?></li>
+        <li><?= $product->amount." ".$product->{'color_'.$_SESSION['lang']['name']}." ".$product->{'name_'.$_SESSION['lang']['name']}." ".$product->{'size_'.$_SESSION['lang']['name']}." Preis: ".$product->prize." CHF total: ".$product->total_prize." CHF"?></li>
         <?php $total_prize += $product->total_prize?>
     <?php endforeach ?>
     <li>TOTAL: <?= $total_prize?></li>

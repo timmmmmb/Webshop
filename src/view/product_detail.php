@@ -17,8 +17,8 @@
     <div class="product__info">
 
         <h5>CHF <?= $product->Price; ?></h5>
-        <h2><?= $product->Name; ?></h2>
-        <h4><?= $product->Description; ?></h4>
+        <h2><?= $product->{'Name_'.strtoupper($_SESSION['lang']['name'])}; ?></h2>
+        <h4><?= $product->{'Description_'.strtoupper($_SESSION['lang']['name'])}; ?></h4>
 
         <form id="formAddBasket" method="post" data-url="/<?= $_SESSION['lang']['name'] ?>/order/addBasket">
             <input type="hidden" name="product_id" value="<?= $product->ID ?>" />
@@ -26,7 +26,7 @@
         
             <select name="size" class="product__info__size">
                 <?php foreach ($sizes as $size) : ?>
-                    <option value="<?= $size->ID; ?>"><?= $size->Name; ?></option>
+                    <option value="<?= $size->ID; ?>"><?= $size->{'Name_'.strtoupper($_SESSION['lang']['name'])}; ?></option>
                 <?php endforeach ?>
             </select>
 

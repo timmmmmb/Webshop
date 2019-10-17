@@ -60,7 +60,7 @@ class OrderModel extends Model
     {
         $query = 
             "SELECT * FROM orders WHERE userid = ? 
-            AND stageid = (SELECT ID FROM stages WHERE NAME LIKE 'Warenkorb' LIMIT 1)";
+            AND stageid = (SELECT ID FROM stages WHERE NAME_de LIKE 'Warenkorb' LIMIT 1)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $user_id);
@@ -110,20 +110,23 @@ class OrderModel extends Model
         $query =
             "SELECT
                 p.id as ID,
-                p.name as name,
+                p.name_de as name_de,
+                p.name_en as name_en,
                 p.price as prize,
                 p.image as image,
                 CONVERT(p.price * sum(amount), DECIMAL(65, 2)) as total_prize,
                 sum(amount) as amount,
-                c.Name as color,
-                s.name as size,
+                c.Name_EN as color_en,
+                c.Name_DE as color_de,
+                s.name_de as size_de,
+                s.name_en as size_en,
                 op.ID as order_id
             FROM orders_products as op
                 JOIN products p ON op.ProductID = p.ID
                 JOIN colors c ON op.ColorID = c.ID
                 JOIN sizes s ON op.SizeID = s.ID
             WHERE OrderID = ?
-            GROUP BY NAME, color, size";
+            GROUP BY name_de, color_de, s.id";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $basketid);
@@ -234,7 +237,7 @@ class OrderModel extends Model
                 AND SizeID = ? 
                 AND OrderID = (SELECT ID FROM orders 
                     WHERE UserID = ? 
-                    AND StageID = (SELECT ID FROM stages WHERE NAME LIKE 'Warenkorb' LIMIT 1) 
+                    AND StageID = (SELECT ID FROM stages WHERE NAME_de LIKE 'Warenkorb' LIMIT 1) 
                     LIMIT 1) 
                 AND OrderID = ?";
 
@@ -276,7 +279,7 @@ class OrderModel extends Model
             return;
         }
 
-        $query = "UPDATE orders SET StageID = (SELECT ID FROM stages where NAME like 'Gekauft' limit 1) where ID = ?";
+        $query = "UPDATE orders SET StageID = (SELECT ID FROM stages where NAME_de like 'Gekauft' limit 1) where ID = ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('i', $basket_id);
