@@ -36,5 +36,13 @@ define("_REGISTER_RESET", "Reset");
 define("_REGISTER_REGISTER", "Register");
 define("_REGISTER_ALLREADY_ACCOUNT", "Already have an account?");
 define("_REGISTER_LOGIN", "Sign in");
-
-
+define("_CHECKOUT_TITLE", "Checkout");
+define("_CHECKOUT_SHIPPING", "Shipping address");
+define("_CHECKOUT_PAYMENT", "Payment with following cards");
+define("_CHECKOUT_ADDRESS_STREET", "Street");
+define("_CHECKOUT_ADDRESS_POSTCODE", "ZIP");
+define("_CHECKOUT_ADDRESS_STATE", "State");
+define("_CHECKOUT_CARD_NAME", "Name on card");
+define("_CHECKOUT_CARD_NUMBER", "Card number");
+define("_CHECKOUT_CARD_CVV", "CVV");
+define("_CHECKOUT_CARD_EXPDATE", "Exp. date: MM/YYYY");

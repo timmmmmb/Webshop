@@ -70,7 +70,9 @@ class UserController
             } 
             else 
             {
-                echo 'registration__failed';
+                $data = new stdClass();
+                $data->status = "error";
+                echo json_encode($data);
             }
         }
     }
@@ -98,10 +100,11 @@ class UserController
             md5(htmlspecialchars($_POST['psw']))
         );
         $arr = (array)$result;
-        
+        $data = new stdClass();
+
         if(empty($arr)) 
         {
-            echo "Login failed";
+            $data->status = "error";
         } 
         else 
         {
@@ -111,12 +114,10 @@ class UserController
             $_SESSION['user_name'] = $result->Name;
             $_SESSION['user_type_de'] = $result->Type_de;
             $_SESSION['user_type_en'] = $result->Type_en;
-                
-            $data = new stdClass();
             $data->status = "success";
             $data->href = "/".$_SESSION['lang']['name'];
-            echo json_encode($data);
         }
+        echo json_encode($data);
     }
 
     /**

@@ -2,10 +2,10 @@
 
     <h3><?=_ADMIN_USERLIST?></h3>
 
-    <div class="basket__hr">
-        <div class="basket__hr__line"></div>
-        <div class="basket__hr__circle"></div>
-        <div class="basket__hr__line"></div>
+    <div class="h3__hr">
+        <div class="h3__hr__line"></div>
+        <div class="h3__hr__circle"></div>
+        <div class="h3__hr__line"></div>
     </div>
 
     <ul class="admin__list">

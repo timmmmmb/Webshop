@@ -1,10 +1,10 @@
 <section class="basket">
 
     <h3><?=_BASKET_TITLE?></h3>
-    <div class="basket__hr">
-        <div class="basket__hr__line"></div>
-        <div class="basket__hr__circle"></div>
-        <div class="basket__hr__line"></div>
+    <div class="h3__hr">
+        <div class="h3__hr__line"></div>
+        <div class="h3__hr__circle"></div>
+        <div class="h3__hr__line"></div>
     </div>
 
     <?php if (empty($products)) : ?>
@@ -50,11 +50,13 @@
                 <?php $checkout_total += $product->total_prize; ?>
             <?php endforeach; ?>
         </ul>
-        <div class="basket__hr">
-            <div class="basket__hr__line"></div>
-            <div class="basket__hr__circle"></div>
-            <div class="basket__hr__line"></div>
+
+        <div class="h3__hr">
+            <div class="h3__hr__line"></div>
+            <div class="h3__hr__circle"></div>
+            <div class="h3__hr__line"></div>
         </div>
+        
         <a href="/<?=$_SESSION['lang']['name']?>/product/checkout" class="basket__form">
             <button class="basket__checkout">
                 <?= _BASKET_CHECKOUT ?> &nbsp; CHF <?= number_format((float)$checkout_total, 2, '.', ''); ?>
