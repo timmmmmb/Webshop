@@ -46,3 +46,4 @@ define("_CHECKOUT_CARD_NAME", "Karteninhaber");
 define("_CHECKOUT_CARD_NUMBER", "Kartennummer");
 define("_CHECKOUT_CARD_CVV", "CVV");
 define("_CHECKOUT_CARD_EXPDATE", "Gültig bis: MM.YYYY");
+define("_CHECKOUT_BUY","KAUFE JETZT");

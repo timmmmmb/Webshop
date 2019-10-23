@@ -67,8 +67,8 @@ class InputValidation
      */
     public function passwordInputValidationPost($psw, $value){
         $psw = $this->stringInputValidationPost($psw, $value);
-        if(strlen($psw)<5){
-            $this->throwError("this value is not long enough: ".$value." expected at least 5 but the value is only ".strlen($psw) , 907);
+        if(strlen($psw)<4){
+            $this->throwError("this value is not long enough: ".$value." expected at least 4 but the value is only ".strlen($psw) , 907);
         }
         $psw = md5($psw);
         return $psw;

@@ -72,7 +72,7 @@
             <div class="h3__hr__line"></div>
         </div>
 
-        <button type="submit" class="checkout__form__submit">Buy now</button>
+        <button type="submit" class="checkout__form__submit"><?=_CHECKOUT_BUY?></button>
 
     </form>
 </section>
