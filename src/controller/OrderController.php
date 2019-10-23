@@ -2,29 +2,36 @@
 
 require_once 'src/model/OrderModel.php';
 require_once 'src/model/DefaultModel.php';
+require_once 'src/helper/InputValidation.php';
 
 /**
  * URL name: /order
  * This controller is invoked at https://servername/order/ by the Dispatcher.
  * The class methods are invoked at https://servername/order/method by the Dispatcher.
- * 
+ *
  */
 class OrderController
 {
+
     /**
      * https://servername/order/addBasket
      */
-    public function addBasket() 
+    public function addBasket()
     {
         $orderModel = new OrderModel();
+        $iv = new InputValidation();
+        $product_id = $iv->intInputValidationPost($_POST["product_id"], "product id");
+        $amount = $iv->intInputValidationPost($_POST["amount"], "amount");
+        $color = $iv->intInputValidationPost($_POST["color"], "color");
+        $size = $iv->intInputValidationPost($_POST["size"], "size");
         $orderModel->addToBasket(
-            $_POST["product_id"], 
+            $product_id,
             $_SESSION["user_id"],
-            $_POST["amount"], 
-            $_POST["color"], 
-            $_POST["size"]
+            $amount,
+            $color,
+            $size
         );
-        $_SESSION['user_order_count'] += $_POST["amount"];
+        $_SESSION['user_order_count'] += $amount;
         echo $_SESSION['user_order_count'];
     }
 
@@ -34,9 +41,12 @@ class OrderController
     public function updateAmount()
     {
         $orderModel = new OrderModel();
-        $orderModel ->changeProductAmount($_POST["amount"], $_POST["id"]);
+        $iv = new InputValidation();
+        $product_id = $iv->intInputValidationPost($_POST["id"], "product id");
+        $amount = $iv->intInputValidationPost($_POST["amount"], "amount");
+        $orderModel->changeProductAmount($amount, $product_id);
         $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($_SESSION["user_id"]);
-        header("Location: /".$_SESSION['lang']['name']."/basket");
+        header("Location: /" . $_SESSION['lang']['name'] . "/basket");
         die();
     }
 
@@ -47,9 +57,12 @@ class OrderController
     public function removeItem()
     {
         $orderModel = new OrderModel();
-        $orderModel->removeItemByID($_POST["id"]);
-        $_SESSION['user_order_count'] -= $_POST["amount"];
-        header("Location: /".$_SESSION['lang']['name']."/basket");
+        $iv = new InputValidation();
+        $id = $iv->intInputValidationPost($_POST["id"], "product id");
+        $amount = $iv->intInputValidationPost($_POST["amount"], "amount");
+        $orderModel->removeItemByID($id);
+        $_SESSION['user_order_count'] -= $amount;
+        header("Location: /" . $_SESSION['lang']['name'] . "/basket");
         die();
     }
 }

@@ -2,6 +2,7 @@
 
 require_once 'src/model/UserModel.php';
 require_once 'src/model/OrderModel.php';
+require_once 'src/helper/InputValidation.php';
 
 /**
  * URL name: /user
@@ -56,14 +57,18 @@ class UserController
         if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['psw'])) 
         {
             $userModel = new UserModel();
+            $iv = new InputValidation();
+            $name = $iv->nameInputValidationPost($_POST['name'], "Name");
+            $email = $iv->emailInputValidationPost($_POST['email'], "email");
+            $psw = $iv->passwordInputValidationPost($_POST['psw'], "Password");
             if ($userModel->userExists(
-                htmlspecialchars($_POST['name']),
-                htmlspecialchars($_POST['email']))) 
+                $name,
+                $email))
             {
                 $userModel->createUser(
-                    htmlspecialchars($_POST['name']),
-                    htmlspecialchars($_POST['email']),
-                    md5(htmlspecialchars($_POST['psw'])),
+                    $name,
+                    $email,
+                    $psw,
                     '1'
                 );
                 $this->doLogin();
@@ -93,9 +98,12 @@ class UserController
     public function doLogin() 
     {
         $userModel = new UserModel();
+        $iv = new InputValidation();
+        $name = $iv->nameInputValidationPost($_POST['name'], "Name");
+        $psw = $iv->passwordInputValidationPost($_POST['psw'], "Password");
         $result = $userModel->getUserByNameAndPassword(
-            htmlspecialchars($_POST['name']), 
-            md5(htmlspecialchars($_POST['psw']))
+            $name,
+            $psw
         );
         $arr = (array)$result;
         
