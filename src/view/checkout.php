@@ -1,10 +1,10 @@
 <section class="checkout">
     
-    <h3>Checkout</h3>
-    <div class="basket__hr">
-        <div class="basket__hr__line"></div>
-        <div class="basket__hr__circle"></div>
-        <div class="basket__hr__line"></div>
+    <h3><?=_CHECKOUT_TITLE?></h3>
+    <div class="h3__hr">
+        <div class="h3__hr__line"></div>
+        <div class="h3__hr__circle"></div>
+        <div class="h3__hr__line"></div>
     </div>
 
     <?php $total_prize = 0?>
@@ -34,53 +34,45 @@
             <span>CHF <?=number_format((float)$total_prize, 2, '.', '');?></span>
         </li>
     </ul>
+
+    <div class="h3__hr">
+        <div class="h3__hr__line"></div>
+        <div class="h3__hr__circle"></div>
+        <div class="h3__hr__line"></div>
+    </div>
     
     <form action="/<?=$_SESSION['lang']['name']?>/product/pay" class="checkout__form" method="post">
               
-        <h4>Shipping Address</h4>
-        <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-        <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
-        <label for="city"><i class="fa fa-institution"></i> City</label>
-        <input type="text" id="city" name="city" placeholder="New York">
+        <h4><?=_CHECKOUT_SHIPPING?></h4>
+        <div class="checkout__form__section">
+            <input type="text" name="address_street" placeholder="<?=_CHECKOUT_ADDRESS_STREET?>" required>
+            <input type="text" name="address_plz" placeholder="<?=_CHECKOUT_ADDRESS_POSTCODE?>" required>
+            <input type="text" name="address_place" placeholder="<?=_CHECKOUT_ADDRESS_STATE?>" required>
+        </div>
+   
+        <h4><?=_CHECKOUT_PAYMENT?></h4>
+        <div class="checkout__form__section checkout__form__section--cards">
+            <i class="fa fa-cc-visa fa-2x" style="color:navy;"></i>
+            <i class="fa fa-cc-amex fa-2x" style="color:blue;"></i>
+            <i class="fa fa-cc-paypal fa-2x" style="color:deepskyblue;"></i>
+            <i class="fa fa-cc-mastercard fa-2x" style="color:red;"></i>
+            <i class="fa fa-cc-discover fa-2x" style="color:orange;"></i>
+        </div>
 
-        <div>
-            <div>
-                <label for="state">State</label>
-                <input type="text" id="state" name="state" placeholder="NY">
-            </div>
-            <div>
-                <label for="zip">Zip</label>
-                <input type="text" id="zip" name="zip" placeholder="10001">
-            </div>
+        <div class="checkout__form__section checkout__form__section--wrap2">
+            <input type="text" name="card_name" placeholder="<?=_CHECKOUT_CARD_NAME?>" required>
+            <input type="text" name="card_number" placeholder="<?=_CHECKOUT_CARD_NUMBER?>" required>
+            <input type="text" name="card_cvv" placeholder="<?=_CHECKOUT_CARD_CVV?>" required>
+            <input type="text" name="card_exp" placeholder="<?=_CHECKOUT_CARD_EXPDATE?>" required>
         </div>
-                
-        <h4>Payment</h4>
-        <label for="fname">Accepted Cards</label>
-        <div class="icon-container">
-            <i class="fa fa-cc-visa" style="color:navy;"></i>
-            <i class="fa fa-cc-amex" style="color:blue;"></i>
-            <i class="fa fa-cc-mastercard" style="color:red;"></i>
-            <i class="fa fa-cc-discover" style="color:orange;"></i>
+     
+        <div class="h3__hr">
+            <div class="h3__hr__line"></div>
+            <div class="h3__hr__circle"></div>
+            <div class="h3__hr__line"></div>
         </div>
-        <label for="cname">Name on Card</label>
-        <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-        <label for="ccnum">Credit card number</label>
-        <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-        <label for="expmonth">Exp Month</label>
-        <input type="text" id="expmonth" name="expmonth" placeholder="September">
 
-        <div class="row">
-            <div class="col-50">
-                <label for="expyear">Exp Year</label>
-                <input type="text" id="expyear" name="expyear" placeholder="2018">
-            </div>
-            <div class="col-50">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" placeholder="352">
-            </div>
-        </div>
-                    
-        <button type="submit">Pay</button>
+        <button type="submit" class="checkout__form__submit">Buy now</button>
 
     </form>
 </section>
