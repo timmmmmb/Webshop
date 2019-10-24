@@ -58,26 +58,32 @@ class UserController
         {
             $userModel = new UserModel();
             $iv = new InputValidation();
-            $name = $iv->nameInputValidationPost($_POST['name'], "Name");
-            $email = $iv->emailInputValidationPost($_POST['email'], "email");
-            $psw = $iv->passwordInputValidationPost($_POST['psw'], "Password");
-            if ($userModel->userExists(
-                $name,
-                $email))
+            $response = new stdClass();
+
+            try
             {
-                $userModel->createUser(
-                    $name,
-                    $email,
-                    $psw,
-                    '1'
-                );
+                $name = $iv->nameInputValidationPost($_POST['name']);
+                $email = $iv->emailInputValidationPost($_POST['email']);
+                $psw = $iv->passwordInputValidationPost($_POST['psw']);
+            }
+            catch(Exception $e)
+            {
+                $response->status = "error";
+                $response->error = $e->getMessage();
+                echo json_encode($response);
+                exit();
+            }
+
+            if ($userModel->userExists($name, $email))
+            {
+                $userModel->createUser($name, $email, $psw, '1');
                 $this->doLogin();
             } 
             else 
             {
-                $data = new stdClass();
-                $data->status = "error";
-                echo json_encode($data);
+                $response->status = "error";
+                $response->error = _REGISTER_ERROR;
+                echo json_encode($response);
             }
         }
     }
@@ -101,18 +107,29 @@ class UserController
     {
         $userModel = new UserModel();
         $iv = new InputValidation();
-        $name = $iv->nameInputValidationPost($_POST['name'], "Name");
-        $psw = $iv->passwordInputValidationPost($_POST['psw'], "Password");
-        $result = $userModel->getUserByNameAndPassword(
-            $name,
-            $psw
-        );
-        $arr = (array)$result;
-        $data = new stdClass();
+        $response = new stdClass();
 
+        try 
+        {
+            $name = $iv->stringInputValidationPost($_POST['name']);
+            $psw = $iv->stringInputValidationPost($_POST['psw']);
+            $psw = md5($psw);
+            $result = $userModel->getUserByNameAndPassword($name, $psw);
+        }
+        catch(Exception $e)
+        {
+            $response->status = "error";
+            $response->error = $e->getMessage();
+            echo json_encode($response);
+            exit();
+        }
+
+        $arr = (array)$result;
+        
         if(empty($arr)) 
         {
-            $data->status = "error";
+            $response->status = "error";
+            $response->error = _LOGIN_ERROR;
         } 
         else 
         {
@@ -122,10 +139,10 @@ class UserController
             $_SESSION['user_name'] = $result->Name;
             $_SESSION['user_type_de'] = $result->Type_de;
             $_SESSION['user_type_en'] = $result->Type_en;
-            $data->status = "success";
-            $data->href = "/".$_SESSION['lang']['name'];
+            $response->status = "success";
+            $response->href = "/".$_SESSION['lang']['name'];
         }
-        echo json_encode($data);
+        echo json_encode($response);
     }
 
     /**
@@ -141,6 +158,7 @@ class UserController
 
     /**
      * Deny access to certain pages if user is not logged in.
+     * @param string $redirect.
      */
     private function checkForExistingLogin($redirect) 
     {

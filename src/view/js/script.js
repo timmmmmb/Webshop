@@ -30,7 +30,7 @@ jQuery(document).ready(function($) {
                 if(data.status === "success") {
                     window.location = data.href;
                 } else {
-                    showErrorMessage("Login incorrect");
+                    showErrorMessage(data.error);
                 }
             }
         });
@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
                 if(data.status === "success") {
                    window.location = data.href;
                 } else {
-                   showErrorMessage("User already exists");
+                   showErrorMessage(data.error);
                 }
             }
         });
@@ -57,16 +57,17 @@ jQuery(document).ready(function($) {
 
     //Show error div in form
     let showErrorMessage = function(message) {
+        let errorDisplayDuration = 5000;
         let loginInput = $(".form__container__input");
         let loginInputErrorClass = "form__container__input--error";
         let loginErrorMsg = $(".form__container__error");
-        loginErrorMsg.innerText = message;
+        loginErrorMsg.text(message);
         loginErrorMsg.slideDown(); 
         loginInput.addClass(loginInputErrorClass);
         setTimeout(() => {
             loginInput.removeClass(loginInputErrorClass);
             loginErrorMsg.slideUp();
-        }, 2000);
+        }, errorDisplayDuration);
     };
 
     //product_detail, choose color

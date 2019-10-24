@@ -25,6 +25,7 @@ class Dispatcher
             $_SESSION['lang'] = $lang[$uriFragments[$offset]];
             $offset++;
         }
+        require "src/view/languages/".$_SESSION['lang']['file'];
         
         $controllerName = 'DefaultController';
         if (!empty($uriFragments[$offset])) 

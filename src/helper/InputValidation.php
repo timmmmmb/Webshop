@@ -1,19 +1,26 @@
 <?php
+
 class InputValidation
 {
     /**
      * Returns the validated int or else throws an error
      */
-    public function intInputValidationPost($int, $value){
+    public function intInputValidationPost($int)
+    {
         $int = htmlspecialchars($int);
         $int = filter_var($int, FILTER_VALIDATE_INT);
-        if (empty($int)) {
-            $this->throwError("this value is empty: " . $value, 901);
-        } else if ($int === false) {
-            $this->throwError("this value is not an integer: " . $value, 902);
+
+        if (empty($int)) 
+        {
+            $this->throwError(_ERROR_VALUE_EMPTY);
+        } 
+        else if ($int === false) 
+        {
+            $this->throwError(_ERROR_NOT_INT);
         }
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->throwError("wrong request method expected POST", 903);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') 
+        {
+            $this->throwError(_ERROR_NOT_POST);
         }
         return $int;
     }
@@ -21,43 +28,54 @@ class InputValidation
     /**
      * Returns the validated string or else throws an error
      */
-    public function stringInputValidationPost($string, $value){
+    public function stringInputValidationPost($string)
+    {
         $string = htmlspecialchars($string);
         $string = filter_var($string, FILTER_SANITIZE_STRING);
-        if (empty($string)) {
-            $this->throwError("this value is empty: " . $value, 904);
-        } else if ($string === false) {
-            $this->throwError("this value is not an String: " . $value, 905);
+
+        if (empty($string)) 
+        {
+            $this->throwError(_ERROR_VALUE_EMPTY);
+        } 
+        else if ($string === false) 
+        {
+            $this->throwError(_ERROR_NOT_STRING);
         }
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->throwError("wrong request method expected POST", 906);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') 
+        {
+            $this->throwError(_ERROR_NOT_POST);
         }
         return $string;
     }
 
     /**
-     * creates a new exception and throws it.
+     * Creates a new exception and throws it.
      * @param string $error the error description
-     * @param int $errorCode the errorcode
      * @throws Exception the new exception that gets thrown
      */
-    static function throwError($error = 'Error In Processing', $errorCode = 0){
-        throw new Exception($error, $errorCode);
+    static function throwError($error = _ERROR_DEFAULT)
+    {
+        throw new Exception($error);
     }
 
     /**
      * Returns the validated email or else throws an error
      */
-    public function emailInputValidationPost($email, $value){
+    public function emailInputValidationPost($email)
+    {
         $email = htmlspecialchars($email);
-        $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-        if (empty($email)) {
-            $this->throwError("this value is empty: " . $value, 904);
-        } else if ($email === false) {
-            $this->throwError("this value is not an email: " . $value, 905);
+        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+        {
+            $this->throwError(_ERROR_NOT_EMAIL);
         }
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->throwError("wrong request method expected POST", 906);
+        else if ($email === false) 
+        {
+            $this->throwError(_ERROR_NOT_EMAIL);
+        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') 
+        {
+            $this->throwError(_ERROR_NOT_POST);
         }
         return $email;
     }
@@ -65,11 +83,15 @@ class InputValidation
     /**
      * Returns the validated password that is md5 encrypted or else throws an error
      */
-    public function passwordInputValidationPost($psw, $value){
-        $psw = $this->stringInputValidationPost($psw, $value);
-        if(strlen($psw)<4){
-            $this->throwError("this value is not long enough: ".$value." expected at least 4 but the value is only ".strlen($psw) , 907);
+    public function passwordInputValidationPost($psw)
+    {
+        $psw = $this->stringInputValidationPost($psw);
+
+        if (strlen($psw) < 4)
+        {
+            $this->throwError(_ERROR_PSW_SHORT);
         }
+
         $psw = md5($psw);
         return $psw;
     }
@@ -77,27 +99,40 @@ class InputValidation
     /**
      * Returns the validated password that is md5 encrypted or else throws an error
      */
-    public function nameInputValidationPost($name, $value){
-        $name = $this->stringInputValidationPost($name, $value);
-        if(strlen($name)<4){
-            $this->throwError("this value is not long enough: ".$value." expected at least 4 but the value is only ".strlen($name) , 907);
+    public function nameInputValidationPost($name)
+    {
+        $nameMinLength = 4;
+        $nameMaxLength = 50;
+        $name = $this->stringInputValidationPost($name);
+
+        if(strlen($name) < $nameMinLength)
+        {
+            $this->throwError(_ERROR_NAME_SHORT);
+        }
+        else if(strlen($name) > $nameMaxLength)
+        {
+            $this->throwError(_ERROR_NAME_LONG);
         }
         return $name;
     }
 
-    public function intInputValidationGet($int, $value){
+    public function intInputValidationGet($int)
+    {
         $int = htmlspecialchars($int);
         $int = filter_var($int, FILTER_VALIDATE_INT);
-        if (empty($int)) {
-            $this->throwError("this value is empty: " . $value, 901);
-        } else if ($int === false) {
-            $this->throwError("this value is not an integer: " . $value, 902);
+
+        if (empty($int)) 
+        {
+            $this->throwError(_ERROR_VALUE_EMPTY);
+        } 
+        else if ($int === false) 
+        {
+            $this->throwError(_ERROR_NOT_INT);
         }
-        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-            $this->throwError("wrong request method expected GET", 903);
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') 
+        {
+            $this->throwError(_ERROR_NOT_GET);
         }
         return $int;
     }
 }
-
-?>

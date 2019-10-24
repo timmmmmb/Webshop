@@ -47,7 +47,6 @@ class View
     {
         extract($this->properties);
 
-        require "src/view/languages/".$_SESSION['lang']['file'];
         require 'src/view/header.php';
         require $this->viewfile;
         require 'src/view/footer.php';
