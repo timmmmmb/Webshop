@@ -12,6 +12,7 @@ class Dispatcher
      */
     public static function dispatch()
     {
+        //Analyze URL
         $uri = $_SERVER['REQUEST_URI'];
         $uri = strtok($uri, '?');           //Remove URL values after '?'
         $uri = trim($uri, '/');             //Remove both '/' from left and right 
@@ -19,6 +20,7 @@ class Dispatcher
         $offset = 0;
         $lang = require 'src/view/languages/lang_config.php';
 
+        //Define language
         $_SESSION['lang'] = $lang['en'];
         if(array_key_exists($uriFragments[$offset], $lang)) 
         {
@@ -27,6 +29,7 @@ class Dispatcher
         }
         require "src/view/languages/".$_SESSION['lang']['file'];
         
+        //Define controller
         $controllerName = 'DefaultController';
         if (!empty($uriFragments[$offset])) 
         {
@@ -35,6 +38,7 @@ class Dispatcher
             $controllerName .= 'Controller';            //Add "Controller"
         }
         
+        //Define controller method
         $method = 'index';
         if (!empty($uriFragments[$offset + 1])) 
         {
@@ -42,6 +46,7 @@ class Dispatcher
         }
         require_once "src/controller/$controllerName.php";
 
+        //Execute
         $controller = new $controllerName();
         $controller->$method();
     }

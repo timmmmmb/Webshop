@@ -11,10 +11,10 @@ class UserModel extends Model
 
     /**
      * Store new user in database.
-     * @param name Username
-     * @param email user e-mail
-     * @param password User password
-     * @param typeid User classification
+     * @param string $name Username
+     * @param string $email user e-mail
+     * @param string $password User password
+     * @param int $typeid User classification
      * @throws Exception if database connection fails.
      */
     public function createUser($name, $email, $password, $typeid) 
@@ -67,8 +67,8 @@ class UserModel extends Model
     /**
      * Checks if a user with this name and pw exists.
      * Returns the row if the user exists.
-     * @param name Username.
-     * @param password Password.
+     * @param string $name Username.
+     * @param string $password Password.
      * @throws Exception if database connection fails.
      * @return Object User properties.
      */
@@ -103,8 +103,8 @@ class UserModel extends Model
     /**
      * Checks if a user with these credentials allready exists.
      * Returns true if the user doesnt exist yet.
-     * @param email input email.
-     * @param name input name.
+     * @param string $email input email.
+     * @param string $name input name.
      * @throws Exception if database connection fails.
      * @return boolean
      */

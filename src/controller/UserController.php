@@ -24,7 +24,7 @@ class UserController
      */
     public function profile() 
     {
-        if(!isset($_SESSION['user_id'])) 
+        if (!isset($_SESSION['user_id'])) 
         {
             header("Location: /".$_SESSION['lang']['name']."/user/login");
             die();
@@ -165,7 +165,7 @@ class UserController
      */
     private function checkForExistingLogin($redirect) 
     {
-        if(isset($_SESSION['user_id'])) 
+        if (isset($_SESSION['user_id'])) 
         {
             header("Location: " . $redirect);
             die();

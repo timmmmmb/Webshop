@@ -8,11 +8,9 @@ require_once 'src/lib/InputValidator.php';
  * URL name: /order
  * This controller is invoked at https://servername/order/ by the Dispatcher.
  * The class methods are invoked at https://servername/order/method by the Dispatcher.
- *
  */
 class OrderController
 {
-
     /**
      * https://servername/order/addBasket
      */
@@ -52,7 +50,6 @@ class OrderController
 
     /**
      * https://servername/order/removeItem
-     * removes all of the items of one type from the basket and returns to the basket.
      */
     public function removeItem()
     {

@@ -11,7 +11,7 @@ class View
 
     /**
      * Set viewfile in constructor.
-     * @param viewfile php file.
+     * @param string $viewfile php file.
      */
     public function __construct($viewfile)
     {

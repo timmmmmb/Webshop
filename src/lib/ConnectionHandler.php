@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ConnectionHandler provides static quick and easy access to database.
+ * ConnectionHandler provides a quick and easy access to database.
  */
 class ConnectionHandler
 {
@@ -30,7 +30,7 @@ class ConnectionHandler
             if (self::$connection->connect_error) 
             {
                 $error = self::$connection->connect_error;
-                throw new Exception("Verbindungsfehler: $error");
+                throw new Exception("Connection error: $error");
             }
 
             self::$connection->set_charset('utf8');

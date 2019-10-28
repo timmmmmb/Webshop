@@ -127,7 +127,7 @@ class InputValidator
         $psw = $this->validateString($psw);
         $pswRepeat = $this->validateString($pswRepeat);
 
-        if($psw != $pswRepeat)
+        if ($psw != $pswRepeat)
         {
             $this->throwError(_ERROR_PSW_NOT_MATCH);
         }
@@ -139,7 +139,7 @@ class InputValidator
         {
             $this->throwError(_ERROR_PSW_SHORT);
         }
-        if(strlen($psw) > $pswMaxLength)
+        if (strlen($psw) > $pswMaxLength)
         {
             $this->throwError(_ERROR_PSW_LONG);
         }
@@ -148,7 +148,7 @@ class InputValidator
         $lowercase = preg_match('@(?=.*[a-z])@', $psw);
         $number    = preg_match('@(?=.*\d)@', $psw);
 
-        if(!$uppercase || !$lowercase || !$number)
+        if (!$uppercase || !$lowercase || !$number)
         {
             $this->throwError(_ERROR_PSW_RGX);
         }

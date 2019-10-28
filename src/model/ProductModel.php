@@ -11,7 +11,7 @@ class ProductModel extends Model
 
     /**
      * Gets available colors of product.
-     * @param id id of product.
+     * @param int $id id of product.
      * @throws Exception if database connection fails.
      * @return Array of objects.
      */
@@ -39,7 +39,7 @@ class ProductModel extends Model
 
     /**
      * Gets available sizes of product.
-     * @param id id of product.
+     * @param int $id id of product.
      * @throws Exception if database connection fails.
      * @return Array of objects.
      */

@@ -12,7 +12,7 @@ class Model
 
     /**
      * Returns database entry by specific id.
-     * @param id id of entry to retrieve.
+     * @param int $id of entry to retrieve.
      * @throws Exception if database connection fails.
      * @return Object entry of null if not exists.
      */
@@ -25,7 +25,7 @@ class Model
         $statement->execute();
 
         $result = $statement->get_result();
-        if(!$result) 
+        if (!$result) 
         {
             throw new Exception($statement->error);
         }
@@ -63,7 +63,7 @@ class Model
 
     /**
      * Deletes entry with specific id.
-     * @param id id of entry.
+     * @param int $id of entry.
      * @throws Exception if database connection fails.
      */
     public function deleteById($id)

@@ -11,11 +11,11 @@ class OrderModel extends Model
 
     /**
      * Adds a new product to the basket of the user.
-     * @param product_id id of product.  
-     * @param user_id id of user.
-     * @param amount amount of this product.
-     * @param color_id color.
-     * @param size_id size.
+     * @param int $product_id id of product.  
+     * @param int $user_id id of user.
+     * @param int $amount amount of this product.
+     * @param int $color_id color.
+     * @param int $size_id size.
      * @throws Exception if database connection fails.
      */
     public function addToBasket($product_id, $user_id, $amount, $color_id, $size_id)
@@ -52,7 +52,7 @@ class OrderModel extends Model
 
     /**
      * Gets the basket id of the user specified.
-     * @param user_id the id of the user.
+     * @param int $user_id the id of the user.
      * @throws Exception if database connection fails.
      * @return int id of order.
      */
@@ -82,7 +82,7 @@ class OrderModel extends Model
 
     /**
      * Create a new order for the user where with the stage set to basket.
-     * @param user_id id of user.
+     * @param int $user_id id of user.
      * @throws Exception if database connection fails.
      */
     private function createBasket($user_id)
@@ -100,7 +100,7 @@ class OrderModel extends Model
 
     /**
      * Retrieve list of products in order.
-     * @param user_id id of user.
+     * @param int $user_id id of user.
      * @throws Exception if database connection fails.
      * @return Array of products
      */
@@ -148,7 +148,7 @@ class OrderModel extends Model
 
     /**
      * Gets number of individual orders.
-     * @param user_id id of user.
+     * @param int $user_id id of user.
      * @return int order count.
      */
     public function getNumberOfProductsInBasket($user_id) 
@@ -164,7 +164,7 @@ class OrderModel extends Model
 
     /**
      * Remove entry in basket.
-     * @param id of order.
+     * @param int $id of order.
      * @throws Exception if database connection fails.
      */
     public function removeItemByID($id)
@@ -182,8 +182,8 @@ class OrderModel extends Model
 
     /**
      * Update amount of product order.
-     * @param amount new amount.
-     * @param id id of order.
+     * @param int $amount new amount.
+     * @param int $id id of order.
      * @throws Exception if database connection fails.
      */
     public function changeProductAmount($amount, $id)
@@ -201,8 +201,8 @@ class OrderModel extends Model
 
     /**
      * Increases the amount of an order.
-     * @param amount amount increment.
-     * @param id id of order.
+     * @param int $amount amount increment.
+     * @param int $id id of order.
      * @throws Exception if database connection fails.
      */
     public function addProductAmount($amount, $id)
@@ -220,11 +220,11 @@ class OrderModel extends Model
 
     /**
      * Returns product id if already in basket.
-     * @param product_id if of product.
-     * @param user_id id of user.
-     * @param color_id id of color.
-     * @param size_id id of size.
-     * @param order_id id of order.
+     * @param int $product_id if of product.
+     * @param int $user_id id of user.
+     * @param int $color_id id of color.
+     * @param int $size_id id of size.
+     * @param int $order_id id of order.
      * @throws Exception if database connection fails.
      * @return int id of product or 0.
      */
@@ -262,19 +262,19 @@ class OrderModel extends Model
 
     /**
      * Update status of order.
-     * @param user_id id of user.
+     * @param int $user_id id of user.
      * @throws Exception if database connection fails.
      */
     public function payBasket($user_id)
     {
-        //get the id of the order that represents the basket
+        //Get the id of the order that represents the basket
         $basket_id = $this->getBasketID($user_id);
-        //return if there is no basket
+        //Return if there is no basket
         if ($basket_id == 0) 
         {
             return;
         }
-        if($this->checkIfBasketEmptyByBasket($basket_id))
+        if ($this->checkIfBasketEmptyByBasket($basket_id))
         {
             return;
         }
@@ -292,7 +292,7 @@ class OrderModel extends Model
 
     /**
      * Check if basket exists.
-     * @param basket_id id of basket.
+     * @param int $basket_id id of basket.
      * @throws Exception if database connection fails.
      * @return boolean
      */
@@ -314,13 +314,13 @@ class OrderModel extends Model
 
     /**
      * Checks if user has basket.
-     * @param user_id id of user.
+     * @param int $user_id id of user.
      * @return boolean
      */
     public function checkIfBasketEmptyByUser($user_id)
     {
         $basket_id = $this->getBasketID($user_id);
-        //return if there is no basket
+        //Return if there is no basket
         if ($basket_id == 0) 
         {
             return true;
