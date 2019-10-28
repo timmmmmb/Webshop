@@ -2,7 +2,7 @@
 
 require_once 'src/model/OrderModel.php';
 require_once 'src/model/DefaultModel.php';
-require_once 'src/helper/InputValidation.php';
+require_once 'src/lib/InputValidator.php';
 
 /**
  * URL name: /order
@@ -19,11 +19,11 @@ class OrderController
     public function addBasket()
     {
         $orderModel = new OrderModel();
-        $iv = new InputValidation();
-        $product_id = $iv->intInputValidationPost($_POST["product_id"], "product id");
-        $amount = $iv->intInputValidationPost($_POST["amount"], "amount");
-        $color = $iv->intInputValidationPost($_POST["color"], "color");
-        $size = $iv->intInputValidationPost($_POST["size"], "size");
+        $iv = new InputValidator();
+        $product_id = $iv->validateIntPost($_POST["product_id"], "product id");
+        $amount = $iv->validateIntPost($_POST["amount"], "amount");
+        $color = $iv->validateIntPost($_POST["color"], "color");
+        $size = $iv->validateIntPost($_POST["size"], "size");
         $orderModel->addToBasket(
             $product_id,
             $_SESSION["user_id"],
@@ -41,9 +41,9 @@ class OrderController
     public function updateAmount()
     {
         $orderModel = new OrderModel();
-        $iv = new InputValidation();
-        $product_id = $iv->intInputValidationPost($_POST["id"], "product id");
-        $amount = $iv->intInputValidationPost($_POST["amount"], "amount");
+        $iv = new InputValidator();
+        $product_id = $iv->validateIntPost($_POST["id"], "product id");
+        $amount = $iv->validateIntPost($_POST["amount"], "amount");
         $orderModel->changeProductAmount($amount, $product_id);
         $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($_SESSION["user_id"]);
         header("Location: /" . $_SESSION['lang']['name'] . "/basket");
@@ -57,9 +57,9 @@ class OrderController
     public function removeItem()
     {
         $orderModel = new OrderModel();
-        $iv = new InputValidation();
-        $id = $iv->intInputValidationPost($_POST["id"], "product id");
-        $amount = $iv->intInputValidationPost($_POST["amount"], "amount");
+        $iv = new InputValidator();
+        $id = $iv->validateIntPost($_POST["id"], "product id");
+        $amount = $iv->validateIntPost($_POST["amount"], "amount");
         $orderModel->removeItemByID($id);
         $_SESSION['user_order_count'] -= $amount;
         header("Location: /" . $_SESSION['lang']['name'] . "/basket");

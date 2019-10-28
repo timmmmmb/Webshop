@@ -108,7 +108,7 @@ class UserModel extends Model
      * @throws Exception if database connection fails.
      * @return boolean
      */
-    public function userExists($email, $name) 
+    public function userDoesNotExists($email, $name) 
     {
         $query = "SELECT * FROM users WHERE NAME LIKE ? OR EMAIL LIKE ?";
 

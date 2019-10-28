@@ -2,7 +2,7 @@
 
 require_once 'src/model/UserModel.php';
 require_once 'src/model/OrderModel.php';
-require_once 'src/helper/InputValidation.php';
+require_once 'src/lib/InputValidator.php';
 
 /**
  * URL name: /user
@@ -54,17 +54,20 @@ class UserController
      */
     public function doRegister() 
     {
-        if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['psw'])) 
+        if (isset($_POST['name']) && 
+            isset($_POST['email']) && 
+            isset($_POST['psw']) && 
+            isset($_POST['psw-repeat'])) 
         {
             $userModel = new UserModel();
-            $iv = new InputValidation();
+            $iv = new InputValidator();
             $response = new stdClass();
 
             try
             {
-                $name = $iv->nameInputValidationPost($_POST['name']);
-                $email = $iv->emailInputValidationPost($_POST['email']);
-                $psw = $iv->passwordInputValidationPost($_POST['psw']);
+                $name = $iv->validateUsername($_POST['name']);
+                $email = $iv->validateEmail($_POST['email']);
+                $psw = $iv->validatePassword($_POST['psw'], $_POST['psw-repeat']);
             }
             catch(Exception $e)
             {
@@ -74,7 +77,7 @@ class UserController
                 exit();
             }
 
-            if ($userModel->userExists($name, $email))
+            if ($userModel->userDoesNotExists($name, $email))
             {
                 $userModel->createUser($name, $email, $psw, '1');
                 $this->doLogin();
@@ -106,13 +109,13 @@ class UserController
     public function doLogin() 
     {
         $userModel = new UserModel();
-        $iv = new InputValidation();
+        $iv = new InputValidator();
         $response = new stdClass();
 
         try 
         {
-            $name = $iv->stringInputValidationPost($_POST['name']);
-            $psw = $iv->stringInputValidationPost($_POST['psw']);
+            $name = $iv->validateString($_POST['name']);
+            $psw = $iv->validateString($_POST['psw']);
             $psw = md5($psw);
             $result = $userModel->getUserByNameAndPassword($name, $psw);
         }
