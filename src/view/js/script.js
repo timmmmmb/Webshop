@@ -103,4 +103,10 @@ jQuery(document).ready(function($) {
         $(this).closest("form").submit();        
     });
 
+    //Input validation
+    $(".input--validate-me").on('input', function(e) {
+        var format = /[ !#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
+        $(this).val($(this).val().replace(format, ''));
+    });
+
 });

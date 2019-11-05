@@ -1,6 +1,6 @@
-<div class="banner">
+<div class="banner" style="background-image: url('/src/view/images/<?=$banner?>');">
     <div class="banner__overlay">
-        <div class="banner__overlay__title"><?=_POPULAR?></div>
+        <div class="banner__overlay__title"><?=$heading?></div>
     </div>
 </div>
 <section class="products">

@@ -64,4 +64,29 @@ class ProductModel extends Model
         }
         return $rows;
     }
+
+    /**
+     * Gets products by gender.
+     */
+    public function getProductsBySex($sex) 
+    {
+        $query = "SELECT * FROM $this->tableName WHERE Sex = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('s', $sex);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        if(!$result)
+        {
+            throw new Exception($statement->error);
+        }
+
+        $rows = array();
+        while($row = $result->fetch_object())
+        {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 }

@@ -39,8 +39,8 @@
             <nav>
                 <ul>
                     <li><a href="/<?=$_SESSION['lang']['name']?>"><?=_HOME?></a></li>
-                    <li><a href="/<?=$_SESSION['lang']['name']?>"><?=_WOMEN?></a></li>
-                    <li><a href="/<?=$_SESSION['lang']['name']?>"><?=_MEN?></a></li>
+                    <li><a href="/<?=$_SESSION['lang']['name']?>/product/men"><?=_MEN?></a></li>
+                    <li><a href="/<?=$_SESSION['lang']['name']?>/product/women"><?=_WOMEN?></a></li>
                     <?php if (isset($_SESSION['user_type_de']) && $_SESSION["user_type_de"]=="Admin") : ?>
                         <li><a href="/<?=$_SESSION['lang']['name']?>/admin"><?=_ADMIN?></a></li>
                     <?php endif; ?>

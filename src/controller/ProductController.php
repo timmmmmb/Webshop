@@ -21,10 +21,38 @@ class ProductController
         $view->title = 'Product';
         $view->heading = 'Product';
         $iv = new InputValidator();
-        $product_id = $iv->validateIntGet($_GET["product_id"], "product id");
+        $product_id = $iv->validateIntGet($_GET["product_id"]);
         $view->product = $productModel->readById($product_id);
         $view->colors = $productModel->readColorsByID($product_id);
         $view->sizes = $productModel->readSizesByID($product_id);
+        $view->display();
+    }
+
+    /**
+     * https://servername/product/men
+     */
+    public function men()
+    {
+        $productModel = new ProductModel();
+        $view = new View('default_index');
+        $view->title = _MEN;
+        $view->heading = _MEN;
+        $view->banner = 'banner_men.jpg';
+        $view->products = $productModel->getProductsBySex("Male");
+        $view->display();
+    }
+
+    /**
+     * https://servername/product/men
+     */
+    public function women()
+    {
+        $productModel = new ProductModel();
+        $view = new View('default_index');
+        $view->title = _WOMEN;
+        $view->heading = _WOMEN;
+        $view->banner = 'banner_women.jpg';
+        $view->products = $productModel->getProductsBySex("Female");
         $view->display();
     }
 

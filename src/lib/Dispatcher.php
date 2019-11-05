@@ -7,12 +7,13 @@ class Dispatcher
 {
     /**
      * Dispatch method scans URL: https://servername/controller/method
-     * 1. URL fragment (/controller) => instantiates corresponding Controller.
-     * 2. URL fragment (/method) => calls corresponding method.
+     * First URL fragment (/controller) => instantiates corresponding Controller.
+     * Second URL fragment (/method) => calls corresponding method.
      */
     public static function dispatch()
     {
         //Analyze URL
+        //-----------
         $uri = $_SERVER['REQUEST_URI'];
         $uri = strtok($uri, '?');           //Remove URL values after '?'
         $uri = trim($uri, '/');             //Remove both '/' from left and right 
@@ -21,6 +22,7 @@ class Dispatcher
         $lang = require 'src/view/languages/lang_config.php';
 
         //Define language
+        //---------------
         $_SESSION['lang'] = $lang['en'];
         if(array_key_exists($uriFragments[$offset], $lang)) 
         {
@@ -30,6 +32,7 @@ class Dispatcher
         require "src/view/languages/".$_SESSION['lang']['file'];
         
         //Define controller
+        //-----------------
         $controllerName = 'DefaultController';
         if (!empty($uriFragments[$offset])) 
         {
@@ -39,20 +42,36 @@ class Dispatcher
         }
         
         //Define controller method
+        //------------------------
         $method = 'index';
         if (!empty($uriFragments[$offset + 1])) 
         {
             $method = $uriFragments[$offset + 1];
         }
-        require_once "src/controller/$controllerName.php";
 
+        //Exception handling
+        //------------------
+        $controllerClass = "src/controller/$controllerName.php";
+        if (!file_exists($controllerClass)) 
+        {
+            Dispatcher::redirect();
+        }
+        require_once $controllerClass;
+        if (!method_exists($controllerName, $method))
+        {
+            Dispatcher::redirect();
+        }
+        
         //Execute
+        //-------
         $controller = new $controllerName();
         $controller->$method();
     }
 
     /**
      * Returns url with language fragment.
+     * @param string $lang
+     * @return string
      */
     public static function getURL($lang) 
     {
@@ -73,4 +92,13 @@ class Dispatcher
         
         return '/'.$lang;
     }
+
+    /**
+     * Redirect to main page.
+     */
+    private function redirect() 
+    {
+        header("Location: /".$_SESSION['lang']['name']);
+        die();
+    }    
 }

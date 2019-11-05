@@ -56,7 +56,7 @@ define("_ERROR_NOT_POST", "Expected POST request method");
 define("_ERROR_NOT_GET", "Expected GET request method");
 define("_ERROR_NAME_SHORT", "Username to short");
 define("_ERROR_NAME_LONG", "Username too long");
-define("_ERROR_NAME_NUMBERS", "Name cannot contain numbers");
+define("_ERROR_NAME_NUMBERS", "Name cannot contain special characters");
 define("_ERROR_PSW_SHORT", "Password too short");
 define("_ERROR_PSW_LONG", "Password too long");
 define("_ERROR_PSW_NOT_MATCH", "Passwords do not match");

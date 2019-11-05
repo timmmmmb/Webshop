@@ -4,8 +4,8 @@
         <h3><?=_REGISTER_TITLE?></h3>
         <form id="formRegister" method="post" data-url="/<?=$_SESSION['lang']['name']?>/user/doRegister">
 
-            <input type="text" class="form__container__input" placeholder="<?=_REGISTER_USERNAME?>" name="name" required>
-            <input type="email" class="form__container__input" placeholder="<?=_REGISTER_EMAIL?>" name="email" required>
+            <input type="text" class="form__container__input input--validate-me" placeholder="<?=_REGISTER_USERNAME?>" name="name" required>
+            <input type="email" class="form__container__input input--validate-me" placeholder="<?=_REGISTER_EMAIL?>" name="email" required>
             <input type="password" class="form__container__input" placeholder="<?=_REGISTER_PASSWORD?>" name="psw" required>
             <input type="password" class="form__container__input" placeholder="<?=_REGISTER_REPEAT_PASSWORD?>" name="psw-repeat" required>
             <div class="form__container__error" hidden><?=_REGISTER_ERROR?></div>
