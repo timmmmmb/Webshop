@@ -41,13 +41,13 @@
         <div class="h3__hr__line"></div>
     </div>
     
-    <form action="/<?=$_SESSION['lang']['name']?>/product/pay" class="checkout__form" method="post">
+    <form id="formProductPay" method="post" data-url="/<?=$_SESSION['lang']['name']?>/product/pay" class="checkout__form">
               
         <h4><?=_CHECKOUT_SHIPPING?></h4>
         <div class="checkout__form__section">
-            <input type="text" name="address_street" placeholder="<?=_CHECKOUT_ADDRESS_STREET?>" required>
-            <input type="text" name="address_plz" placeholder="<?=_CHECKOUT_ADDRESS_POSTCODE?>" required>
-            <input type="text" name="address_place" placeholder="<?=_CHECKOUT_ADDRESS_STATE?>" required>
+            <input type="text" name="address_street" class="input--validate-me" placeholder="<?=_CHECKOUT_ADDRESS_STREET?>" required>
+            <input type="text" name="address_plz" class="input--validate-me" placeholder="<?=_CHECKOUT_ADDRESS_POSTCODE?>" required>
+            <input type="text" name="address_place" class="input--validate-me" placeholder="<?=_CHECKOUT_ADDRESS_STATE?>" required>
         </div>
    
         <h4><?=_CHECKOUT_PAYMENT?></h4>
@@ -60,11 +60,13 @@
         </div>
 
         <div class="checkout__form__section checkout__form__section--wrap2">
-            <input type="text" name="card_name" placeholder="<?=_CHECKOUT_CARD_NAME?>" required>
-            <input type="text" name="card_number" placeholder="<?=_CHECKOUT_CARD_NUMBER?>" required>
-            <input type="text" name="card_cvv" placeholder="<?=_CHECKOUT_CARD_CVV?>" required>
-            <input type="text" name="card_exp" placeholder="<?=_CHECKOUT_CARD_EXPDATE?>" required>
+            <input type="text" name="card_name" class="input--validate-me" placeholder="<?=_CHECKOUT_CARD_NAME?>" required>
+            <input type="text" name="card_number" class="input--validate-me" placeholder="<?=_CHECKOUT_CARD_NUMBER?>" required>
+            <input type="text" name="card_cvv" class="input--validate-me" placeholder="<?=_CHECKOUT_CARD_CVV?>" required>
+            <input type="text" name="card_exp" class="input--validate-me" placeholder="<?=_CHECKOUT_CARD_EXPDATE?>" required>
         </div>
+
+        <div class="checkout__form__error" hidden></div>
      
         <div class="h3__hr">
             <div class="h3__hr__line"></div>

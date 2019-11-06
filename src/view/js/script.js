@@ -1,6 +1,8 @@
 jQuery(document).ready(function($) {
 
-    //Sticky Header
+    //------------------------
+    //  STICKY HEADER
+    //------------------------
     function stickyHeader() {
         let scrollTop = $(window).scrollTop();
         let header = $("h1");
@@ -17,7 +19,9 @@ jQuery(document).ready(function($) {
     $(window).scroll(stickyHeader);
     stickyHeader();
 
-    //Login submit
+    //------------------------
+    //  LOGIN SUBMIT
+    //------------------------
     $("#formLogin").submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -30,13 +34,15 @@ jQuery(document).ready(function($) {
                 if(data.status === "success") {
                     window.location = data.href;
                 } else {
-                    showErrorMessage(data.error);
+                    showLoginErrorMessage(data.error);
                 }
             }
         });
     });
 
-    //Register submit
+    //------------------------
+    //  REGISTER SUBMIT
+    //------------------------
     $("#formRegister").submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -49,14 +55,16 @@ jQuery(document).ready(function($) {
                 if(data.status === "success") {
                    window.location = data.href;
                 } else {
-                   showErrorMessage(data.error);
+                   showLoginErrorMessage(data.error);
                 }
             }
         });
     });
 
-    //Show error div in form
-    let showErrorMessage = function(message) {
+    //------------------------
+    //  DISPLAY ERROR
+    //------------------------
+    let showLoginErrorMessage = function(message) {
         let errorDisplayDuration = 5000;
         let loginInput = $(".form__container__input");
         let loginInputErrorClass = "form__container__input--error";
@@ -70,7 +78,9 @@ jQuery(document).ready(function($) {
         }, errorDisplayDuration);
     };
 
-    //product_detail, choose color
+    //--------------------------------------
+    //  CHOOSE COLOR (product_detail.php)
+    //--------------------------------------
     $(".product__view__colors__radio").click(function() {
         let selected = "product__view__colors__radio--selected";
         $(".product__view__colors__radio").removeClass(selected);
@@ -79,7 +89,9 @@ jQuery(document).ready(function($) {
     });
     $(".product__view__colors__radio:first-child").click();
 
-    //Add to basket submit
+    //----------------------------
+    //  ADD TO BASKET SUBMIT
+    //----------------------------
     $("#formAddBasket").submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -98,15 +110,48 @@ jQuery(document).ready(function($) {
         });
     });
 
-    //Basket change amount of product
+    //---------------------------
+    //  BASKET CHANGE AMOUNT
+    //---------------------------
     $(".basket__item__right__number").bind('keyup mouseup', function () {
         $(this).closest("form").submit();        
     });
 
-    //Input validation
+    //------------------------
+    //  INPUT VALIDATION
+    //------------------------
     $(".input--validate-me").on('input', function(e) {
-        var format = /[ !#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
+        var format = /[!#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
         $(this).val($(this).val().replace(format, ''));
     });
+
+    //------------------------
+    //  PAY BASKET SUBMIT
+    //------------------------
+    $("#formProductPay").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('data-url'),
+            data: $(this).serialize(),
+            success: function(data)
+            {
+                data = JSON.parse(data);
+                if(data.status === "success") {
+                   window.location = data.href;
+                } else {
+                    showCheckoutErrorMessage(data.error);
+                }
+            }
+        });
+    });
+
+    let showCheckoutErrorMessage = function(message) {
+        let errorDiv = $(".checkout__form__error");
+        let errorDisplayDuration = 5000;
+        errorDiv.text(message);
+        errorDiv.slideDown();
+        setTimeout(() => errorDiv.slideUp(), errorDisplayDuration);
+    }
 
 });

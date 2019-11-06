@@ -69,7 +69,7 @@ class UserController
                 $email = $iv->validateEmail($_POST['email']);
                 $psw = $iv->validatePassword($_POST['psw'], $_POST['psw-repeat']);
             }
-            catch(Exception $e)
+            catch (Exception $e)
             {
                 $response->status = "error";
                 $response->error = $e->getMessage();
@@ -87,6 +87,7 @@ class UserController
                 $response->status = "error";
                 $response->error = _REGISTER_ERROR;
                 echo json_encode($response);
+                exit();
             }
         }
     }
@@ -119,7 +120,7 @@ class UserController
             $psw = md5($psw);
             $result = $userModel->getUserByNameAndPassword($name, $psw);
         }
-        catch(Exception $e)
+        catch (Exception $e)
         {
             $response->status = "error";
             $response->error = $e->getMessage();
@@ -129,7 +130,7 @@ class UserController
 
         $arr = (array)$result;
         
-        if(empty($arr)) 
+        if (empty($arr)) 
         {
             $response->status = "error";
             $response->error = _LOGIN_ERROR;

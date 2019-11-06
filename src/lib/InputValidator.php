@@ -184,4 +184,21 @@ class InputValidator
 
         return $name;
     }
+
+    /**
+     * Validates value by given regex.
+     * @param string $value.
+     * @param string $regex.
+     * @throws Exception if regex does not match.
+     * @return string
+     */
+    public function validateByRegex($value, $regex) 
+    {
+        $value = $this->validateString($value);
+        if (!preg_match($regex, $value))
+        {
+            $this->throwError(_ERROR_RGX);
+        }
+        return $value;
+    }
 }
