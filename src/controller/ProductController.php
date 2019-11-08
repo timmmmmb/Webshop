@@ -1,8 +1,15 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 require_once 'src/model/ProductModel.php';
 require_once 'src/model/OrderModel.php';
+require_once 'src/model/UserModel.php';
 require_once 'src/lib/InputValidator.php';
+require_once 'src/lib/phpmailer/PHPMailer.php';
+require_once 'src/lib/phpmailer/Exception.php';
+require_once 'src/lib/phpmailer/SMTP.php';
 
 /**
  * URL name: /product
@@ -67,10 +74,16 @@ class ProductController
     public function checkout()
     {
         $ordermodel = new OrderModel();
+        $products = $ordermodel->getProductsInBasket($_SESSION["user_id"]);
+        if(empty($products))
+        {
+            header("Location: /".$_SESSION['lang']['name']);
+            die();
+        }
         $view = new View('checkout');
         $view->title = 'Checkout';
         $view->heading = 'Checkout';
-        $view->products = $ordermodel->getProductsInBasket($_SESSION["user_id"]);
+        $view->products = $products;
         $view->display();
     }
 
@@ -108,13 +121,48 @@ class ProductController
                 echo json_encode($response);
                 exit();
             }
-            
-            $ordermodel = new OrderModel();
-            $ordermodel->payBasket($_SESSION["user_id"]);
-            $_SESSION['user_order_count'] = 0;
 
-            $response->status = "success";
-            $response->href = "/".$_SESSION['lang']['name'];
+            //SEND MAIL
+            $usermodel = new UserModel();
+            $user = $usermodel->readById($_SESSION['user_id']);
+
+            /**
+             * 
+             * 
+             * 
+             * 
+             * Configure apacha server
+             * 
+             * 
+             * 
+             */
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->From = "no-reply@tandy-webshop.ch";
+            $mail->FromName = "Tim & Yannick's Webshop";
+            $mail->addAddress($user->EMail, $user->Name);
+            $mail->isHTML(true);
+            $mail->Subject = "Your Order from Tim & Yannick's Webshop";
+            $mail->Body = "<i>Street(test): ". $street ."</i>";
+
+            if($mail->send())
+            {
+                //PAY
+                $ordermodel = new OrderModel();
+                $ordermodel->payBasket($_SESSION["user_id"]);
+                $_SESSION['user_order_count'] = 0;
+
+                //MAIL SUCCESS
+                $response->status = "success";
+                $response->href = "/".$_SESSION['lang']['name'];
+            }
+            else
+            {
+                //MAIL ERROR
+                $response->status = "failed";
+                $response->error = $mail->ErrorInfo;
+            }
             echo json_encode($response);
         }
     }
