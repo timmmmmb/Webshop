@@ -6,20 +6,31 @@
 class Dispatcher
 {
     /**
+     * Define root folder.
+     */
+    function __construct()
+    {
+        $conf = require 'config.php';
+        define("_ROOT", $conf['root']);
+    }
+
+    /**
      * Dispatch method scans URL: https://servername/controller/method
      * First URL fragment (/controller) => instantiates corresponding Controller.
      * Second URL fragment (/method) => calls corresponding method.
      */
-    public static function dispatch()
+    public function dispatch()
     {
         //Analyze URL
         //-----------
         $uri = $_SERVER['REQUEST_URI'];
         $uri = strtok($uri, '?');           //Remove URL values after '?'
+        $uri = substr($uri, strlen(_ROOT)); //Remove root folder
         $uri = trim($uri, '/');             //Remove both '/' from left and right 
         $uriFragments = explode('/', $uri); //Split URL into array
         $offset = 0;
         $lang = require 'src/view/languages/lang_config.php';
+        
 
         //Define language
         //---------------
@@ -90,13 +101,13 @@ class Dispatcher
             $lang .= '/'.$uriFragment;
         }
         
-        return '/'.$lang;
+        return _ROOT.$lang;
     }
 
     /**
      * Redirect to main page.
      */
-    private function redirect() 
+    private static function redirect() 
     {
         header("Location: /".$_SESSION['lang']['name']);
         die();
