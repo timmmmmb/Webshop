@@ -2,7 +2,7 @@
     <div class="form__container">
 
         <h3><?=_REGISTER_TITLE?></h3>
-        <form id="formRegister" method="post" data-url="/<?=$_SESSION['lang']['name']?>/user/doRegister">
+        <form id="formRegister" method="post" data-url="<?=_ROOT.$_SESSION['lang']['name']?>/user/doRegister">
 
             <input type="text" class="form__container__input input--validate-me" placeholder="<?=_REGISTER_USERNAME?>" name="name" required>
             <input type="email" class="form__container__input input--validate-me" placeholder="<?=_REGISTER_EMAIL?>" name="email" required>
@@ -16,7 +16,7 @@
             </span>
 
             <p class="form__container__hint">
-                <?=_REGISTER_ALLREADY_ACCOUNT?><a href="/<?=$_SESSION['lang']['name']?>/user/login"> <?=_REGISTER_LOGIN?></a>.
+                <?=_REGISTER_ALLREADY_ACCOUNT?><a href="<?=_ROOT.$_SESSION['lang']['name']?>/user/login"> <?=_REGISTER_LOGIN?></a>.
             </p>
         
         </form>

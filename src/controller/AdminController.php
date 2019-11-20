@@ -72,7 +72,7 @@ class AdminController
     private function checkForAdminRights($redirect)
     {
         if (isset($_SESSION['user_type']) && $_SESSION["user_type"] != "Admin") {
-            header("Location: " . $redirect);
+            header("Location: ".$redirect);
             die();
         }
     }

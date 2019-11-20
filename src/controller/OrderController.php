@@ -44,7 +44,7 @@ class OrderController
         $amount = $iv->validateIntPost($_POST["amount"], "amount");
         $orderModel->changeProductAmount($amount, $product_id);
         $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($_SESSION["user_id"]);
-        header("Location: /" . $_SESSION['lang']['name'] . "/basket");
+        header("Location: "._ROOT.$_SESSION['lang']['name'] . "/basket");
         die();
     }
 
@@ -59,7 +59,7 @@ class OrderController
         $amount = $iv->validateIntPost($_POST["amount"], "amount");
         $orderModel->removeItemByID($id);
         $_SESSION['user_order_count'] -= $amount;
-        header("Location: /" . $_SESSION['lang']['name'] . "/basket");
+        header("Location: "._ROOT.$_SESSION['lang']['name'] . "/basket");
         die();
     }
 }

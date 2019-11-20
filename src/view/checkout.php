@@ -12,8 +12,8 @@
         <?php foreach ($products as $product): ?>
         <li>
             <div class="checkout__products__img">
-                <a href="/<?=$_SESSION['lang']['name']?>/product?product_id=<?= $product->ID ?>">
-                    <div style="background-image: url('/src/view/images/<?= $product->image; ?>');"></div> 
+                <a href="<?=_ROOT.$_SESSION['lang']['name']?>/product?product_id=<?= $product->ID ?>">
+                    <div style="background-image: url('<?=_ROOT?>src/view/images/<?= $product->image; ?>');"></div> 
                 </a>
             </div>
             <div class="checkout__products__desc">
@@ -41,7 +41,7 @@
         <div class="h3__hr__line"></div>
     </div>
     
-    <form id="formProductPay" method="post" data-url="/<?=$_SESSION['lang']['name']?>/product/pay" class="checkout__form">
+    <form id="formProductPay" method="post" data-url="<?=_ROOT.$_SESSION['lang']['name']?>/product/pay" class="checkout__form">
               
         <h4><?=_CHECKOUT_SHIPPING?></h4>
         <div class="checkout__form__section">

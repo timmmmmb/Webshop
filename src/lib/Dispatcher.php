@@ -61,6 +61,7 @@ class Dispatcher
         }
 
         //Exception handling
+        //Required only if .htaccess file not working
         //------------------
         $controllerClass = "src/controller/$controllerName.php";
         if (!file_exists($controllerClass)) 
@@ -87,6 +88,7 @@ class Dispatcher
     public static function getURL($lang) 
     {
         $uri = $_SERVER['REQUEST_URI'];
+        $uri = substr($uri, strlen(_ROOT));
         $uri = trim($uri, '/'); 
         $uriFragments = explode('/', $uri);
 
@@ -109,7 +111,7 @@ class Dispatcher
      */
     private static function redirect() 
     {
-        header("Location: /".$_SESSION['lang']['name']);
+        header("Location: "._ROOT.$_SESSION['lang']['name']);
         die();
     }    
 }

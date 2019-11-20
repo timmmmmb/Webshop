@@ -26,7 +26,7 @@ class UserController
     {
         if (!isset($_SESSION['user_id'])) 
         {
-            header("Location: /".$_SESSION['lang']['name']."/user/login");
+            header("Location: "._ROOT.$_SESSION['lang']['name']."/user/login");
             die();
         }
         $userModel = new UserModel();
@@ -42,7 +42,7 @@ class UserController
      */
     public function register() 
     {
-        $this->checkForExistingLogin("/".$_SESSION['lang']['name']);
+        $this->checkForExistingLogin(_ROOT.$_SESSION['lang']['name']);
         $view = new View('register');
         $view->title = 'Register';
         $view->heading = 'Register';
@@ -97,7 +97,7 @@ class UserController
      */
     public function login() 
     {
-        $this->checkForExistingLogin("/".$_SESSION['lang']['name']."/user/profile");
+        $this->checkForExistingLogin(_ROOT.$_SESSION['lang']['name']."/user/profile");
         $view = new View('login');
         $view->title = 'Login';
         $view->heading = 'Login';
@@ -144,7 +144,7 @@ class UserController
             $_SESSION['user_type_de'] = $result->Type_de;
             $_SESSION['user_type_en'] = $result->Type_en;
             $response->status = "success";
-            $response->href = "/".$_SESSION['lang']['name'];
+            $response->href = _ROOT.$_SESSION['lang']['name'];
         }
         echo json_encode($response);
     }
@@ -156,7 +156,7 @@ class UserController
     {
         $lang = $_SESSION['lang']['name'];
         session_unset();
-        header("Location: /".$lang);
+        header("Location: "._ROOT.$lang);
         die();
     }
 
@@ -168,7 +168,7 @@ class UserController
     {
         if (isset($_SESSION['user_id'])) 
         {
-            header("Location: " . $redirect);
+            header("Location: ".$redirect);
             die();
         }
     }

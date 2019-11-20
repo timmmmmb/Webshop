@@ -1,7 +1,7 @@
 <section class="product">
 
     <div class="product__view">
-        <div class="product__view__img" style="background-image: url('/src/view/images/<?= $product->Image; ?>');"></div>
+        <div class="product__view__img" style="background-image: url('<?=_ROOT?>src/view/images/<?= $product->Image; ?>');"></div>
         <hr class="product__view__hr">
         <div class="product__view__colors">
             <?php foreach ($colors as $color) : ?>
@@ -20,7 +20,7 @@
         <h2><?= $product->{'Name_'.strtoupper($_SESSION['lang']['name'])}; ?></h2>
         <h4><?= $product->{'Description_'.strtoupper($_SESSION['lang']['name'])}; ?></h4>
 
-        <form id="formAddBasket" method="post" data-url="/<?= $_SESSION['lang']['name'] ?>/order/addBasket">
+        <form id="formAddBasket" method="post" data-url="<?=_ROOT.$_SESSION['lang']['name'] ?>/order/addBasket">
             <input type="hidden" name="product_id" value="<?= $product->ID ?>" />
             <input type="hidden" name="color" value="<?= $colors[0]->ID ?>" id="productColor"/>
         

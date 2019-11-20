@@ -25,7 +25,7 @@ class ProductController
     {
         if(!isset($_GET["product_id"]))
         {
-            header("Location: /".$_SESSION['lang']['name']);
+            header("Location: "._ROOT.$_SESSION['lang']['name']);
             die();
         }
         $productModel = new ProductModel();
@@ -77,7 +77,7 @@ class ProductController
         $products = $ordermodel->getProductsInBasket($_SESSION["user_id"]);
         if(empty($products))
         {
-            header("Location: /".$_SESSION['lang']['name']);
+            header("Location: "._ROOT.$_SESSION['lang']['name']);
             die();
         }
         $view = new View('checkout');
@@ -155,7 +155,7 @@ class ProductController
 
                 //MAIL SUCCESS
                 $response->status = "success";
-                $response->href = "/".$_SESSION['lang']['name'];
+                $response->href = _ROOT.$_SESSION['lang']['name'];
             }
             else
             {

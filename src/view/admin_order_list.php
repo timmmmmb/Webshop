@@ -14,7 +14,7 @@
         <?php endforeach; ?>
     </ul>
 
-    <a href="/admin">
+    <a href="<?=_ROOT?>admin">
         <div class="admin__return">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
         </div>
