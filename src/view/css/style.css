@@ -218,14 +218,16 @@ header {
 .header__menu__line__square {
     width: 20px;
     height: 20px;
-    background: #999;
+    border-radius: 1px;
+    padding: 3px;
+    background: rgb(40, 50, 70);
     transform: rotate(45deg);
     transition: 0.5s;
 }
 
-.header__menu__line__square--shrink {
-    width: 13px;
-    height: 13px;
+.header__menu__line__square img {
+    transform: rotate(-45deg);
+    width: 20px;
 }
 
 .header__icons {

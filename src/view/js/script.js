@@ -6,14 +6,14 @@ jQuery(document).ready(function($) {
     function stickyHeader() {
         let scrollTop = $(window).scrollTop();
         let header = $("h1");
-        let headerSquare = $(".header__line__square");
+        let headerSquare = $(".header__menu__line__square");
 
         if(scrollTop >= 50) {
             header.slideUp();
-            headerSquare.addClass("header__line__square--shrink");
+            headerSquare.addClass("header__menu__line__square--shrink");
         } else {
             header.slideDown();
-            headerSquare.removeClass("header__line__square--shrink");
+            headerSquare.removeClass("header__menu__line__square--shrink");
         }
     };
     $(window).scroll(stickyHeader);

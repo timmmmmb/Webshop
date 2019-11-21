@@ -11,11 +11,19 @@
 <html lang="<?=$_SESSION['lang']['name']?>">
 
 <head>
+    <!-- META -->
     <meta charset="utf-8" />
+    <meta name="description" content="T and Y Webshop">
+    <meta name="keywords" content="Clean, Web, Shop">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<?=_ROOT?>src/view/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
+    <!-- SHORTCUT -->
+    <link href="<?=_ROOT?>src/view/images/tandy-dark.png" rel="shortcut icon">
+    <!-- TITLE -->
     <title><?=_TITLE?> | <?= $title ?></title>
 </head>
 
@@ -33,7 +41,9 @@
             <h1><?=_TITLE?></h1>
             <div class="header__menu__line">
                 <div class="header__menu__line__hr"></div>
-                <div class="header__menu__line__square"></div>
+                <div class="header__menu__line__square">
+                    <img src="<?=_ROOT?>src/view/images/tandy-light.png" alt="T&Y">
+                </div>
                 <div class="header__menu__line__hr"></div>
             </div>
             <nav>
