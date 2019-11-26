@@ -127,14 +127,10 @@ class ProductController
             $user = $usermodel->readById($_SESSION['user_id']);
 
             /**
-             * 
-             * 
-             * 
-             * 
-             * Configure apacha server
-             * 
-             * 
-             * 
+             * TODO:
+             * - configure apache server for mail
+             * - Search for products
+             * - Add new product on admin page 
              */
             $mail = new PHPMailer();
             $mail->isSMTP();

@@ -19,8 +19,9 @@
         <h5>CHF <?= $product->Price; ?></h5>
         <h2><?= $product->{'Name_'.strtoupper($_SESSION['lang']['name'])}; ?></h2>
         <h4><?= $product->{'Description_'.strtoupper($_SESSION['lang']['name'])}; ?></h4>
-
-        <form id="formAddBasket" method="post" data-url="<?=_ROOT.$_SESSION['lang']['name'] ?>/order/addBasket">
+        
+        <?php if (isset($_SESSION['user_id'])) : ?>
+        <form id="formAddBasket" method="post" data-url="<?=_ROOT.$_SESSION['lang']['name']?>/order/addBasket">
             <input type="hidden" name="product_id" value="<?= $product->ID ?>" />
             <input type="hidden" name="color" value="<?= $colors[0]->ID ?>" id="productColor"/>
         
@@ -33,12 +34,16 @@
             <input type="number" name="amount" min="1" value="1">
             
             <hr class="product__info__hr">
-            
-            <?php if (isset($_SESSION['user_id'])) : ?>
-                <button type="submit" class="product__info__submit"><?=_PRODUCT_DETAIL_ORDER?></button>
-            <?php endif; ?>
-        </form>
 
+            <button type="submit" class="product__info__submit"><?=_PRODUCT_DETAIL_ORDER?></button>
+        </form>
+        <?php else: ?>
+        <a href="<?=_ROOT.$_SESSION['lang']['name']?>/user/login">
+        <button class="basket__checkout">
+            <?=_PRODUCT_DETAIL_ORDER?>
+        </button>     
+        </a>
+        <?php endif; ?>
     </div>
 
 </section>

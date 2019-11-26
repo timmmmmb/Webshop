@@ -1,6 +1,8 @@
 <?php
 
-require_once 'src/lib/ModelAutoLoader.php';
+require_once 'src/model/UserModel.php';
+require_once 'src/model/ProductModel.php';
+require_once 'src/model/OrderModel.php';
 
 /**
  * URL name: /admin

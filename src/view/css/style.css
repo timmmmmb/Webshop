@@ -655,16 +655,16 @@ footer a {
     margin: 0 0 2em;
 }
 
-.product__info__submit {
+button.product__info__submit {
     display: block;
-    max-width: 200px;
-    min-width: 150px;
+    min-width: 280px;
     background: #407088;
     color: white;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 1em;
     letter-spacing: 0.225em;
+    padding: 1.5em 0;
 }
 
 /*--------------------------------------------*/
