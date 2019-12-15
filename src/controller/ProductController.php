@@ -106,7 +106,7 @@ class ProductController
             try
             {
                 $iv = new InputValidator();
-                $street = $iv->validateByRegex($_POST['address_street'], "@^[a-zA-Z0-9]*+$@");
+                $street = $iv->validateByRegex($_POST['address_street'], "@^[a-zA-Z0-9_ ]*+$@");
                 $zip = $iv->validateByRegex($_POST['address_plz'], "@^[0-9]{4}+$@");
                 $place = $iv->validateByRegex($_POST['address_place'], "@^[a-zA-Z0-9]*+$@");
                 $cardname = $iv->validateByRegex($_POST['card_name'], "@^[a-zA-Z]*+$@");
@@ -114,7 +114,7 @@ class ProductController
                 $cardcvv = $iv->validateByRegex($_POST['card_cvv'], "@^\d{3,4}+$@");
                 $cardexp = $iv->validateByRegex($_POST['card_exp'], "@^\d{2}\.\d{4}+$@");
             }
-            catch (Exception $e)
+            catch (\Exception $e)
             {
                 $response->status = 'error';
                 $response->error = $e->getMessage();
@@ -126,18 +126,11 @@ class ProductController
             $usermodel = new UserModel();
             $user = $usermodel->readById($_SESSION['user_id']);
 
-            /**
-             * TODO:
-             * - configure apache server for mail
-             * - Search for products
-             * - Add new product on admin page 
-             */
             $mail = new PHPMailer();
             $mail->isSMTP();
-            $mail->Host = "smtp.gmail.com";
-            $mail->From = "no-reply@tandy-webshop.ch";
-            $mail->FromName = "Tim & Yannick's Webshop";
-            $mail->addAddress($user->EMail, $user->Name);
+            $mail->FromName = "Tim & Yannick";
+            $mail->From = "master@yruefenacht.ch";
+            $mail->addAddress($user->EMail);
             $mail->isHTML(true);
             $mail->Subject = "Your Order from Tim & Yannick's Webshop";
             $mail->Body = "<i>Street(test): ". $street ."</i>";

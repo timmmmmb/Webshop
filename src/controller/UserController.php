@@ -24,11 +24,7 @@ class UserController
      */
     public function profile() 
     {
-        if (!isset($_SESSION['user_id'])) 
-        {
-            header("Location: "._ROOT.$_SESSION['lang']['name']."/user/login");
-            die();
-        }
+        $this->redirectIfSessionIs(false, _ROOT.$_SESSION['lang']['name']."/user/login");
         $userModel = new UserModel();
         $view = new View('profile');
         $view->title = 'Profile';
@@ -38,11 +34,24 @@ class UserController
     }
 
     /**
+     * https://servername/user/doEdit
+     */
+    public function doEdit() 
+    {
+        if (isset($_POST['email'])) {
+            $iv = new InputValidator();
+            $email = $iv->validateEmail($_POST['email']);
+            $userModel = new UserModel();
+            $userModel->updateUserEmail($email, $_SESSION['user_id']);
+        }
+    }
+
+    /**
      * https://servername/user/register
      */
     public function register() 
     {
-        $this->checkForExistingLogin(_ROOT.$_SESSION['lang']['name']);
+        $this->redirectIfSessionIs(true, _ROOT.$_SESSION['lang']['name']);
         $view = new View('register');
         $view->title = 'Register';
         $view->heading = 'Register';
@@ -97,7 +106,7 @@ class UserController
      */
     public function login() 
     {
-        $this->checkForExistingLogin(_ROOT.$_SESSION['lang']['name']."/user/profile");
+        $this->redirectIfSessionIs(true, _ROOT.$_SESSION['lang']['name']."/user/profile");
         $view = new View('login');
         $view->title = 'Login';
         $view->heading = 'Login';
@@ -164,9 +173,9 @@ class UserController
      * Deny access to certain pages if user is not logged in.
      * @param string $redirect.
      */
-    private function checkForExistingLogin($redirect) 
+    private function redirectIfSessionIs($bool, $redirect) 
     {
-        if (isset($_SESSION['user_id'])) 
+        if (isset($_SESSION['user_id']) == $bool) 
         {
             header("Location: ".$redirect);
             die();

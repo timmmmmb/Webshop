@@ -136,6 +136,7 @@ jQuery(document).ready(function($) {
             data: $(this).serialize(),
             success: function(data)
             {
+                console.log(data)
                 data = JSON.parse(data);
                 if(data.status === "success") {
                    window.location = data.href;
@@ -153,5 +154,26 @@ jQuery(document).ready(function($) {
         errorDiv.slideDown();
         setTimeout(() => errorDiv.slideUp(), errorDisplayDuration);
     }
+    //------------------------
+    //  USER PROFILE
+    //------------------------
+    var prevEmail = $('.profile__section__email').val();
+    $('.profile__section__email').keyup(function() {
+        let enable = ($(this).val() != '' && $(this).val() != prevEmail);
+        $('.profile__section__submit').prop('disabled', !enable);
+    });
+
+    $("#formEditEmail").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: $(this).attr("data-url"),
+            data: $(this).serialize(),
+            success: function(data)
+            {
+                $('.profile__section__submit').addClass("profile__section__submit--success");
+            }
+        });
+    });
 
 });

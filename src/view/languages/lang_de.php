@@ -62,3 +62,4 @@ define("_ERROR_PSW_LONG", "Passwort zu lang");
 define("_ERROR_PSW_NOT_MATCH", "Passwörter stimmen nicht überein");
 define("_ERROR_PSW_RGX", "Passwort muss einen Klein- und Grossbuchstaben und eine Zahl enthalten");
 define("_ERROR_RGX", "Invalide Kontaktdaten");
+define("_SAVE", "Speichern");

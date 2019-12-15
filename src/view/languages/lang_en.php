@@ -62,3 +62,4 @@ define("_ERROR_PSW_LONG", "Password too long");
 define("_ERROR_PSW_NOT_MATCH", "Passwords do not match");
 define("_ERROR_PSW_RGX", "Password must contain a lowercase and uppercase letter and a digit");
 define("_ERROR_RGX", "Invalid contact data");
+define("_SAVE", "Save");

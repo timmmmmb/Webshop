@@ -127,4 +127,23 @@ class UserModel extends Model
         return $exists;
     }
 
+    /**
+     * Updates Email
+     * @param string $email new email.
+     * @param int $id specifies which user to update.
+     * @throws Exception if statement could not execute.
+     */
+    public function updateUserEmail($email, $id) 
+    {
+        $query="UPDATE users SET EMail = ? WHERE id = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('si', $email, $id);
+
+        if (!$statement->execute()) 
+        {
+            throw new Exception($statement->error);
+        }
+    }
+
 }

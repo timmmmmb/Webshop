@@ -543,30 +543,54 @@ footer a {
 /*--------------------------------------------*/
 
 .profile {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 4em 0;
-}
-
-.profile__img {
-    width: 150px;
-    height: 150px;
-    background-image: url("http://s3.amazonaws.com/37assets/svn/765-default-avatar.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 50%;
-    box-shadow: 0 0 10px 0 #ddd;
+    width: 50%;
+    background: white;
+    margin: 3em auto;
+    padding: 4em 4em;
 }
 
 .profile__name {
+    width: 100%;
+    text-align: center;
     color: #333;
     font-size: 2em;
     text-transform: capitalize;
-    margin: 1em;
+    margin: 1em 0;
+}
+
+.profile__h3 {
+    width: 100%;
+    color: #444;
+    font-weight: bold;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+}
+
+.profile__section__email {
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #333;
+    outline: none;
+}
+
+button.profile__section__submit {
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 0.3em;
+    background: #407088;
+    margin-top: 2em;
+}
+
+button.profile__section__submit:disabled {
+    cursor: default;
+    opacity: 0.75;
+}
+
+button.profile__section__submit--success {
+    background: #42b883;
 }
 
 /*--------------------------------------------*/
