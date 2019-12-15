@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 20. Nov 2019 um 10:42
+-- Erstellungszeit: 15. Dez 2019 um 21:36
 -- Server-Version: 10.4.6-MariaDB
 -- PHP-Version: 7.3.9
 
@@ -49,7 +49,8 @@ INSERT INTO `available_colors` (`ID`, `ProductID`, `ColorID`) VALUES
 (8, 1, 5),
 (9, 1, 2),
 (10, 1, 1),
-(11, 5, 1);
+(11, 5, 1),
+(12, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,9 @@ INSERT INTO `products` (`ID`, `Name_DE`, `Name_EN`, `Description_DE`, `Descripti
 (3, 'Socken', 'Socks', 'Ein Normales paar weisser Socken.', 'A pair of white socks.', 'Female', 'socken.png', 9.95),
 (4, 'Pullover', 'Pullover', 'Ein warmer aus 100% Wolle bestehender Pullover.', 'A warm and soft pullover with 100% cotten.', 'Male', 'pullover.png', 39.95),
 (5, 'Jacke', 'Jacket', 'Eine dicke Jacke perfekt für zum Skifahren oder während kalten Wintertagen', 'A thic Veste that will keep you warm in the biggest snowstorm.', 'Male', 'jacke.png', 109.95),
-(6, 'Mütze', 'Cap', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'A comftable cap available in black or blue.', 'Female', 'mütze.png', 14.95);
+(6, 'Mütze', 'Cap', 'Eine warme Wollmütze in zwei verschiedenen Farben entweder Schwarz oder Blau.', 'A comftable cap available in black or blue.', 'Female', 'mütze.png', 14.95),
+(7, 'Schwarzes Kleid', 'Black dress', 'Elegantes Kleid für beiläufige wie auch formelle Ereignisse.', 'Sleek dress for casual as well as formal events.', 'Female', 'dress1.png', 49.95),
+(8, 'Rotes Kleid', 'Red dress', 'Verführerisches rotes Kleid mit entzückender schwarzer schleife.', 'Seductive red dress with lovely black bow.', 'Female', 'dress2.png', 49.95);
 
 -- --------------------------------------------------------
 
@@ -410,7 +413,7 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT für Tabelle `available_colors`
 --
 ALTER TABLE `available_colors`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT für Tabelle `available_sizes`
@@ -452,7 +455,7 @@ ALTER TABLE `orders_products`
 -- AUTO_INCREMENT für Tabelle `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT für Tabelle `sizes`
