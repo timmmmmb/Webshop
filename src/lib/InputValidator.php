@@ -91,6 +91,32 @@ class InputValidator
     }
 
     /**
+     * Returns the validated string or else throws an error.
+     * @param string $string.
+     * @throws Exception if string is invalid.
+     * @return string
+     */
+    public function validateStringGet($string)
+    {
+        $string = htmlspecialchars($string);
+        $string = filter_var($string, FILTER_SANITIZE_STRING);
+
+        if (empty($string)) 
+        {
+            $this->throwError(_ERROR_VALUE_EMPTY);
+        } 
+        else if ($string === false) 
+        {
+            $this->throwError(_ERROR_NOT_STRING);
+        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') 
+        {
+            $this->throwError(_ERROR_NOT_POST);
+        }
+        return $string;
+    }
+
+    /**
      * Returns the validated email or else throws an error.
      * @param string $email.
      * @throws Exception if email is invalid.

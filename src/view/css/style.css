@@ -146,10 +146,14 @@ header {
     padding: 1.5em 0;
     background: white;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     box-shadow: 0 5px 10px -10px #333;
     z-index: 1;
+}
+.header--wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header__languages {
@@ -244,6 +248,7 @@ header {
     height: 30px;
     position: relative;
     color: #555;
+    cursor: pointer;
 }
 
 .header__icons__item--cart {
@@ -271,6 +276,21 @@ header {
     justify-content: center;
     align-items: center;
     color: white;
+}
+
+.header__search {
+    width: 100%;
+    background: white;
+    text-align: center;
+}
+
+.header__search__bar {
+    width: 50%;
+    outline: none;
+    border: None;
+    border-bottom: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 1em 0;
 }
 
 /*--------------------------------------------*/
@@ -582,6 +602,7 @@ button.profile__section__submit {
     letter-spacing: 0.3em;
     background: #407088;
     margin-top: 2em;
+    width: 200px;
 }
 
 button.profile__section__submit:disabled {

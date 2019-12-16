@@ -176,4 +176,11 @@ jQuery(document).ready(function($) {
         });
     });
 
+    //------------------------
+    //  HEADER SEARCH
+    //------------------------
+    $("#header__icons__search").click(function() {
+        $('.header__search').slideToggle();
+        $('.header__search__bar').focus();
+    });
 });

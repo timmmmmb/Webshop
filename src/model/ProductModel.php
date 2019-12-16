@@ -89,4 +89,36 @@ class ProductModel extends Model
         }
         return $rows;
     }
+
+    /**
+     * @param string $keyword search query.
+     * @throws Exception if db query fails.
+     * @return Array list of products
+     */
+    public function searchProducts($keyword)
+    {
+        $keyword = '%'.$keyword.'%';
+        $query = "SELECT * FROM $this->tableName 
+            WHERE Name_DE LIKE ?
+            OR Name_EN LIKE ? 
+            OR Description_DE LIKE ?
+            OR Description_EN LIKE ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('ssss', $keyword, $keyword, $keyword, $keyword);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        if(!$result)
+        {
+            throw new Exception($statement->error);
+        }
+
+        $rows = array();
+        while($row = $result->fetch_object())
+        {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 }

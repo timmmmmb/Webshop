@@ -38,7 +38,8 @@ class UserController
      */
     public function doEdit() 
     {
-        if (isset($_POST['email'])) {
+        if (isset($_POST['email'])) 
+        {
             $iv = new InputValidator();
             $email = $iv->validateEmail($_POST['email']);
             $userModel = new UserModel();

@@ -71,6 +71,28 @@ class ProductController
     /**
      * https://servername/product/checkout
      */
+    public function search()
+    {
+        if (isset($_GET['q']))
+        {
+            $productModel = new ProductModel();
+            $iv = new InputValidator();
+            $query = $iv->validateStringGet($_GET["q"]);
+            $view = new View('default_index');
+            $view->title = _SEARCH;
+            $view->products = $productModel->searchProducts($query);
+            $view->display();
+        }
+        else
+        {
+            header("Location: "._ROOT.$_SESSION['lang']['name']);
+            die();
+        }
+    }
+
+    /**
+     * https://servername/product/checkout
+     */
     public function checkout()
     {
         $ordermodel = new OrderModel();

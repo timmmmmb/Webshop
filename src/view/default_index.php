@@ -1,8 +1,10 @@
+<?php if (isset($banner)): ?>
 <div class="banner" style="background-image: url('<?=_ROOT?>src/view/images/<?=$banner?>');">
     <div class="banner__overlay">
         <div class="banner__overlay__title"><?=$heading?></div>
     </div>
 </div>
+<?php endif; ?>
 <section class="products">
     <?php foreach ($products as $product) : ?>
         <a href="<?=_ROOT.$_SESSION['lang']['name']?>/product?product_id=<?= $product->ID; ?>">
