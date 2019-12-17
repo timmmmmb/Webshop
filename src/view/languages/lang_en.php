@@ -66,3 +66,4 @@ define("_SAVE", "Save");
 define("_SEARCH", "Search");
 define("_PRODUCTS_EMPTY", "No products found");
 define("_ORDERS_EMPTY", "No orders");
+define("_ORDERS_TITLE", "My orders");

@@ -327,4 +327,94 @@ class OrderModel extends Model
         }
         return $this->checkIfBasketEmptyByBasket($basket_id);
     }
+
+    /**
+     * Returns not only most recent but all baskets
+     * @param int $user_id session
+     * @param string $stage Basket/Bought
+     * @throws Exception if db statment failed.
+     * @return Array of ints.
+     */
+    public function getAllBasketIDs($user_id, $stage)
+    {
+        $query = 
+            "SELECT * FROM orders WHERE userid = ? 
+            AND stageid = (SELECT ID FROM stages WHERE Name_EN LIKE ?)";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('is', $user_id, $stage);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        if (!$result) 
+        {
+            throw new Exception($statement->error);
+        }
+        $rows = array();
+        while ($row = $result->fetch_object()) 
+        {
+            $rows[] = $row->ID;
+        }
+        return $rows;
+    }
+
+    //TODO Replace:
+    public function getProductsInBoughtBasket($basketid)
+    {
+        $query =
+            "SELECT
+                p.id as ID,
+                p.name_de as name_de,
+                p.name_en as name_en,
+                p.price as prize,
+                p.image as image,
+                CONVERT(p.price * sum(amount), DECIMAL(65, 2)) as total_prize,
+                sum(amount) as amount,
+                c.Name_EN as color_en,
+                c.Name_DE as color_de,
+                s.name_de as size_de,
+                s.name_en as size_en,
+                op.ID as order_id
+            FROM orders_products as op
+                JOIN products p ON op.ProductID = p.ID
+                JOIN colors c ON op.ColorID = c.ID
+                JOIN sizes s ON op.SizeID = s.ID
+            WHERE OrderID = ?
+            GROUP BY name_de, color_de, s.id";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $basketid);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        if (!$result) 
+        {
+            throw new Exception($statement->error);
+        }
+
+        $rows = array();
+        while ($row = $result->fetch_object()) 
+        {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    /**
+     * Returns all products from all baskets.
+     * @param int $user_id session.
+     * @param string $stage Basket/Bought
+     * @return Array of products.
+     */
+    public function getAllBoughtProducts($user_id, $stage)
+    {
+        $baskets = $this->getAllBasketIDs($user_id, $stage);
+        $all_products = array();
+        foreach($baskets as $basket_id)
+        {
+            $products = $this->getProductsInBoughtBasket($basket_id);
+            $all_products = array_merge($all_products, $products);
+        }
+        return $all_products;
+    }
 }

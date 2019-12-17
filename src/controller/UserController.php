@@ -31,7 +31,7 @@ class UserController
         $view->title = 'Profile';
         $view->heading = 'Profile';
         $view->user = $userModel->readById($_SESSION['user_id']);
-        $view->orders = $orderModel->getProductsInBasket($_SESSION['user_id'], 'Bought');
+        $view->orders = $orderModel->getAllBoughtProducts($_SESSION['user_id'], 'Bought');
         $view->display();
     }
 

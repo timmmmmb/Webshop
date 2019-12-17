@@ -5,7 +5,7 @@
         <div class="h3__hr__circle"></div>
         <div class="h3__hr__line"></div>
     </div>
-    <h3 class="profile__h3">My orders</h3>
+    <h3 class="profile__h3"><?=_ORDERS_TITLE?></h3>
     <?php if (empty($orders)): ?>
         <div class="basket__empty basket__empty--profile">
             <div class="basket__empty__icon">
@@ -34,6 +34,7 @@
                 </div>
             </li>
             <?php endforeach ?>
+            <li></li>
         </ul>
     <?php endif; ?>
     <h3 class="profile__h3">Email</h3>

@@ -128,8 +128,9 @@ jQuery(document).ready(function($) {
     //------------------------
     //  PAY BASKET SUBMIT
     //------------------------
+    let payButton = $('.checkout__form__submit');
     $("#formProductPay").submit(function(e) {
-        $('.checkout__form__submit').prop("disabled", true);
+        payButton.prop("disabled", true);
         e.preventDefault();
         $.ajax({
             type: "POST",
@@ -143,7 +144,7 @@ jQuery(document).ready(function($) {
                    window.location = data.href;
                 } else {
                     showCheckoutErrorMessage(data.error);
-                    $('.checkout__form__submit').prop("disabled", false);
+                    payButton.prop("disabled", false);
                 }
             }
         });

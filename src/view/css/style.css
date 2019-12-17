@@ -953,6 +953,12 @@ input.basket__item__right__number {
     margin: 0;
 }
 
+.checkout__products--profile li:last-child {
+    height: 0;
+    border: none;
+    padding: 0;
+}
+
 .checkout__products__img {
     width: 100px;
     height: 100px;
