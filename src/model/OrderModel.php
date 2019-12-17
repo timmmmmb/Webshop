@@ -21,12 +21,12 @@ class OrderModel extends Model
     public function addToBasket($product_id, $user_id, $amount, $color_id, $size_id)
     {
         //Get the id of the order that represents the basket
-        $basket_id = $this->getBasketID($user_id);
+        $basket_id = $this->getBasketID($user_id, "Basket");
         //Create a new basket if there is none in the db
         if ($basket_id == 0) 
         {
             $this->createBasket($user_id);
-            $basket_id = $this->getBasketID($user_id);
+            $basket_id = $this->getBasketID($user_id, "Basket");
         }
 
         //Check if product is allready in basket
@@ -56,14 +56,14 @@ class OrderModel extends Model
      * @throws Exception if database connection fails.
      * @return int id of order.
      */
-    private function getBasketID($user_id)
+    private function getBasketID($user_id, $stage)
     {
         $query = 
             "SELECT * FROM orders WHERE userid = ? 
-            AND stageid = (SELECT ID FROM stages WHERE NAME_de LIKE 'Warenkorb' LIMIT 1)";
+            AND stageid = (SELECT ID FROM stages WHERE Name_EN LIKE ? LIMIT 1)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('i', $user_id);
+        $statement->bind_param('is', $user_id, $stage);
         $statement->execute();
 
         $result = $statement->get_result();
@@ -104,9 +104,9 @@ class OrderModel extends Model
      * @throws Exception if database connection fails.
      * @return Array of products
      */
-    public function getProductsInBasket($user_id)
+    public function getProductsInBasket($user_id, $stage)
     {
-        $basketid = $this->getBasketID($user_id);
+        $basketid = $this->getBasketID($user_id, $stage);
         $query =
             "SELECT
                 p.id as ID,
@@ -153,7 +153,7 @@ class OrderModel extends Model
      */
     public function getNumberOfProductsInBasket($user_id) 
     {
-        $products = $this->getProductsInBasket($user_id);
+        $products = $this->getProductsInBasket($user_id, "Basket");
         $numberOfProducts = 0;
         foreach($products as $product)
         {
@@ -268,7 +268,7 @@ class OrderModel extends Model
     public function payBasket($user_id)
     {
         //Get the id of the order that represents the basket
-        $basket_id = $this->getBasketID($user_id);
+        $basket_id = $this->getBasketID($user_id, "Basket");
         //Return if there is no basket
         if ($basket_id == 0) 
         {
@@ -319,7 +319,7 @@ class OrderModel extends Model
      */
     public function checkIfBasketEmptyByUser($user_id)
     {
-        $basket_id = $this->getBasketID($user_id);
+        $basket_id = $this->getBasketID($user_id, "Basket");
         //Return if there is no basket
         if ($basket_id == 0) 
         {

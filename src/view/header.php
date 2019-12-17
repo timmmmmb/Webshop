@@ -72,7 +72,7 @@
                         <li>
                             <a href="<?=_ROOT.$_SESSION['lang']['name']?>/user/login">
                                 <div class="header__icons__item">
-                                    <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
                                 </div>
                             </a>
                         </li>

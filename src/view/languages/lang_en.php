@@ -64,3 +64,5 @@ define("_ERROR_PSW_RGX", "Password must contain a lowercase and uppercase letter
 define("_ERROR_RGX", "Invalid contact data");
 define("_SAVE", "Save");
 define("_SEARCH", "Search");
+define("_PRODUCTS_EMPTY", "No products found");
+define("_ORDERS_EMPTY", "No orders");

@@ -18,7 +18,7 @@ class BasketController
         $view = new View('basket');
         $view->title = 'Warenkorb';
         $view->heading = 'Warenkorb';
-        $view->products = $ordermodel->getProductsInBasket($_SESSION["user_id"]);
+        $view->products = $ordermodel->getProductsInBasket($_SESSION["user_id"], "Basket");
         $view->display();
     }
 }

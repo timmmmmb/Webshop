@@ -118,6 +118,11 @@ button[type="submit"], button[type="reset"] {
     font-size: 1em;
 }
 
+button:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
 input[type="number"] {
     width: 100px;
     padding: 0.6em 0;
@@ -156,8 +161,12 @@ header {
     align-items: center;
 }
 
+.header__languages, .header__icons {
+    flex-basis: 20%;
+}
+
 .header__languages {
-    margin: 0 2em;
+    margin-left: 2em;
 }
 
 .header__languages nav ul li {
@@ -235,7 +244,10 @@ header {
 }
 
 .header__icons {
-    margin: 0 2em;
+    margin-right: 2em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .header__icons nav ul li {
@@ -249,6 +261,7 @@ header {
     position: relative;
     color: #555;
     cursor: pointer;
+    transform: scale(0.8);
 }
 
 .header__icons__item--cart {
@@ -256,6 +269,7 @@ header {
     animation-name: none;
     animation-duration: 0.5s;
     animation-iteration-count: 2;
+    transform: scale(0.95);
 }
 
 @keyframes header__icons__item--beat {
@@ -393,6 +407,11 @@ main {
     flex-wrap: wrap;
     padding: 1.5em 0;
     background: white;
+}
+
+.products__empty {
+    font-size: 3em;
+    padding: 5em 0;
 }
 
 .products__item {
@@ -585,6 +604,7 @@ footer a {
     font-size: 1em;
     text-transform: uppercase;
     letter-spacing: 0.3em;
+    margin-top: 4em;
 }
 
 .profile__section__email {
@@ -603,11 +623,6 @@ button.profile__section__submit {
     background: #407088;
     margin-top: 2em;
     width: 200px;
-}
-
-button.profile__section__submit:disabled {
-    cursor: default;
-    opacity: 0.75;
 }
 
 button.profile__section__submit--success {
@@ -758,6 +773,10 @@ button.product__info__submit {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.basket__empty--profile {
+    height: 30vh;
 }
 
 .basket__empty p {
@@ -928,6 +947,10 @@ input.basket__item__right__number {
 
 .checkout__products li:nth-last-child(2) {
     border-bottom: none;
+}
+
+.checkout__products--profile li {
+    margin: 0;
 }
 
 .checkout__products__img {

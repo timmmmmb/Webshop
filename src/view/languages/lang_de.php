@@ -64,3 +64,5 @@ define("_ERROR_PSW_RGX", "Passwort muss einen Klein- und Grossbuchstaben und ein
 define("_ERROR_RGX", "Invalide Kontaktdaten");
 define("_SAVE", "Speichern");
 define("_SEARCH", "Suchen");
+define("_PRODUCTS_EMPTY", "Keine Produkte gefunden");
+define("_ORDERS_EMPTY", "Keine Bestellungen");

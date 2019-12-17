@@ -96,7 +96,7 @@ class ProductController
     public function checkout()
     {
         $ordermodel = new OrderModel();
-        $products = $ordermodel->getProductsInBasket($_SESSION["user_id"]);
+        $products = $ordermodel->getProductsInBasket($_SESSION["user_id"], "Basket");
         if(empty($products))
         {
             header("Location: "._ROOT.$_SESSION['lang']['name']);
