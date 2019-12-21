@@ -64,6 +64,20 @@ class AdminController
         $view->orders = $ordermodel->readAll();
         $view->display();
     }
+
+    /**
+     * https://servername/admin/createproduct
+     */
+    public function createProduct()
+    {
+        $this->checkForAdminRights("/");
+        $target_dir = "/images/upload/";
+        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        //it doesnt upload the files?
+        var_dump($_FILES);
+        die();
+        move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+    }
     
     /**
      * Redirect if permission denied.
