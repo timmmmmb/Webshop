@@ -147,15 +147,25 @@ class ProductController
             //SEND MAIL
             $usermodel = new UserModel();
             $user = $usermodel->readById($_SESSION['user_id']);
+            $config = require 'config.php';
+            $username = $config['gmail']['username'];
+            $password = $config['gmail']['password'];
 
-            $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->FromName = "Tim & Yannick";
-            $mail->From = "master@yruefenacht.ch";
-            $mail->addAddress($user->EMail);
+            $mail = new PHPMailer();  
+            $mail->isSMTP();                           
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;           
+            $mail->Username = $username;                 
+            $mail->Password = $password;     
+            $mail->SMTPSecure = "tls";  
+            $mail->Port = 587;                                   
+            $mail->From = "tandy.webshop@gmail.com";
+            $mail->FromName = "Tim and Yannick | Webshop";
+            $mail->addAddress($user->EMail, $user->Name);
             $mail->isHTML(true);
-            $mail->Subject = "Your Order from Tim & Yannick's Webshop";
-            $mail->Body = "<i>Street(test): ". $street ."</i>";
+            $mail->Subject = "Subject Text";
+            $mail->Body = "<i>Mail body in HTML</i>";
+            $mail->AltBody = "This is the plain text version of the email content";
 
             if($mail->send())
             {
