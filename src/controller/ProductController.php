@@ -95,8 +95,9 @@ class ProductController
      */
     public function checkout()
     {
-        $ordermodel = new OrderModel();
-        $products = $ordermodel->getProductsInBasket($_SESSION["user_id"], "Basket");
+        $orderModel = new OrderModel();
+        $basketid = $orderModel->getBasketID($_SESSION["user_id"]);
+        $products = $orderModel->getProductsInBasket($basketid);
         if(empty($products))
         {
             header("Location: "._ROOT.$_SESSION['lang']['name']);
@@ -164,7 +165,7 @@ class ProductController
             $mail->addAddress($user->EMail, $user->Name);
             $mail->isHTML(true);
             $mail->Subject = "Subject Text";
-            $mail->Body = "<i>Mail body in HTML</i>";
+            $mail->Body = "<i>Mail body in HTML5</i>";
             $mail->AltBody = "This is the plain text version of the email content";
 
             if($mail->send())

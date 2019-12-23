@@ -14,11 +14,12 @@ class BasketController
      */
     public function index() 
     {
-        $ordermodel = new OrderModel();
+        $orderModel = new OrderModel();
         $view = new View('basket');
         $view->title = 'Warenkorb';
         $view->heading = 'Warenkorb';
-        $view->products = $ordermodel->getProductsInBasket($_SESSION["user_id"], "Basket");
+        $basketid = $orderModel->getBasketID($_SESSION["user_id"]);
+        $view->products = $orderModel->getProductsInBasket($basketid);
         $view->display();
     }
 }

@@ -21,12 +21,12 @@ class OrderModel extends Model
     public function addToBasket($product_id, $user_id, $amount, $color_id, $size_id)
     {
         //Get the id of the order that represents the basket
-        $basket_id = $this->getBasketID($user_id, "Basket");
+        $basket_id = $this->getBasketID($user_id);
         //Create a new basket if there is none in the db
         if ($basket_id == 0) 
         {
             $this->createBasket($user_id);
-            $basket_id = $this->getBasketID($user_id, "Basket");
+            $basket_id = $this->getBasketID($user_id);
         }
 
         //Check if product is allready in basket
@@ -56,14 +56,14 @@ class OrderModel extends Model
      * @throws Exception if database connection fails.
      * @return int id of order.
      */
-    private function getBasketID($user_id, $stage)
+    public function getBasketID($user_id)
     {
         $query = 
             "SELECT * FROM orders WHERE userid = ? 
-            AND stageid = (SELECT ID FROM stages WHERE Name_EN LIKE ? LIMIT 1)";
+            AND stageid = (SELECT ID FROM stages WHERE Name_EN LIKE 'Basket' LIMIT 1)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('is', $user_id, $stage);
+        $statement->bind_param('i', $user_id);
         $statement->execute();
 
         $result = $statement->get_result();
@@ -104,9 +104,8 @@ class OrderModel extends Model
      * @throws Exception if database connection fails.
      * @return Array of products
      */
-    public function getProductsInBasket($user_id, $stage)
+    public function getProductsInBasket($basketid)
     {
-        $basketid = $this->getBasketID($user_id, $stage);
         $query =
             "SELECT
                 p.id as ID,
@@ -153,7 +152,8 @@ class OrderModel extends Model
      */
     public function getNumberOfProductsInBasket($user_id) 
     {
-        $products = $this->getProductsInBasket($user_id, "Basket");
+        $basketid = $this->getBasketID($user_id);
+        $products = $this->getProductsInBasket($basketid);
         $numberOfProducts = 0;
         foreach($products as $product)
         {
@@ -268,7 +268,7 @@ class OrderModel extends Model
     public function payBasket($user_id)
     {
         //Get the id of the order that represents the basket
-        $basket_id = $this->getBasketID($user_id, "Basket");
+        $basket_id = $this->getBasketID($user_id);
         //Return if there is no basket
         if ($basket_id == 0) 
         {
@@ -319,7 +319,7 @@ class OrderModel extends Model
      */
     public function checkIfBasketEmptyByUser($user_id)
     {
-        $basket_id = $this->getBasketID($user_id, "Basket");
+        $basket_id = $this->getBasketID($user_id);
         //Return if there is no basket
         if ($basket_id == 0) 
         {
@@ -358,48 +358,6 @@ class OrderModel extends Model
         return $rows;
     }
 
-    //TODO Replace:
-    public function getProductsInBoughtBasket($basketid)
-    {
-        $query =
-            "SELECT
-                p.id as ID,
-                p.name_de as name_de,
-                p.name_en as name_en,
-                p.price as prize,
-                p.image as image,
-                CONVERT(p.price * sum(amount), DECIMAL(65, 2)) as total_prize,
-                sum(amount) as amount,
-                c.Name_EN as color_en,
-                c.Name_DE as color_de,
-                s.name_de as size_de,
-                s.name_en as size_en,
-                op.ID as order_id
-            FROM orders_products as op
-                JOIN products p ON op.ProductID = p.ID
-                JOIN colors c ON op.ColorID = c.ID
-                JOIN sizes s ON op.SizeID = s.ID
-            WHERE OrderID = ?
-            GROUP BY name_de, color_de, s.id";
-
-        $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('i', $basketid);
-        $statement->execute();
-
-        $result = $statement->get_result();
-        if (!$result) 
-        {
-            throw new Exception($statement->error);
-        }
-
-        $rows = array();
-        while ($row = $result->fetch_object()) 
-        {
-            $rows[] = $row;
-        }
-        return $rows;
-    }
-
     /**
      * Returns all products from all baskets.
      * @param int $user_id session.
@@ -412,7 +370,7 @@ class OrderModel extends Model
         $all_products = array();
         foreach($baskets as $basket_id)
         {
-            $products = $this->getProductsInBoughtBasket($basket_id);
+            $products = $this->getProductsInBasket($basket_id);
             $all_products = array_merge($all_products, $products);
         }
         return $all_products;
