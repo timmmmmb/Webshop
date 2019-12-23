@@ -164,9 +164,11 @@ class ProductController
             $mail->FromName = "Tim and Yannick | Webshop";
             $mail->addAddress($user->EMail, $user->Name);
             $mail->isHTML(true);
-            $mail->Subject = "Subject Text";
-            $mail->Body = "<i>Mail body in HTML5</i>";
-            $mail->AltBody = "This is the plain text version of the email content";
+            $mail->Subject = _MAIL_SUBJECT;
+            ob_start();
+            include('src/view/mail_content.php');
+            $mail->Body = ob_get_clean();
+            $mail->AltBody = _MAIL_ALTBODY;
 
             if($mail->send())
             {

@@ -67,3 +67,5 @@ define("_SEARCH", "Suchen");
 define("_PRODUCTS_EMPTY", "Keine Produkte gefunden");
 define("_ORDERS_EMPTY", "Keine Bestellungen");
 define("_ORDERS_TITLE", "Meine Bestellungen");
+define("_MAIL_SUBJECT", "Deine Bestellung von Tandy");
+define("_MAIL_ALTBODY", "Bestellung auf https://tandy.ch ansehen");

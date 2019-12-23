@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Dez 2019 um 21:36
+-- Erstellungszeit: 23. Dez 2019 um 13:16
 -- Server-Version: 10.4.6-MariaDB
 -- PHP-Version: 7.3.9
 
@@ -50,7 +50,8 @@ INSERT INTO `available_colors` (`ID`, `ProductID`, `ColorID`) VALUES
 (9, 1, 2),
 (10, 1, 1),
 (11, 5, 1),
-(12, 7, 1);
+(12, 7, 1),
+(13, 8, 6);
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,9 @@ INSERT INTO `available_sizes` (`ID`, `ProductID`, `SizeID`) VALUES
 (5, 5, 2),
 (6, 6, 2),
 (7, 3, 2),
-(8, 4, 2);
+(8, 4, 2),
+(9, 7, 1),
+(10, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -149,21 +152,6 @@ CREATE TABLE `orders` (
   `StageID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Daten für Tabelle `orders`
---
-
-INSERT INTO `orders` (`ID`, `UserID`, `StageID`) VALUES
-(1, 16, 2),
-(2, 16, 2),
-(3, 18, 1),
-(4, 16, 2),
-(6, 16, 2),
-(7, 16, 2),
-(8, 16, 2),
-(9, 16, 1),
-(10, 23, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -178,23 +166,6 @@ CREATE TABLE `orders_products` (
   `SizeID` int(11) NOT NULL,
   `ColorID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Daten für Tabelle `orders_products`
---
-
-INSERT INTO `orders_products` (`ID`, `ProductID`, `OrderID`, `Amount`, `SizeID`, `ColorID`) VALUES
-(22, 1, 1, 5, 1, 3),
-(28, 1, 3, 1, 1, 3),
-(30, 1, 2, 1, 1, 3),
-(31, 3, 2, 1, 2, 2),
-(32, 1, 4, 1, 1, 3),
-(33, 3, 4, 2, 2, 2),
-(35, 1, 6, 1, 1, 3),
-(36, 1, 7, 1, 1, 3),
-(37, 1, 8, 1, 1, 3),
-(38, 1, 9, 1, 1, 3),
-(39, 1, 10, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -294,7 +265,8 @@ INSERT INTO `users` (`ID`, `Name`, `EMail`, `Password`, `User_TypeID`) VALUES
 (15, 'meche', 'mech@mech', 'f7ff8b3b2c106010635c9252ab4c4a66', 1),
 (16, 'yrue', 'yrue@test.ch', '202cb962ac59075b964b07152d234b70', 2),
 (18, 'admin', 'admin@bfh.ch', '63a9f0ea7bb98050796b649e85481845', 2),
-(23, 'Yannick', 'yannick.ruefenacht@hotmail.com', 'cd6ced3ae839a743ee8c44f307527d9f', 1);
+(23, 'Yannick', 'yannick.ruefenacht@hotmail.com', 'cd6ced3ae839a743ee8c44f307527d9f', 1),
+(24, 'Usain', 'usain.bolt@gmail.com', 'afbce0413973fac09006d536066e92f8', 1);
 
 -- --------------------------------------------------------
 
@@ -413,13 +385,13 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT für Tabelle `available_colors`
 --
 ALTER TABLE `available_colors`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT für Tabelle `available_sizes`
 --
 ALTER TABLE `available_sizes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT für Tabelle `category`
@@ -443,13 +415,13 @@ ALTER TABLE `colors`
 -- AUTO_INCREMENT für Tabelle `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT für Tabelle `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT für Tabelle `products`
@@ -473,7 +445,7 @@ ALTER TABLE `stages`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT für Tabelle `user_types`
