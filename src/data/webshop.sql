@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 23. Dez 2019 um 13:16
+-- Erstellungszeit: 23. Dez 2019 um 13:51
 -- Server-Version: 10.4.6-MariaDB
 -- PHP-Version: 7.3.9
 
@@ -286,7 +286,7 @@ CREATE TABLE `user_types` (
 
 INSERT INTO `user_types` (`ID`, `Name_DE`, `Name_EN`) VALUES
 (1, 'Kunde', 'Customer'),
-(2, 'Admin', 'Administrator');
+(2, 'Admin', 'Admin');
 
 --
 -- Indizes der exportierten Tabellen

@@ -153,8 +153,7 @@ class UserController
             $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($result->ID);
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
-            $_SESSION['user_type_de'] = $result->Type_de;
-            $_SESSION['user_type_en'] = $result->Type_en;
+            $_SESSION['user_type'] = $result->Type_en;
             $response->status = "success";
             $response->href = _ROOT.$_SESSION['lang']['name'];
         }

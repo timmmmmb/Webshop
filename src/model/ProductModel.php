@@ -67,6 +67,9 @@ class ProductModel extends Model
 
     /**
      * Gets products by gender.
+     * @param string $sex
+     * @throws Exception if db statement fails.
+     * @return Array of Products.
      */
     public function getProductsBySex($sex) 
     {
@@ -120,5 +123,49 @@ class ProductModel extends Model
             $rows[] = $row;
         }
         return $rows;
+    }
+
+    /**
+     * @param string $name_de
+     * @param string $name_en
+     * @param string $desc_de
+     * @param string $desc_en
+     * @param string $sex
+     * @param string $image
+     * @param string $price
+     * @throws Exception if db statement fails.
+     */
+    public function insertProduct($name_de, $name_en, $desc_de, $desc_en, $sex, $image, $price)
+    {
+        $query="INSERT INTO $this->tableName (Name_DE, Name_EN, Description_DE, Description_EN, Sex, Image, Price) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('ssssssd', $name_de, $name_en, $desc_de, $desc_en, $sex, $image, $price);
+        
+        if (!$statement->execute()) 
+        {
+            throw new Exception($statement->error);
+        }
+        $this->insertSize(ConnectionHandler::getConnection()->insert_id, 1);
+    }
+
+    /**
+     * Product must have some size.
+     * @param int $productID
+     * @param int $sizeID
+     * @throws Exception if db statement fails.
+     */
+    private function insertSize($productID, $sizeID)
+    {
+        $query="INSERT INTO available_sizes (ProductID, SizeID) VALUES (?, ?)";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('ii', $productID, $sizeID);
+
+        if (!$statement->execute()) 
+        {
+            throw new Exception($statement->error);
+        }
     }
 }

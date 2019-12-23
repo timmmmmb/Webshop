@@ -25,7 +25,7 @@ class InputValidator
 
         if (empty($int)) 
         {
-            $this->throwError(_ERROR_VALUE_EMPTY);
+            $this->throwError($int.": "._ERROR_VALUE_EMPTY);
         } 
         else if ($int === false) 
         {
@@ -77,7 +77,7 @@ class InputValidator
 
         if (empty($string)) 
         {
-            $this->throwError(_ERROR_VALUE_EMPTY);
+            $this->throwError($string.": "._ERROR_VALUE_EMPTY);
         } 
         else if ($string === false) 
         {
