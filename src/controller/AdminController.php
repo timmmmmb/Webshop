@@ -48,7 +48,6 @@ class AdminController
         $view = new View('admin_product_list');
         $view->title = 'Admin';
         $view->heading = 'Admin';
-        $view->products = $productmodel->readAll();
         $view->display();
     }
 

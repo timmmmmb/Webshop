@@ -9,6 +9,7 @@ define("_LOGOUT", "Abmelden");
 define("_ADMIN_TITLE", "Admin Panel");
 define("_ADMIN_USERLIST", "Benutzer");
 define("_ADMIN_PRODUCTLIST", "Produkte");
+define("_ADMIN_PRODUCT_NEW", "Neues Produkt erfassen");
 define("_ADMIN_ORDERLIST", "Bestellungen");
 define("_BASKET_TITLE", "Warenkorb");
 define("_BASKET_COLOR", "Farbe:");

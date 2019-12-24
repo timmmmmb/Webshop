@@ -10,7 +10,7 @@
 
     <ul class="admin__list">
         <?php foreach ($users as $user) : ?>
-            <li><?= $user->Name . " " . $user->email . " " . $user->{'Type_'.$_SESSION['lang']['name']} ?></li>
+            <li><t><?= $user->Name?></t> |  <t><?=$user->email?></t> | <t><?=$user->{'Type_'.$_SESSION['lang']['name']}?></t></li>
         <?php endforeach; ?>
     </ul>
       
