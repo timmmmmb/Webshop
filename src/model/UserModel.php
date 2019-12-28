@@ -11,12 +11,11 @@ class UserModel extends Model
 
     /**
      * Store new user in database.
-     *
-     * @param $name Username
-     * @param $email user e-mail
-     * @param $password User password
-     * @param $typeid User classification
-     * @throws Exception Falls das Ausführen des Statements fehlschlägt
+     * @param string $name Username
+     * @param string $email user e-mail
+     * @param string $password User password
+     * @param int $typeid User classification
+     * @throws Exception if database connection fails.
      */
     public function createUser($name, $email, $password, $typeid) 
     {
@@ -31,8 +30,22 @@ class UserModel extends Model
         }
     }
 
-    public function getAllUsers(){
-        $query = "SELECT u.id as ID, u.name as Name, email, ut.Name as Type FROM users as u join user_types as ut on ut.ID = u.User_TypeID";
+    /**
+     * Retrieves all users from database.
+     * @throws Exception if database connection fails.
+     * @return Array of user objects.
+     */
+    public function getAllUsers()
+    {
+        $query = 
+            "SELECT 
+                u.id as ID, 
+                u.name as Name, 
+                email, 
+                ut.Name_de as Type_de,
+                ut.Name_en as Type_en 
+            FROM users as u 
+            JOIN user_types as ut ON ut.ID = u.User_TypeID";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->execute();
@@ -44,7 +57,8 @@ class UserModel extends Model
         }
 
         $rows = array();
-        while ($row = $result->fetch_object()) {
+        while ($row = $result->fetch_object()) 
+        {
             $rows[] = $row;
         }
         return $rows;
@@ -53,14 +67,23 @@ class UserModel extends Model
     /**
      * Checks if a user with this name and pw exists.
      * Returns the row if the user exists.
-     * 
-     * @param $name
-     * @param $password
+     * @param string $name Username.
+     * @param string $password Password.
+     * @throws Exception if database connection fails.
      * @return Object User properties.
      */
     public function getUserByNameAndPassword($name, $password) 
     {
-        $query = "SELECT u.id as ID, u.name as Name, email, ut.Name as Type FROM users as u join user_types as ut on ut.ID = u.User_TypeID WHERE u.NAME like ? and u.PASSWORD like ?";
+        $query = 
+            "SELECT 
+                u.id as ID, 
+                u.name as Name, 
+                email, 
+                ut.Name_de as Type_de,
+                ut.Name_EN  as Type_en
+            FROM users as u 
+            JOIN user_types as ut ON ut.ID = u.User_TypeID 
+            WHERE u.NAME LIKE ? AND u.PASSWORD LIKE ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('ss', $name, $password);
@@ -80,14 +103,14 @@ class UserModel extends Model
     /**
      * Checks if a user with these credentials allready exists.
      * Returns true if the user doesnt exist yet.
-     * 
-     * @param $email
-     * @param $name
+     * @param string $email input email.
+     * @param string $name input name.
+     * @throws Exception if database connection fails.
      * @return boolean
      */
-    public function userExists($email, $name) 
+    public function userDoesNotExists($email, $name) 
     {
-        $query = "SELECT * FROM $this->tableName WHERE NAME like ? or EMAIL like ?";
+        $query = "SELECT * FROM users WHERE NAME LIKE ? OR EMAIL LIKE ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('ss', $email, $name);
@@ -102,6 +125,25 @@ class UserModel extends Model
         $exists = mysqli_num_rows($result) == 0;
         $result->close();
         return $exists;
+    }
+
+    /**
+     * Updates Email
+     * @param string $email new email.
+     * @param int $id specifies which user to update.
+     * @throws Exception if statement could not execute.
+     */
+    public function updateUserEmail($email, $id) 
+    {
+        $query="UPDATE users SET EMail = ? WHERE id = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('si', $email, $id);
+
+        if (!$statement->execute()) 
+        {
+            throw new Exception($statement->error);
+        }
     }
 
 }

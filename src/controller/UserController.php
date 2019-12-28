@@ -2,12 +2,12 @@
 
 require_once 'src/model/UserModel.php';
 require_once 'src/model/OrderModel.php';
+require_once 'src/lib/InputValidator.php';
 
 /**
  * URL name: /user
  * This controller is invoked at https://servername/user/ by the Dispatcher.
  * The class methods are invoked at https://servername/user/method by the Dispatcher.
- * 
  */
 class UserController
 {
@@ -24,17 +24,29 @@ class UserController
      */
     public function profile() 
     {
-        if(!isset($_SESSION['user_id'])) 
-        {
-            header("Location: /user/login");
-            die();
-        }
+        $this->redirectIfSessionIs(false, _ROOT.$_SESSION['lang']['name']."/user/login");
         $userModel = new UserModel();
+        $orderModel = new OrderModel();
         $view = new View('profile');
         $view->title = 'Profile';
         $view->heading = 'Profile';
         $view->user = $userModel->readById($_SESSION['user_id']);
+        $view->orders = $orderModel->getAllBoughtProducts($_SESSION['user_id'], 'Bought');
         $view->display();
+    }
+
+    /**
+     * https://servername/user/doEdit
+     */
+    public function doEdit() 
+    {
+        if (isset($_POST['email'])) 
+        {
+            $iv = new InputValidator();
+            $email = $iv->validateEmail($_POST['email']);
+            $userModel = new UserModel();
+            $userModel->updateUserEmail($email, $_SESSION['user_id']);
+        }
     }
 
     /**
@@ -42,7 +54,7 @@ class UserController
      */
     public function register() 
     {
-        $this->checkForExistingLogin("/");
+        $this->redirectIfSessionIs(true, _ROOT.$_SESSION['lang']['name']);
         $view = new View('register');
         $view->title = 'Register';
         $view->heading = 'Register';
@@ -54,24 +66,40 @@ class UserController
      */
     public function doRegister() 
     {
-        if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['psw'])) 
+        if (isset($_POST['name']) && 
+            isset($_POST['email']) && 
+            isset($_POST['psw']) && 
+            isset($_POST['psw-repeat'])) 
         {
             $userModel = new UserModel();
-            if ($userModel->userExists(
-                htmlspecialchars($_POST['name']),
-                htmlspecialchars($_POST['email']))) 
+            $iv = new InputValidator();
+            $response = new stdClass();
+
+            try
             {
-                $userModel->createUser(
-                    htmlspecialchars($_POST['name']),
-                    htmlspecialchars($_POST['email']),
-                    md5(htmlspecialchars($_POST['psw'])),
-                    '1'
-                );
+                $name = $iv->validateUsername($_POST['name']);
+                $email = $iv->validateEmail($_POST['email']);
+                $psw = $iv->validatePassword($_POST['psw'], $_POST['psw-repeat']);
+            }
+            catch (Exception $e)
+            {
+                $response->status = "error";
+                $response->error = $e->getMessage();
+                echo json_encode($response);
+                exit();
+            }
+
+            if ($userModel->userDoesNotExists($name, $email))
+            {
+                $userModel->createUser($name, $email, $psw, '1');
                 $this->doLogin();
             } 
             else 
             {
-                echo 'registration__failed';
+                $response->status = "error";
+                $response->error = _REGISTER_ERROR;
+                echo json_encode($response);
+                exit();
             }
         }
     }
@@ -81,7 +109,7 @@ class UserController
      */
     public function login() 
     {
-        $this->checkForExistingLogin("/user/profile");
+        $this->redirectIfSessionIs(true, _ROOT.$_SESSION['lang']['name']."/user/profile");
         $view = new View('login');
         $view->title = 'Login';
         $view->heading = 'Login';
@@ -94,15 +122,30 @@ class UserController
     public function doLogin() 
     {
         $userModel = new UserModel();
-        $result = $userModel->getUserByNameAndPassword(
-            htmlspecialchars($_POST['name']), 
-            md5(htmlspecialchars($_POST['psw']))
-        );
+        $iv = new InputValidator();
+        $response = new stdClass();
+
+        try 
+        {
+            $name = $iv->validateString($_POST['name']);
+            $psw = $iv->validateString($_POST['psw']);
+            $psw = md5($psw);
+            $result = $userModel->getUserByNameAndPassword($name, $psw);
+        }
+        catch (Exception $e)
+        {
+            $response->status = "error";
+            $response->error = $e->getMessage();
+            echo json_encode($response);
+            exit();
+        }
+
         $arr = (array)$result;
         
-        if(empty($arr)) 
+        if (empty($arr)) 
         {
-            echo "login__failed";
+            $response->status = "error";
+            $response->error = _LOGIN_ERROR;
         } 
         else 
         {
@@ -110,9 +153,11 @@ class UserController
             $_SESSION['user_order_count'] = $orderModel->getNumberOfProductsInBasket($result->ID);
             $_SESSION['user_id'] = $result->ID;
             $_SESSION['user_name'] = $result->Name;
-            $_SESSION['user_type'] = $result->Type;
-            echo "login__success";
+            $_SESSION['user_type'] = $result->Type_en;
+            $response->status = "success";
+            $response->href = _ROOT.$_SESSION['lang']['name'];
         }
+        echo json_encode($response);
     }
 
     /**
@@ -120,19 +165,21 @@ class UserController
      */
     public function logout() 
     {
+        $lang = $_SESSION['lang']['name'];
         session_unset();
-        header("Location: /");
+        header("Location: "._ROOT.$lang);
         die();
     }
 
     /**
      * Deny access to certain pages if user is not logged in.
+     * @param string $redirect.
      */
-    private function checkForExistingLogin($redirect) 
+    private function redirectIfSessionIs($bool, $redirect) 
     {
-        if(isset($_SESSION['user_id'])) 
+        if (isset($_SESSION['user_id']) == $bool) 
         {
-            header("Location: " . $redirect);
+            header("Location: ".$redirect);
             die();
         }
     }
